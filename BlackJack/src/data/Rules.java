@@ -3,11 +3,12 @@ package data;
 /**
  * 
  * @author Fabian Schäfer
- * @brief Diese Klasse enthält das BlackJack Regelwerk
+ * @brief This Class contains the BlackJack Regelwerk
  *
  */
 
 public class Rules {
 	//TODO: Rules
+	
 
 }
