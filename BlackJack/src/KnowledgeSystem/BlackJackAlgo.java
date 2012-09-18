@@ -6,5 +6,9 @@
  */
 package KnowledgeSystem;
 public class BlackJackAlgo {
+	
+	//TODO: Wahrscheinlichkeit berechnen
+	//TODO: Karten zählen
+	//TODO: Entscheidung anhand von Kriterien treffen
 
 }
