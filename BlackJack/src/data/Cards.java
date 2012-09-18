@@ -26,4 +26,14 @@ public class Cards {
 	}
 	
 	//CardDeck
+	private CardTypes cardType;
+	private CardIcons cardIcon;
+	private String[][] CardDeck;
+	
+	public void SetCards () {
+		
+		
+		
+		
+	}
 }
