@@ -3,7 +3,7 @@ package data;
 /**
  * 
  * @author Fabian Schäfer
- * @brief This Class contains the BlackJack Regelwerk
+ * @brief This Class contains the BlackJack policy
  *
  */
 
