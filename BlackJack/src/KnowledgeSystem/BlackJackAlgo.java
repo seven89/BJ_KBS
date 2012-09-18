@@ -1,7 +1,7 @@
 /**
  * 
  * @author Fabian Schäfer
- * @brief Diese Klasse implementiert den Hauptalgorithmus des KnowledgeBased Systems
+ * @brief This class implements the algorithm of the agent
  *
  */
 package KnowledgeSystem;
