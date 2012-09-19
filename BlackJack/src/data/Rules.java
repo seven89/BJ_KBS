@@ -8,7 +8,6 @@ package data;
  */
 
 public class Rules {
-	//TODO: Rules
 	
-
+	
 }

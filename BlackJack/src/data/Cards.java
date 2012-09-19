@@ -24,16 +24,16 @@ public class Cards {
 	 *    ...
 	 *    12: ACE
 	 */
-	private Cards() {
-		CardDeck= new int[4][14];
+	public Cards() {
+		setCardDeck(new int[4][14]);
 		CurrentCard= new int[3];
 		int i=0, j=0;	
 		
 		// new Card Deck (52 Cards)
 		for  (i=0; i<4; i++) {
-			CardDeck[i][j] = i;
+			getCardDeck()[i][j] = i;
 			for (j=0; j<13; j++) {
-				CardDeck[i][j] = 1;			// 1=card in deck, 0= card not in deck
+				getCardDeck()[i][j] = 1;			// 1=card in deck, 0= card not in deck
 			}
 		}	
 	}
@@ -51,12 +51,12 @@ public class Cards {
 		do {
 			l = random.nextInt(4);
 			r = random.nextInt(13);
-		} while (CardDeck[l][r]==0);
+		} while (getCardDeck()[l][r]==0);
 
 			CurrentCard[0]=l;
 			CurrentCard[1]=r;
 			CurrentCard[2]= getCardScore(r);
-			CardDeck[l][r]= 0;				// set 0, (card not more in the deck) 
+			getCardDeck()[l][r]= 0;				// set 0, (card not more in the deck) 
 
 		return CurrentCard;
 	}
@@ -66,38 +66,30 @@ public class Cards {
 	 * @brief give the score of the card
 	 */
 	private int getCardScore(int score) {
-		
-		switch (score) {
-          case 0: score=2;
-          case 1: score=3;
-          case 2: score=4;
-          case 3: score=5;
-          case 4: score=6;
-          case 5: score=7;
-          case 6: score=8;
-          case 7: score=9;
-          case 12: score=11;
-          default: score=10;
-        }	
+        switch (score) {
+        	case 0:  score=2	; break;
+            case 1:  score=3	; break;
+            case 2:  score=4	; break;
+            case 3:  score=5	; break;
+            case 4:  score=6	; break;
+            case 5:  score=7	; break;
+            case 6:  score=8	; break;
+            case 7:  score=9	; break;
+            case 8:  score=10	; break;
+            case 9:  score=10	; break;
+            case 10: score=10	; break;
+            case 11: score=10	; break;
+            case 12: score=11	; break;
+        }     
 		return score;
-	}	
+	}
 	
-	/**
-	 * only for test
-	 */
-	public static void main(String [ ] args)
-	{
-		int i=0, j=0;
-		Cards CardTest = new Cards();
-		
-		for (int c=0; c<52;c++) {
-			CardTest.getCard();
-		}
-		
-		for  (i=0; i<4; i++) {
-			for (j=0; j<13; j++) {
-				System.out.print(CardTest.CardDeck[i][j]+" ");
-			}
-		}	
+	// getter & setter
+	public int[][] getCardDeck() {
+		return CardDeck;
+	}
+	
+	public void setCardDeck(int[][] cardDeck) {
+		CardDeck = cardDeck;
 	}
 }
