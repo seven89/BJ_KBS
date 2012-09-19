@@ -7,7 +7,10 @@ public class Cards {
 	private int[][] CardDeck;
 	private int[] CurrentCard;
 	
-	//constructor
+	/*
+	 * constructor
+	 * @brief create new CardDeck
+	 */
 	private Cards() {
 		CardDeck= new int[4][14];
 		CurrentCard= new int[3];
@@ -22,27 +25,33 @@ public class Cards {
 		}	
 	}
 	
-	//getCard
+	/*
+	 * getCard
+	 * @brief get a Card from the deck
+	 */
 	public int[] getCard() {
 
 		Random random = new Random();
 		int l, r;
-
+		
+		// get random card and check if this card is in the deck (loop)
 		do {
 			l = random.nextInt(4);
 			r = random.nextInt(13);
 		} while (CardDeck[l][r]==0);
-		
-		
-		
+
 			CurrentCard[0]=l;
 			CurrentCard[1]=r;
 			CurrentCard[2]= getCardScore(r);
-			CardDeck[l][r]= 0;				// set to 0, (card not more in the deck) 
+			CardDeck[l][r]= 0;				// set 0, (card not more in the deck) 
 
 		return CurrentCard;
 	}
 	
+	/*
+	 * getCardScore
+	 * givethe score of the card
+	 */
 	private int getCardScore(int score) {
 		
 		switch (score) {
@@ -60,7 +69,9 @@ public class Cards {
 		return score;
 	}	
 	
-	// only for test
+	/*
+	 * only for thest
+	 */
 	public static void main(String [ ] args)
 	{
 		int i=0, j=0;
