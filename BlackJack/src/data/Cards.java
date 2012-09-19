@@ -7,7 +7,8 @@ public class Cards {
 	private int[][] CardDeck;
 	private int[] CurrentCard;
 	
-	/*
+
+	/**
 	 * constructor
 	 * @brief create new CardDeck
 	 */
@@ -25,7 +26,7 @@ public class Cards {
 		}	
 	}
 	
-	/*
+	/**
 	 * getCard
 	 * @brief get a Card from the deck
 	 */
@@ -48,9 +49,9 @@ public class Cards {
 		return CurrentCard;
 	}
 	
-	/*
+	/**
 	 * getCardScore
-	 * givethe score of the card
+	 * @brief give the score of the card
 	 */
 	private int getCardScore(int score) {
 		
@@ -69,8 +70,8 @@ public class Cards {
 		return score;
 	}	
 	
-	/*
-	 * only for thest
+	/**
+	 * only for test
 	 */
 	public static void main(String [ ] args)
 	{
