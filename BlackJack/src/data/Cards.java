@@ -11,6 +11,18 @@ public class Cards {
 	/**
 	 * constructor
 	 * @brief create new CardDeck
+	 * 
+	 * CardDeck[i][j]: 
+	 * i:
+	 * 	  1: HEART
+	 * 	  2: DIAMOND
+	 *    3: CLUB
+	 *    4: SPADE
+	 * j:
+	 * 	  0: TWO
+	 *    1: THREE
+	 *    ...
+	 *    12: ACE
 	 */
 	private Cards() {
 		CardDeck= new int[4][14];
