@@ -73,7 +73,7 @@ public class Table {
 		else {
 			bank.setCard(CardDeck.getCard());
 			
-			while(bank.getCardScore()<16) {
+			while(bank.getCardScore()<17) {
 				bank.setCard(CardDeck.getCard());
 			}
 			
