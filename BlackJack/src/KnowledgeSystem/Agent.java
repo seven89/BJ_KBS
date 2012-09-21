@@ -5,7 +5,7 @@
  *
  */
 package KnowledgeSystem;
-public class BlackJackAlgo {
+public class Agent {
 	
 	//TODO: Wahrscheinlichkeit berechnen
 	//TODO: Karten zählen
