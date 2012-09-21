@@ -1,4 +1,4 @@
-package data;
+package KnowledgeSystem;
 
 public class Bank {
 	
@@ -13,13 +13,5 @@ public class Bank {
 	
 	public int getCardScore() {
 		return CardScore;
-	}
-	
-	public void setInGame(boolean iG) {
-		inGame = iG;
-	}
-	
-	public boolean getInGame() {
-		return inGame;
 	}
 }

@@ -1,5 +1,8 @@
 package data;
 
+import KnowledgeSystem.Bank;
+import KnowledgeSystem.Player;
+
 public class Table {
 
 	int Players;

@@ -1,4 +1,4 @@
-package data;
+package KnowledgeSystem;
 
 public class Player extends Bank{
 	
@@ -31,5 +31,13 @@ public class Player extends Bank{
 	public void setBet(double d) {
 		Bet = d;
 		Money -= d;
+	}
+	
+	public void setInGame(boolean iG) {
+		inGame = iG;
+	}
+	
+	public boolean getInGame() {
+		return inGame;
 	}
 }
