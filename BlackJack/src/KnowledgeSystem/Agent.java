@@ -18,7 +18,7 @@ public class Agent extends Player{
 	}
 
 	//TODO: Wahrscheinlichkeit berechnen
-	//TODO: Karten zählen
+	//TODO: Strategie
 	//TODO: Entscheidung anhand von Kriterien treffen
 	
 	public double calcBetValue(Rules rules)
