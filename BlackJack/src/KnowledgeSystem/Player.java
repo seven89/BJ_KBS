@@ -3,6 +3,7 @@ package KnowledgeSystem;
 /**
  * 
  * @author Boris Beck & Fabian Schäfer
+ * @brief a player can be a human or an agent
  * @param credit stores the specific money of each participant
  */
 public class Player extends Participant{
