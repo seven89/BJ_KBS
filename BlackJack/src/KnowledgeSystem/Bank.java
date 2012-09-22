@@ -5,7 +5,7 @@ import data.CardSet;
 /**
  * 
  * @author Boris Beck & Fabian Schäfer
- * @brief the bank gives the cards to the player and to itself; 
+ * @brief the bank (dealer) gives the cards to the player and to itself; 
  * it manages wins and loses for the players; 
  * it plays also in order to get BlackJack.
  * @param price stores the to be given price to a winning player
