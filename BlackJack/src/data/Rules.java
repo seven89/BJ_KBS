@@ -1,5 +1,8 @@
 package data;
 
+import KnowledgeSystem.Bank;
+import KnowledgeSystem.Player;
+
 /**
  * 
  * @author Fabian Schäfer
@@ -12,13 +15,56 @@ public class Rules {
 	
 	private int players;
 	private double time;
+	private int blackJack;
 
 	public Rules(int players, double time)
 	{
 		this.setPlayers(players);
 		this.setTime(time);
+		this.setBlackJack(21);
+	}
+	
+	public boolean checkTripleSeven(int[][] openCards)
+	{
+		/**
+		 * iff a player has BlackJack, then this function checks for triple seven.
+		 * In case of triple seven the player wins immediatly in relation of 3:2, 
+		 * after the player is out of the current game
+		 */
+		int i = 0;
+		while(i<3)
+		{
+			if(openCards[i][3] == 7)
+			{
+				i++;
+				
+			}
+			else
+			{
+				break;
+			}
+		}
+		if(i == 2) return true;
+		else return false;
+	}
+	
+	public boolean checkDraw (Bank bank, Player player, int[][] openCards)
+	{
+		/**
+		 * This method checks whether player and bank have a BlackJack simultaneously
+		 */
+		if(bank.getCardScore() == 21 && player.getCardScore() == 21)
+		{
+			if(!checkTripleSeven(openCards))
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 
+	//TODO: Bust, Insurance, split und doppeln Bedingungen
+	
 	//getters & setters
 	public int getPlayers() {
 		return players;
@@ -34,5 +80,13 @@ public class Rules {
 
 	public void setTime(double time) {
 		this.time = time;
+	}
+
+	public int getBlackJack() {
+		return blackJack;
+	}
+
+	public void setBlackJack(int blackJack) {
+		this.blackJack = blackJack;
 	}
 }
