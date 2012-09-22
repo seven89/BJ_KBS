@@ -1,6 +1,8 @@
 package controller;
 
 import data.CardSet;
+import data.Rules;
+import KnowledgeSystem.Agent;
 import KnowledgeSystem.Bank;
 import KnowledgeSystem.Player;
 
@@ -31,6 +33,10 @@ public class BlackJack {
 		
 		BlackJack table = new BlackJack();		//create table
 		CardSet CardDeck = new CardSet();	// create card deck
+		Rules rules = new Rules(7, 5);	
+		Agent a = new Agent (500);
+		a.calcBetValue(rules);
+		
 		Player p = new Player(50);		// create player(s)
 		table.setPlayers(1);			// count player
 		p.setCredit(100);				// give player 100 money

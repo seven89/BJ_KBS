@@ -6,6 +6,8 @@
  */
 package KnowledgeSystem;
 
+import data.Rules;
+
 public class Agent extends Player{
 
 	private double probability;
@@ -18,6 +20,20 @@ public class Agent extends Player{
 	//TODO: Wahrscheinlichkeit berechnen
 	//TODO: Karten zählen
 	//TODO: Entscheidung anhand von Kriterien treffen
+	
+	public double calcBetValue(Rules rules)
+	{
+		/**
+		 * This method calculates the bet-value of an agent
+		 */
+		double betValue = 0;
+		if(credit/50 < rules.getBoxLimit()) betValue =credit/50;
+		else betValue = rules.getBoxLimit();
+		
+		return betValue;
+	}
+	
+	
 	
 	
 	//getters & setters

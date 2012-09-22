@@ -10,6 +10,7 @@ import KnowledgeSystem.Player;
  * @param players stores the amount of players for the BlackJack game
  * @param time stores the waiting time for an player interaction in each game cycle
  * @param blackJack marks the BlackJack value
+ * @param boxLimit limits the max. stake
  */
 
 public class Rules {
@@ -17,12 +18,14 @@ public class Rules {
 	private int players;
 	private double time;
 	private int blackJack;
+	private int boxLimit;
 
 	public Rules(int players, double time)
 	{
 		this.setPlayers(players);
 		this.setTime(time);
 		this.setBlackJack(21);
+		this.setBoxLimit(50);
 	}
 	
 	public boolean checkTripleSeven(int[][] openCards)
@@ -87,5 +90,13 @@ public class Rules {
 
 	public void setBlackJack(int blackJack) {
 		this.blackJack = blackJack;
+	}
+
+	public int getBoxLimit() {
+		return boxLimit;
+	}
+
+	public void setBoxLimit(int boxLimit) {
+		this.boxLimit = boxLimit;
 	}
 }
