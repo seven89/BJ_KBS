@@ -1,14 +1,15 @@
-package data;
+package controller;
 
+import data.CardSet;
 import KnowledgeSystem.Bank;
 import KnowledgeSystem.Player;
 
-public class Table {
+public class BlackJack {
 
 	int Players;
 	int startMoney;
 	
-	public Table() {
+	public BlackJack() {
 		startMoney=100;
 	}
 	
@@ -28,11 +29,11 @@ public class Table {
 		int i=0, j=0;
 		int bet=10;
 		
-		Table table = new Table();		//create table
-		Cards CardDeck = new Cards();	// create card deck
-		Player p = new Player();		// create player(s)
+		BlackJack table = new BlackJack();		//create table
+		CardSet CardDeck = new CardSet();	// create card deck
+		Player p = new Player(50);		// create player(s)
 		table.setPlayers(1);			// count player
-		p.setMoney(100);				// give player 100 money
+		p.setCredit(100);				// give player 100 money
 		p.setBet(bet);					// player set 10 money
 		
 		// Bank (first card)
@@ -82,7 +83,7 @@ public class Table {
 			
 			if (bank.getCardScore()>21) {
 				System.out.println("You win!");
-				p.setMoney(bet*2);
+				p.setCredit(bet*2);
 				
 			}
 			else {
@@ -91,16 +92,16 @@ public class Table {
 				}
 				else if (bank.getCardScore() == p.getCardScore() && p.getCardScore()!=21) {
 					System.out.println("drawn");
-					p.setMoney(bet);
+					p.setCredit(bet);
 				}
 				else {
 					System.out.println("You win!");
-					p.setMoney(bet*2);
+					p.setCredit(bet*2);
 				}
 			}
 			System.out.println("Bank Score: "+bank.getCardScore());
 		}
-		System.out.println("Money: "+p.getMoney());
+		System.out.println("Money: "+p.getCredit());
 		
 		
 		

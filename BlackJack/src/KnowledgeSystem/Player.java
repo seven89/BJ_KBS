@@ -1,12 +1,34 @@
 package KnowledgeSystem;
 
-public class Player extends Bank{
+/**
+ * 
+ * @author Boris Beck & Fabian Schäfer
+ * @param credit stores the specific money of each participant
+ */
+public class Player extends Participant{
 	
-	double Money, countCards=0;
-	double Bet;
+	protected int credit;
+	private double countCards;
+	private double Bet;
 	
-	public void setMoney(int m) {
-		Money += m;
+	public Player(int credit) 
+	{
+		super();
+		countCards=0;
+	}
+	
+	public void splitt()
+	{
+		//TODO: implement function
+	}
+	
+	public void insure ()
+	{
+		//TODO: implement function
+	}
+	
+	public void setCredit(int m) {
+		credit += m;
 	}
 	
 	public void setCard(int[] pC) {		
@@ -20,8 +42,8 @@ public class Player extends Bank{
 		CardScore += pC[2];
 	}
 	
-	public double getMoney() {
-		return Money;
+	public int getCredit() {
+		return credit;
 	}
 	
 	public double getBet() {
@@ -30,14 +52,6 @@ public class Player extends Bank{
 	
 	public void setBet(double d) {
 		Bet = d;
-		Money -= d;
-	}
-	
-	public void setInGame(boolean iG) {
-		inGame = iG;
-	}
-	
-	public boolean getInGame() {
-		return inGame;
+		credit -= d;
 	}
 }

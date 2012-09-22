@@ -1,17 +1,34 @@
 package KnowledgeSystem;
 
-public class Bank {
+import data.CardSet;
+
+
+
+public class Bank extends Participant{
 	
-	int CardScore=0;
-	int[] Card;
-	boolean inGame=true;
+	private int price;
 	
-	public void setCard(int[] pC) {
-		Card = pC;
-		CardScore += pC[2];
+	public Bank ()
+	{
+		super();
 	}
 	
-	public int getCardScore() {
-		return CardScore;
+	public int[] giveCard(CardSet cardDeck)
+	{
+		/**
+		 * the Bank distributes the cards from the cardset to all participants
+		 */
+		return cardDeck.getCard();
 	}
+	
+	public int getPrice()
+	{
+		//cash out the price for the winning player
+		return price;
+	}
+	public void takeMoney()
+	{
+		//TODO: nimmt das Geld, was von einem Spieler gesetzt wurde
+	}
+	
 }

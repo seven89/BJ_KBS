@@ -2,7 +2,7 @@ package data;
 
 import java.util.Random;
 
-public class Cards {
+public class CardSet {
 	
 	private int[][] CardDeck;
 	private int[] CurrentCard;
@@ -25,7 +25,7 @@ public class Cards {
 	 *    ...
 	 *    12: ACE
 	 */
-	public Cards() {
+	public CardSet() {
 		setCardDeck(new int[4][14]);
 		CurrentCard= new int[3];
 		int i=0, j=0;	
