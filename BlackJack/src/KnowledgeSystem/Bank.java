@@ -18,7 +18,7 @@ public class Bank extends Participant{
 		/**
 		 * the Bank distributes the cards from the cardset to all participants
 		 */
-		return cardDeck.getCard();
+		return cardDeck.getRandCard();
 	}
 	
 	public int getPrice()

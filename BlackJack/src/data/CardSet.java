@@ -43,7 +43,7 @@ public class CardSet {
 	 * getCard
 	 * @brief get a Card from the deck
 	 */
-	public int[] getCard() {
+	public int[] getRandCard() {
 
 		Random random = new Random();
 		int l, r;

@@ -2,7 +2,7 @@ package graphics;
 
 import com.jme3.app.SimpleApplication;
 
-public class GraphicsControler extends SimpleApplication {
+public class GraphicsController extends SimpleApplication {
 
 	/**
 	 * @param args

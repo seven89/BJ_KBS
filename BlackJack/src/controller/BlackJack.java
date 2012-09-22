@@ -38,23 +38,23 @@ public class BlackJack {
 		
 		// Bank (first card)
 		Bank bank = new Bank();
-		bank.setCard(CardDeck.getCard());
+		bank.setCard(CardDeck.getRandCard());
 		
 		if (bank.getCardScore()==10) {
 			System.out.println("Versichern? (Spielmodus)");
 		}
 		
 		// give player a card
-		p.setCard(CardDeck.getCard());
+		p.setCard(CardDeck.getRandCard());
 		p.getCardScore();
 		System.out.println("Score (one card): "+p.getCardScore());
 		
 		// give player another card
-		p.setCard(CardDeck.getCard());
+		p.setCard(CardDeck.getRandCard());
 		p.getCardScore();
 		System.out.println("Score (two cards): "+p.getCardScore());
 		
-		p.setCard(CardDeck.getCard());
+		p.setCard(CardDeck.getRandCard());
 		p.getCardScore();
 		System.out.println("Score (three cards): "+p.getCardScore());
 		System.out.println("-----------------------------");
@@ -75,10 +75,10 @@ public class BlackJack {
 			System.out.println("Bank win");
 		}
 		else {
-			bank.setCard(CardDeck.getCard());
+			bank.setCard(CardDeck.getRandCard());
 			
 			while(bank.getCardScore()<17) {
-				bank.setCard(CardDeck.getCard());
+				bank.setCard(CardDeck.getRandCard());
 			}
 			
 			if (bank.getCardScore()>21) {
