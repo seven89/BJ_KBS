@@ -37,6 +37,7 @@ public class CardSet {
 		}
 		
 		// new Card Deck (52 Cards)
+		
 		for  (i=0; i<4; i++) {
 			CardDeck[i][j] = i;
 			for (j=0; j<13; j++) {
