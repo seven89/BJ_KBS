@@ -53,7 +53,6 @@ public class Player extends Participant{
 	
 	public void setBet(double d) {
 		Bet = d;
-		credit -= d;
 		
 		if (inGame = false) {
 			inGame = true;

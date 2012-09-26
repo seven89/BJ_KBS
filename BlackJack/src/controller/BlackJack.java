@@ -97,7 +97,7 @@ public class BlackJack {
 		  boolean newgame=true;
 		  //Render loop
 			System.out.println("GAME " + Game);
-			while(true){
+			while(p.getCredit()>0){
 				//refresh time
 				wait(10);	// waits for 1000 ms
 				
@@ -140,6 +140,7 @@ public class BlackJack {
 				step++;
 				gc.repaint();
 			}  
+			System.out.println("You have lost! ;( ");
 	  }
 	  
 	  public static Boolean pullCard(int currentPlayerValue){
@@ -157,29 +158,25 @@ public class BlackJack {
 				System.out.println("BlackJack! (player)");
 				p.setBet(bet+bet*1.5);
 			}
-			else if(p.getCardScore()>21){
+			
+			
+			if(p.getCardScore()>21){
 				System.out.println("Player lose!");
 				p.setInGame(false);
 				p.setCredit(-bet);
-			}else
-				if (bank.getCardScore()>21) {
+			}
+			else if (bank.getCardScore()>21) {
 					System.out.println("Player win!");
-					p.setCredit(bet*2);	
-				}
-				else {
-					if (bank.getCardScore() > p.getCardScore()) {
+					p.setCredit(bet);	
+			}
+			else if (bank.getCardScore() > p.getCardScore()) {
 						System.out.println("Bank win!");
 						p.setCredit(-bet);
-					}
-					else if (bank.getCardScore() == p.getCardScore() && p.getCardScore()!=21) {
+			}
+			else if (bank.getCardScore() == p.getCardScore() && p.getCardScore()!=21) {
 						System.out.println("drawn");
-						p.setCredit(bet);
-					}
-					else {
-						System.out.println("Player win!");
-						p.setCredit(bet*2);
-					}
-				}
+						p.setCredit(0);
+			}
 				System.out.println("Player Score: "+p.getCardScore());
 				System.out.println("Bank Score: "+bank.getCardScore());
 				System.out.println("Money: "+p.getCredit());
