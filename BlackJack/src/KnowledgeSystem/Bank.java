@@ -52,4 +52,8 @@ public class Bank extends Participant{
 		this.valueBorder = valueBorder;
 	}
 	
+	public void newGame() {
+		CardScore = 0;
+	}
+	
 }
