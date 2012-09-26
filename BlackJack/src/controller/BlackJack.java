@@ -84,7 +84,7 @@ public class BlackJack {
 		  int step=1;
 		  boolean newgame=true;
 		  //Render loop
-			System.out.println("GAME " + Game);
+			//System.out.println("GAME " + Game);
 			while(p.getCredit()>0){
 				//refresh time
 				wait(1);	// waits for 1000 ms
@@ -120,7 +120,7 @@ public class BlackJack {
 								newgame=true;
 								p.gamesPlayed++;
 								Game++;
-								System.out.println("GAME " + Game);
+								//System.out.println("GAME " + Game);
 							}
 							
 						}
@@ -139,46 +139,46 @@ public class BlackJack {
 	  }
 	  
 	  public static Boolean pullCard(int currentPlayerValue){
-		  if(currentPlayerValue<15) return true;
+		  if((currentPlayerValue-21)*(-1)>8) return true;
 		  return false;
 	  }
 	  
 	  private static void printResult(){
-		  System.out.println("-----------------------------");
+//		  System.out.println("-----------------------------");
 			
 			if(p.getCardScore()<21) {
-				System.out.println("Player under 21");
+				//System.out.println("Player under 21");
 			}
 			else if (p.getCardScore()==21) {
-				System.out.println("BlackJack! (player)");
+				//System.out.println("BlackJack! (player)");
 				p.setBet(bet+bet*1.5);
 			}
 			
 			
 			if(p.getCardScore()>21){
-				System.out.println("Player lose!");
+				//System.out.println("Player lose!");
 				p.setInGame(false);
 				p.setCredit(-bet);
 				p.gamesLost++;
 			}
 			else if (bank.getCardScore()>21) {
-					System.out.println("Player win!");
+					//System.out.println("Player win!");
 					p.setCredit(bet);
 					p.gamesWon++;
 			}
 			else if (bank.getCardScore() > p.getCardScore()) {
-						System.out.println("Bank win!");
+						//System.out.println("Bank win!");
 						p.setCredit(-bet);
 						p.gamesLost++;
 			}
 			else if (bank.getCardScore() == p.getCardScore() && p.getCardScore()!=21) {
-						System.out.println("drawn");
+//						System.out.println("drawn");
 						p.setCredit(0);
 						p.gamesDraw++;
 			}
-				System.out.println("Player Score: "+p.getCardScore());
-				System.out.println("Bank Score: "+bank.getCardScore());
-				System.out.println("Money: "+p.getCredit());
+//				System.out.println("Player Score: "+p.getCardScore());
+//				System.out.println("Bank Score: "+bank.getCardScore());
+//				System.out.println("Money: "+p.getCredit());
 	  }
 		
 }
