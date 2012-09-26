@@ -32,7 +32,7 @@ public class BlackJack {
 		
 		p = new Player(50);		// create player(s)
 		setPlayers(1);			// count player
-		p.setCredit(100);				// give player 100 money
+		p.setCredit(5000);				// give player 100 money
 		p.setBet(bet);					// player set 10 money
 		
 		// Bank (first card)
@@ -139,7 +139,7 @@ public class BlackJack {
 	  }
 	  
 	  public static Boolean pullCard(int currentPlayerValue){
-		  if(currentPlayerValue<16) return true;
+		  if(currentPlayerValue<15) return true;
 		  return false;
 	  }
 	  
