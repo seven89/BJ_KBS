@@ -151,19 +151,19 @@ public class BlackJack {
 		  System.out.println("-----------------------------");
 			
 			if(p.getCardScore()<21) {
-				System.out.println("Player: under 21");
+				System.out.println("Player under 21");
 			}
 			else if (p.getCardScore()==21) {
-				System.out.println("Player: BlackJack!");
-				p.setBet(bet*2.5);
+				System.out.println("BlackJack! (player)");
+				p.setBet(bet+bet*1.5);
 			}
 			else {
-				System.out.println("Player: you Lose!");
+				System.out.println("Player lose!");
 				p.setInGame(false);
 				p.setCredit(-bet);
 			}	
 				if (bank.getCardScore()>21) {
-					System.out.println("You win!");
+					System.out.println("Player win!");
 					p.setCredit(bet*2);	
 				}
 				else {
@@ -176,14 +176,13 @@ public class BlackJack {
 						p.setCredit(bet);
 					}
 					else {
-						System.out.println("You win!");
+						System.out.println("Player win!");
 						p.setCredit(bet*2);
 					}
 				}
 				System.out.println("Player Score: "+p.getCardScore());
 				System.out.println("Bank Score: "+bank.getCardScore());
 				System.out.println("Money: "+p.getCredit());
-			
 	  }
 		
 }
