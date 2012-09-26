@@ -38,9 +38,9 @@ public class CardSet {
 		
 		// new Card Deck (52 Cards)
 		for  (i=0; i<4; i++) {
-			getCardDeck()[i][j] = i;
+			CardDeck[i][j] = i;
 			for (j=0; j<13; j++) {
-				getCardDeck()[i][j] = 1;			// 1=card in deck, 0= card not in deck
+				CardDeck[i][j] = 1;			// 1=card in deck, 0= card not in deck
 			}
 		}	
 	}
@@ -58,12 +58,12 @@ public class CardSet {
 		do {
 			l = random.nextInt(4);
 			r = random.nextInt(13);
-		} while (getCardDeck()[l][r]==0);
+		} while (CardDeck[l][r]==0);
 
 			CurrentCard[0]=l;
 			CurrentCard[1]=r;
 			CurrentCard[2]= getCardScore(r);
-			getCardDeck()[l][r]= 0;				// set 0, (card not more in the deck) 
+			CardDeck[l][r]= 0;				// set 0, (card not more in the deck) 
 
 		return CurrentCard;
 	}
