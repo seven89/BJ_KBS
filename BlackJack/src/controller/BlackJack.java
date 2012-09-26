@@ -1,5 +1,6 @@
 package controller;
 
+import graphics.GraphicsController;
 import data.CardSet;
 import data.Rules;
 import KnowledgeSystem.Agent;
@@ -10,9 +11,35 @@ public class BlackJack {
 
 	int Players;
 	int startMoney;
+	protected static GraphicsController gc;
+	protected static CardSet CardDeck;
+	protected Agent a;
+	protected static Player p;
+	protected static Bank bank;
+	static int bet;
 	
 	public BlackJack() {
 		startMoney=100;
+		gc = new GraphicsController(); //create gui
+		gc.setVisible(true);
+		
+		int i=0, j=0;
+		bet=10;
+		
+		CardDeck = new CardSet();	// create card deck
+		Rules rules = new Rules(7, 5);	
+		a = new Agent (500);
+		a.calcBetValue(rules);
+		
+		p = new Player(50);		// create player(s)
+		setPlayers(1);			// count player
+		p.setCredit(100);				// give player 100 money
+		p.setBet(bet);					// player set 10 money
+		
+		// Bank (first card)
+		bank = new Bank();
+				
+		
 	}
 	
 	// getter & setter
@@ -28,96 +55,12 @@ public class BlackJack {
 	 */
 	public static void main(String [ ] args)
 	{
-		int i=0, j=0;
-		int bet=10;
-		
 		BlackJack table = new BlackJack();		//create table
-		CardSet CardDeck = new CardSet();	// create card deck
-		Rules rules = new Rules(7, 5);	
-		Agent a = new Agent (500);
-		a.calcBetValue(rules);
+		nextStep();
 		
-		Player p = new Player(50);		// create player(s)
-		table.setPlayers(1);			// count player
-		p.setCredit(100);				// give player 100 money
-		p.setBet(bet);					// player set 10 money
-		
-		// Bank (first card)
-		Bank bank = new Bank();
-		bank.setCard(CardDeck.getRandCard());
-		
-		if (bank.getCardScore()==10) {
+		/*if (bank.getCardScore()==10) {
 			System.out.println("Versichern? (Spielmodus)");
 		}
-		
-		// give player a card
-		p.setCard(CardDeck.getRandCard());
-		p.getCardScore();
-		System.out.println("Score (one card): "+p.getCardScore());
-		
-		// give player another card
-		p.setCard(CardDeck.getRandCard());
-		p.getCardScore();
-		System.out.println("Score (two cards): "+p.getCardScore());
-		
-		p.setCard(CardDeck.getRandCard());
-		p.getCardScore();
-		System.out.println("Score (three cards): "+p.getCardScore());
-		System.out.println("-----------------------------");
-		
-		if(p.getCardScore()<21) {
-			System.out.println("Player: under 21");
-		}
-		else if (p.getCardScore()==21) {
-			System.out.println("Player: BlackJack!");
-			p.setBet(bet*2.5);
-		}
-		else {
-			System.out.println("Player: you Lose!");
-			p.setInGame(false);
-		}
-		
-		if (p.getInGame()==false) {
-			System.out.println("Bank win");
-		}
-		else {
-			bank.setCard(CardDeck.getRandCard());
-			
-			while(bank.getCardScore()<17) {
-				bank.setCard(CardDeck.getRandCard());
-			}
-			
-			if (bank.getCardScore()>21) {
-				System.out.println("You win!");
-				p.setCredit(bet*2);
-				
-			}
-			else {
-				if (bank.getCardScore() > p.getCardScore()) {
-					System.out.println("Bank win!");
-				}
-				else if (bank.getCardScore() == p.getCardScore() && p.getCardScore()!=21) {
-					System.out.println("drawn");
-					p.setCredit(bet);
-				}
-				else {
-					System.out.println("You win!");
-					p.setCredit(bet*2);
-				}
-			}
-			System.out.println("Bank Score: "+bank.getCardScore());
-		}
-		System.out.println("Money: "+p.getCredit());
-		
-		
-		
-		
-		
-		
-//		// get card
-//		for (int c=0; c<52;c++) {
-//			CardTest.getCard();
-//		}
 		
 		// show Carddeck
 		System.out.println("----------CardDeck ----------");
@@ -126,5 +69,118 @@ public class BlackJack {
 				System.out.print(CardDeck.getCardDeck()[i][j]+" ");
 			}
 		}
+		*/
+		
+	
 	}
+	
+	  public static void wait (int timeToWait){
+	        long t0,t1;
+	        t0 = System.currentTimeMillis();
+	        do{
+	            t1 = System.currentTimeMillis();
+	        }
+	        while(t1 - t0 < timeToWait);
+	}
+	  
+	  private static void newGame(){
+
+			gc.clearArray();
+			CardDeck.cardSet(false);
+			p.NewGame();
+	  }
+	  
+	  private static void nextStep(){
+		  int step=1;
+		  //Render loop
+			while(true){
+				//refresh time
+				wait(1000);	// waits for 1000 ms
+				
+				//reset turn + player handling
+				if(step==5) {
+					step=0;
+						//players turn?
+						if(pullCard(p.getCardScore())){  //TODO pullCard (implemented below to Agent a
+							int[] card = CardDeck.getRandCard();
+							p.setCard(card);
+							gc.newBankCard(card[0], card[2]);
+						}
+						//now banks turn
+						else{
+							if(bank.getCardScore()<17){
+								int[] card = CardDeck.getRandCard();
+								bank.setCard(card);
+								gc.newBankCard(card[0], card[2]);
+							}
+							//new game
+							else{
+								printResult();
+								newGame();
+								
+								
+							}
+							
+						}
+					
+				}
+				step++;
+				gc.repaint();
+			}  
+	  }
+	  
+	  public static Boolean pullCard(int currentPlayerValue){
+		  if(currentPlayerValue<18) return true;
+		  return false;
+	  }
+	  
+	  private static void printResult(){
+		  System.out.println("-----------------------------");
+			
+			if(p.getCardScore()<21) {
+				System.out.println("Player: under 21");
+			}
+			else if (p.getCardScore()==21) {
+				System.out.println("Player: BlackJack!");
+				p.setBet(bet*2.5);
+			}
+			else {
+				System.out.println("Player: you Lose!");
+				p.setInGame(false);
+			}
+			
+			if (p.getInGame()==false) {
+				System.out.println("Bank win");
+			}
+			else {
+				bank.setCard(CardDeck.getRandCard());
+				
+				while(bank.getCardScore()<17) {
+					bank.setCard(CardDeck.getRandCard());
+				}
+				
+				if (bank.getCardScore()>21) {
+					System.out.println("You win!");
+					p.setCredit(bet*2);
+					
+				}
+				else {
+					if (bank.getCardScore() > p.getCardScore()) {
+						System.out.println("Bank win!");
+					}
+					else if (bank.getCardScore() == p.getCardScore() && p.getCardScore()!=21) {
+						System.out.println("drawn");
+						p.setCredit(bet);
+					}
+					else {
+						System.out.println("You win!");
+						p.setCredit(bet*2);
+					}
+				}
+				System.out.println("Bank Score: "+bank.getCardScore());
+			}
+			System.out.println("Money: "+p.getCredit());
+			
+	  }
+		
 }

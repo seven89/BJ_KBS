@@ -2,7 +2,9 @@ package graphics;
 
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Frame;
 import java.awt.Graphics;
+import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,8 +15,17 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.JWindow;
+
+import KnowledgeSystem.Agent;
+import KnowledgeSystem.Player;
+
+import controller.BlackJack;
+import data.CardSet;
+import data.Rules;
 
 
 public class GraphicsController extends JWindow {
@@ -93,19 +104,11 @@ public class GraphicsController extends JWindow {
 	private int playercards=0;
 	private int bankcards=0;
 	private int cards=0;
-	
-	   public static void main(String str[]) {
-	    	
-		   GraphicsController gc = new GraphicsController();
-		   gc.setVisible(true);
-			while(true){
-				wait(1000);	// waits for 300 ms
-					
-				 gc.repaint();
-			}
-	    }
 	   
 public GraphicsController(){
+	 createAndShowWindow(); 
+	 
+	 
 	 graphicObjects=new Figure[52];
 	 for(int i=0;i<graphicObjects.length;i++){
 		 graphicObjects[i]=new Figure();
@@ -134,15 +137,6 @@ public GraphicsController(){
 	getContentPane().add(backgroundPanel);
 }
 	   
-    public static void wait (int timeToWait){
-        long t0,t1;
-        t0 = System.currentTimeMillis();
-        do{
-            t1 = System.currentTimeMillis();
-        }
-        while(t1 - t0 < timeToWait);
-}
-	
 	public void paint(Graphics g) {
 		
 	super.paint(g);
@@ -296,6 +290,20 @@ public GraphicsController(){
 		}
 	}
 	
+	    private JFrame frame;
+	   
+	    private void createAndShowWindow() {
+	        JTextField text = new JTextField("Whatewer");
+	        JWindow win = new JWindow(frame);
+	        win.setLayout(new GridLayout(0, 1));
+	        this.add(text);
+	        win.pack();
+	        win.setLocation(0, 0);
+	        win.setVisible(true);
+	    }
+
+
+	
 	
 	public void newPlayerCard(int color, int value){
 		 graphicObjects[cards].type=2;
@@ -315,6 +323,12 @@ public GraphicsController(){
 		 graphicObjects[cards].y=100;
 		 bankcards++;
 		 cards++;
+	}
+
+	public void clearArray() {
+		for(int i=0;i<graphicObjects.length;i++){
+			 graphicObjects[i]=new Figure();
+		 }
 	}
 	
 }
