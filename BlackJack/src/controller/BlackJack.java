@@ -93,36 +93,41 @@ public class BlackJack {
 	  
 	  private static void nextStep(){
 		  int step=1;
-		  
-		  int[] initialcard = CardDeck.getRandCard();
-			bank.setCard(initialcard);
-			gc.newBankCard(initialcard[0], initialcard[1]);
-		  
+		  boolean newgame=true;
 		  //Render loop
 			while(true){
 				//refresh time
 				wait(1000);	// waits for 1000 ms
 				
+				if(newgame){
+					int[] initialcard = CardDeck.getRandCard();
+					bank.setCard(initialcard);
+					gc.newBankCard(initialcard[0]+1, initialcard[1]+1);
+					newgame=false;
+				}
+				
 				//reset turn + player handling
-				if(step==3) {
+				if(step==2) {
 					step=0;
 						//players turn?
 						if(pullCard(p.getCardScore())){  //TODO pullCard (implemented below to Agent a
 							int[] card = CardDeck.getRandCard();
 							p.setCard(card);
-							gc.newPlayerCard(card[0], card[1]);
+							gc.newPlayerCard(card[0]+1, card[1]+1);
+							//System.out.println("Farbe " + (card[0]+1) + "Typ " + (card[1]+1) + "Score " + card[2]);
 						}
 						//now banks turn
 						else{
 							if(bank.getCardScore()<17){
 								int[] card = CardDeck.getRandCard();
 								bank.setCard(card);
-								gc.newBankCard(card[0], card[1]);
+								gc.newBankCard(card[0]+1, card[1]+1);
 							}
 							//new game
 							else{
 								printResult();
 								newGame();
+								newgame=true;
 								
 								
 							}
@@ -136,7 +141,7 @@ public class BlackJack {
 	  }
 	  
 	  public static Boolean pullCard(int currentPlayerValue){
-		  if(currentPlayerValue<18) return true;
+		  if(currentPlayerValue<14) return true;
 		  return false;
 	  }
 	  

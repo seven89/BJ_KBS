@@ -74,7 +74,7 @@ public class CardSet {
 	 * @brief give the score of the card 
 	 */
 	private int getCardScore(int score) {
-        switch (score) {
+        switch (score+1) {
         	case 1: if(highAss) { score=11; }
    		 			else{ score=1;} break;
             case 2:  score=2; break;
