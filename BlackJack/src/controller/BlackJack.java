@@ -71,6 +71,10 @@ public class BlackJack {
 	        while(t1 - t0 < timeToWait);
 	}
 	  
+	public int[][] getCardDeck() {
+		return CardDeck.CardDeck;
+	}
+	  
 	  private static void newGame(){
 
 			gc.clearArray();

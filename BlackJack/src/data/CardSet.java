@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class CardSet {
 	
-	private int[][] CardDeck;
+	public int[][] CardDeck;
 	private int[] CurrentCard;
 	private int lengthSym;
 	private int lengthVal;
