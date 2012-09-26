@@ -176,6 +176,10 @@ public class BlackJack {
 						p.setCredit(0);
 						p.gamesDraw++;
 			}
+			else{
+				p.setCredit(bet);
+				p.gamesWon++;
+			}
 //				System.out.println("Player Score: "+p.getCardScore());
 //				System.out.println("Bank Score: "+bank.getCardScore());
 //				System.out.println("Money: "+p.getCredit());
