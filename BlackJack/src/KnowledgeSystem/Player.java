@@ -59,5 +59,6 @@ public class Player extends Participant{
 	public void newGame() {
 		countCards = 0;
 		Bet = 0;
+		CardScore = 0;
 	}
 }
