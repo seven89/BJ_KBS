@@ -99,7 +99,7 @@ public class BlackJack {
 			System.out.println("GAME " + Game);
 			while(p.getCredit()>0){
 				//refresh time
-				wait(10);	// waits for 1000 ms
+				wait(1);	// waits for 1000 ms
 				
 				if(newgame){
 					int[] initialcard = CardDeck.getRandCard();
@@ -144,7 +144,7 @@ public class BlackJack {
 	  }
 	  
 	  public static Boolean pullCard(int currentPlayerValue){
-		  if(currentPlayerValue<14) return true;
+		  if(currentPlayerValue<16) return true;
 		  return false;
 	  }
 	  
