@@ -11,6 +11,10 @@ public class Player extends Participant{
 	protected int credit;
 	private double countCards;
 	private double Bet;
+	public int gamesPlayed=0;
+	public int gamesWon=0;
+	public int gamesLost=0;
+	public int gamesDraw=0;
 	
 	public Player(int credit) 
 	{

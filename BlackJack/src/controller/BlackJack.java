@@ -23,7 +23,6 @@ public class BlackJack {
 		gc = new GraphicsController(); //create gui
 		gc.setVisible(true);
 		
-		int i=0, j=0;
 		bet=10;
 		
 		CardDeck = new CardSet(false);	// create card deck
@@ -60,18 +59,7 @@ public class BlackJack {
 		
 		/*if (bank.getCardScore()==10) {
 			System.out.println("Versichern? (Spielmodus)");
-		}
-		
-		// show Carddeck
-		System.out.println("----------CardDeck ----------");
-		for  (i=0; i<4; i++) {
-			for (j=0; j<13; j++) {
-				System.out.print(CardDeck.getCardDeck()[i][j]+" ");
-			}
-		}
-		*/
-		
-	
+		}*/
 	}
 	
 	  public static void wait (int timeToWait){
@@ -130,6 +118,7 @@ public class BlackJack {
 								printResult();
 								newGame();
 								newgame=true;
+								p.gamesPlayed++;
 								Game++;
 								System.out.println("GAME " + Game);
 							}
@@ -141,6 +130,12 @@ public class BlackJack {
 				gc.repaint();
 			}  
 			System.out.println("You have lost! ;( ");
+			System.out.println("You won "+ p.gamesWon +"/"+ p.gamesPlayed + " " + (((float)p.gamesWon/(float)p.gamesPlayed)*100.0) + "% of games!");
+			System.out.println("You lost "+ p.gamesLost +"/"+ p.gamesPlayed + " " + (((float)p.gamesLost/(float)p.gamesPlayed)*100.0) + "% of games!");
+			System.out.println("You had a draw in "+ p.gamesDraw +"/"+ p.gamesPlayed + " " + (((float)p.gamesDraw/(float)p.gamesPlayed)*100.0) + "% of games!");
+			gc.setVisible(false);
+			gc.dispose();
+			System.exit(0);
 	  }
 	  
 	  public static Boolean pullCard(int currentPlayerValue){
@@ -164,18 +159,22 @@ public class BlackJack {
 				System.out.println("Player lose!");
 				p.setInGame(false);
 				p.setCredit(-bet);
+				p.gamesLost++;
 			}
 			else if (bank.getCardScore()>21) {
 					System.out.println("Player win!");
-					p.setCredit(bet);	
+					p.setCredit(bet);
+					p.gamesWon++;
 			}
 			else if (bank.getCardScore() > p.getCardScore()) {
 						System.out.println("Bank win!");
 						p.setCredit(-bet);
+						p.gamesLost++;
 			}
 			else if (bank.getCardScore() == p.getCardScore() && p.getCardScore()!=21) {
 						System.out.println("drawn");
 						p.setCredit(0);
+						p.gamesDraw++;
 			}
 				System.out.println("Player Score: "+p.getCardScore());
 				System.out.println("Bank Score: "+bank.getCardScore());
