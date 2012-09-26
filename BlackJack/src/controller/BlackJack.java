@@ -191,6 +191,7 @@ public class BlackJack {
 				System.out.println("Bank Score: "+bank.getCardScore());
 			}
 			System.out.println("Money: "+p.getCredit());
+			p.setCredit(p.getCredit());
 			
 	  }
 		
