@@ -113,12 +113,6 @@ public GraphicsController(){
 	 for(int i=0;i<graphicObjects.length;i++){
 		 graphicObjects[i]=new Figure();
 	 }
-	 newBankCard(2, 10);
-	 newBankCard(2, 10);
-	 newPlayerCard(4, 8);
-	 newPlayerCard(3, 2);
-	 newPlayerCard(2, 1);
-	 newPlayerCard(1, 13);
 	setSize(1024,768);
 	initGraphics();
 	centerOnScreen(this);
@@ -329,6 +323,9 @@ public GraphicsController(){
 		for(int i=0;i<graphicObjects.length;i++){
 			 graphicObjects[i]=new Figure();
 		 }
+		playercards=0;
+		bankcards=0;
+		cards=0;
 	}
 	
 }

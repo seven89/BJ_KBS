@@ -98,13 +98,13 @@ public class BlackJack {
 				wait(1000);	// waits for 1000 ms
 				
 				//reset turn + player handling
-				if(step==5) {
+				if(step==3) {
 					step=0;
 						//players turn?
 						if(pullCard(p.getCardScore())){  //TODO pullCard (implemented below to Agent a
 							int[] card = CardDeck.getRandCard();
 							p.setCard(card);
-							gc.newBankCard(card[0], card[2]);
+							gc.newPlayerCard(card[0], card[2]);
 						}
 						//now banks turn
 						else{
