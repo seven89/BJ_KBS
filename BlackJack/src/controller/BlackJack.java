@@ -32,7 +32,7 @@ public class BlackJack {
 		int bet=10;
 		
 		BlackJack table = new BlackJack();		//create table
-		CardSet CardDeck = new CardSet();	// create card deck
+		CardSet CardDeck = new CardSet(true);	// create card deck
 		Rules rules = new Rules(7, 5);	
 		Agent a = new Agent (500);
 		a.calcBetValue(rules);
