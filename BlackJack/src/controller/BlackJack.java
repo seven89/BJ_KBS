@@ -139,7 +139,7 @@ public class BlackJack {
 	  }
 	  
 	  public static Boolean pullCard(int currentPlayerValue){
-		  if((currentPlayerValue-21)*(-1)>8) return true;
+		  if((currentPlayerValue-21)*(-1)>10) return true;
 		  return false;
 	  }
 	  
