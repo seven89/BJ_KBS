@@ -92,7 +92,7 @@ public class BlackJack {
 				if(newgame){
 					int[] initialcard = CardDeck.getRandCard();
 					bank.setCard(initialcard);
-					gc.newBankCard(initialcard[0]+1, initialcard[1]+1);
+					gc.newBankCard(initialcard[0], initialcard[1]);
 					newgame=false;
 				}
 				
@@ -103,7 +103,7 @@ public class BlackJack {
 						if(pullCard(p.getCardScore())){  //TODO pullCard (implemented below to Agent a
 							int[] card = CardDeck.getRandCard();
 							p.setCard(card);
-							gc.newPlayerCard(card[0]+1, card[1]+1);
+							gc.newPlayerCard(card[0], card[1]);
 							//System.out.println("Farbe " + (card[0]+1) + "Typ " + (card[1]+1) + "Score " + card[2]);
 						}
 						//now banks turn
@@ -111,7 +111,7 @@ public class BlackJack {
 							if(bank.getCardScore()<17 && (p.getCardScore()<21)){
 								int[] card = CardDeck.getRandCard();
 								bank.setCard(card);
-								gc.newBankCard(card[0]+1, card[1]+1);
+								gc.newBankCard(card[0], card[1]);
 							}
 							//new game
 							else{
