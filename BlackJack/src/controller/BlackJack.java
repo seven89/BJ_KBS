@@ -118,7 +118,7 @@ public class BlackJack {
 						}
 						//now banks turn
 						else{
-							if(bank.getCardScore()<17){
+							if(bank.getCardScore()<17 || (bank.getCardScore()<p.getCardScore())){
 								int[] card = CardDeck.getRandCard();
 								bank.setCard(card);
 								gc.newBankCard(card[0]+1, card[1]+1);
