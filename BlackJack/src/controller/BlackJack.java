@@ -157,11 +157,11 @@ public class BlackJack {
 				System.out.println("BlackJack! (player)");
 				p.setBet(bet+bet*1.5);
 			}
-			else {
+			else if(p.getCardScore()>21){
 				System.out.println("Player lose!");
 				p.setInGame(false);
 				p.setCredit(-bet);
-			}	
+			}else
 				if (bank.getCardScore()>21) {
 					System.out.println("Player win!");
 					p.setCredit(bet*2);	
