@@ -88,10 +88,16 @@ public class BlackJack {
 			gc.clearArray();
 			CardDeck=new CardSet(false);
 			p.newGame();
+			bank.newGame();
 	  }
 	  
 	  private static void nextStep(){
 		  int step=1;
+		  
+		  int[] initialcard = CardDeck.getRandCard();
+			bank.setCard(initialcard);
+			gc.newBankCard(initialcard[0], initialcard[1]);
+		  
 		  //Render loop
 			while(true){
 				//refresh time
@@ -104,14 +110,14 @@ public class BlackJack {
 						if(pullCard(p.getCardScore())){  //TODO pullCard (implemented below to Agent a
 							int[] card = CardDeck.getRandCard();
 							p.setCard(card);
-							gc.newPlayerCard(card[0], card[2]);
+							gc.newPlayerCard(card[0], card[1]);
 						}
 						//now banks turn
 						else{
 							if(bank.getCardScore()<17){
 								int[] card = CardDeck.getRandCard();
 								bank.setCard(card);
-								gc.newBankCard(card[0], card[2]);
+								gc.newBankCard(card[0], card[1]);
 							}
 							//new game
 							else{
