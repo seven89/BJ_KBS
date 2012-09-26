@@ -54,11 +54,16 @@ public class Player extends Participant{
 	public void setBet(double d) {
 		Bet = d;
 		credit -= d;
+		
+		if (inGame = false) {
+			inGame = true;
+		}
 	}
 	
 	public void newGame() {
 		countCards = 0;
 		Bet = 0;
 		CardScore = 0;
+		inGame = false;
 	}
 }
