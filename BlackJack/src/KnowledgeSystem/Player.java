@@ -55,4 +55,9 @@ public class Player extends Participant{
 		Bet = d;
 		credit -= d;
 	}
+	
+	public void newGame() {
+		countCards = 0;
+		Bet = 0;
+	}
 }
