@@ -20,12 +20,12 @@ public class CardSet {
 	 *    3: CLUB
 	 *    4: SPADE
 	 * j:
-	 * 	  0: TWO
-	 *    1: THREE
+	 * 	  0: ASS
+	 *    1: TWO
 	 *    ...
-	 *    12: ACE
+	 *    12: KING
 	 *    
-	 * @param refresh: set if card set should refresh (false)
+	 * @param refresh: set if cards should refresh (false) (needed for new Game)
 	 */
 	public CardSet(boolean refresh) {
 		
@@ -75,26 +75,21 @@ public class CardSet {
 	 */
 	private int getCardScore(int score) {
         switch (score) {
-        	case 0:  score=2; break;
-            case 1:  score=3; break;
-            case 2:  score=4; break;
-            case 3:  score=5; break;
-            case 4:  score=6; break;
-            case 5:  score=7; break;
-            case 6:  score=8; break;
-            case 7:  score=9; break;
-            case 8:  score=10; break;
+        	case 0: if(highAss) { score=11; }
+   		 			else{ score=1;} break;
+            case 1:  score=2; break;
+            case 2:  score=3; break;
+            case 3:  score=4; break;
+            case 4:  score=5; break;
+            case 5:  score=6; break;
+            case 6:  score=7; break;
+            case 7:  score=8; break;
+            case 8:  score=9; break;
             case 9:  score=10; break;
             case 10: score=10; break;
             case 11: score=10; break;
-            case 12: if(highAss)
-            		 {
-            			score=11;
-            		 }
-            		 else{
-            			score=1;
-            		 }
-            		 break;
+            case 12: score=10; break;
+            
         }     
 		return score;
 	}
