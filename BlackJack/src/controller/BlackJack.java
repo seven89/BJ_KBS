@@ -92,12 +92,14 @@ public class BlackJack {
 	  }
 	  
 	  private static void nextStep(){
+		  int Game=0;
 		  int step=1;
 		  boolean newgame=true;
 		  //Render loop
+			System.out.println("GAME " + Game);
 			while(true){
 				//refresh time
-				wait(1000);	// waits for 1000 ms
+				wait(10);	// waits for 1000 ms
 				
 				if(newgame){
 					int[] initialcard = CardDeck.getRandCard();
@@ -118,7 +120,7 @@ public class BlackJack {
 						}
 						//now banks turn
 						else{
-							if(bank.getCardScore()<17 || (bank.getCardScore()<p.getCardScore())){
+							if(bank.getCardScore()<17 || (bank.getCardScore()<p.getCardScore() && p.getCardScore()<22)){
 								int[] card = CardDeck.getRandCard();
 								bank.setCard(card);
 								gc.newBankCard(card[0]+1, card[1]+1);
@@ -128,8 +130,8 @@ public class BlackJack {
 								printResult();
 								newGame();
 								newgame=true;
-								
-								
+								Game++;
+								System.out.println("GAME " + Game);
 							}
 							
 						}
