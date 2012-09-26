@@ -169,6 +169,7 @@ public class BlackJack {
 				else {
 					if (bank.getCardScore() > p.getCardScore()) {
 						System.out.println("Bank win!");
+						p.setCredit(-bet);
 					}
 					else if (bank.getCardScore() == p.getCardScore() && p.getCardScore()!=21) {
 						System.out.println("drawn");
