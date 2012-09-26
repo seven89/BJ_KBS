@@ -158,22 +158,11 @@ public class BlackJack {
 			else {
 				System.out.println("Player: you Lose!");
 				p.setInGame(false);
-			}
-			
-			if (p.getInGame()==false) {
-				System.out.println("Bank win");
-			}
-			else {
-				bank.setCard(CardDeck.getRandCard());
-				
-				while(bank.getCardScore()<17) {
-					bank.setCard(CardDeck.getRandCard());
-				}
-				
+				p.setCredit(-bet);
+			}	
 				if (bank.getCardScore()>21) {
 					System.out.println("You win!");
-					p.setCredit(bet*2);
-					
+					p.setCredit(bet*2);	
 				}
 				else {
 					if (bank.getCardScore() > p.getCardScore()) {
@@ -188,10 +177,9 @@ public class BlackJack {
 						p.setCredit(bet*2);
 					}
 				}
+				System.out.println("Player Score: "+p.getCardScore());
 				System.out.println("Bank Score: "+bank.getCardScore());
-			}
-			System.out.println("Money: "+p.getCredit());
-			p.setCredit(p.getCredit());
+				System.out.println("Money: "+p.getCredit());
 			
 	  }
 		
