@@ -24,11 +24,17 @@ public class CardSet {
 	 *    1: THREE
 	 *    ...
 	 *    12: ACE
+	 *    
+	 * @param refresh: set if card set should refresh (false)
 	 */
-	public CardSet() {
+	public CardSet(boolean refresh) {
+		
+		int i=0, j=0;
+		
+		if (refresh==false) {
 		setCardDeck(new int[4][14]);
 		CurrentCard= new int[3];
-		int i=0, j=0;	
+		}
 		
 		// new Card Deck (52 Cards)
 		for  (i=0; i<4; i++) {
