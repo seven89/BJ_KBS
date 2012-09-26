@@ -53,7 +53,7 @@ public class Bank extends Participant{
 	}
 	
 	public void newGame() {
-		CardScore = 0;
+		cardScore = 0;
 	}
 	
 }

@@ -12,22 +12,16 @@ package KnowledgeSystem;
 public class Participant {
 	
 	//private CardSet [] cards;
-	protected int[] Card;
-	protected int CardScore;
+	protected int[] card;
+	protected int cardScore;
 	protected boolean inGame;
 	
 	public Participant ()
 	{
-		CardScore = 0;
+		cardScore = 0;
 		inGame=true;
 	}
 	
-	public void takeCard()
-	{
-		/**
-		 * Participant pulls another card
-		 */
-	}
 	
 	public void holdValue()
 	{
@@ -37,12 +31,15 @@ public class Participant {
 	}
 	
 	public void setCard(int[] pC) {
-		Card = pC;
-		CardScore += pC[2];
+		/**
+		 * Participant pulls another card
+		 */
+		card = pC;
+		cardScore += pC[2];
 	}
 	
 	public int getCardScore() {
-		return CardScore;
+		return cardScore;
 	}
 	
 	

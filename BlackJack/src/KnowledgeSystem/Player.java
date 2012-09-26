@@ -40,11 +40,11 @@ public class Player extends Participant{
 		if(countCards==1 && pC[2]<11) {
 			System.out.println("Verdoppeln? (Spielmodus)");
 		}
-		if (countCards==1 && Card==pC) {
+		if (countCards==1 && card==pC) {
 			System.out.println("Splitten? (Spielmodus)");
 		}
-		Card = pC;
-		CardScore += pC[2];
+		card = pC;
+		cardScore += pC[2];
 	}
 	
 	public int getCredit() {
@@ -66,7 +66,7 @@ public class Player extends Participant{
 	public void newGame() {
 		countCards = 0;
 		Bet = 0;
-		CardScore = 0;
+		cardScore = 0;
 		inGame = false;
 	}
 }

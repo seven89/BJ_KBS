@@ -6,15 +6,17 @@
  */
 package KnowledgeSystem;
 
+import data.CardSet;
 import data.Rules;
 
 public class Agent extends Player{
 
-	private double probability;
+	private double [] probability;
 	
 	public Agent (int credit)
 	{
 		super(credit);
+		probability = new double [11];
 	}
 
 	//TODO: Wahrscheinlichkeit berechnen
@@ -33,39 +35,43 @@ public class Agent extends Player{
 		return betValue;
 	}
 	
-	
-	
-	
-	//getters & setters
-	public double getProbability() {
-		return probability;
+	public void initializeProbability(CardSet cardDeck)
+	{
+		//TODO probability berechnen
+		for(int i = 0; i < cardDeck.getLengthSym();i++) {
+			for(int j = 0; j < cardDeck.getLengthVal();j++){
+//				if(cardDeck.[i][j] == 0){
+//					
+				}
+		}
 	}
 
-	public void setProbability(int [][] openCards, int length ) {
+	public void updateProbability(int [] card) {
 		
-		//TODO: Herausfinden wie viele Karten mit value = 1 bzw. 10 etc
+		/**
+		 * Updates the probabilty if a new card is pulled by a participant
+		 */
 		//4x 1 - 9; 16x 10; 1x 11
-		for(int i = 0; i < length;i++)
+		switch(card[2])
 		{
-			switch(openCards[i][3])
-			{
-				case 1: break;
-				case 2: break;
-				case 3: break;
-				case 4: break;
-				case 5: break;
-				case 6: break;
-				case 7: break;
-				case 8: break;
-				case 9: break;
-				case 10: break;
-				case 11: break;
-			}
+			case 1: break;
+			case 2: break;
+			case 3: break;
+			case 4: break;
+			case 5: break;
+			case 6: break;
+			case 7: break;
+			case 8: break;
+			case 9: break;
+			case 10: break;
+			case 11: break;
 		}
-		
-		
-		
-		//this.probability = probability;
 	}
 	
+	//getters & setters
+	public double[] getProbability() {
+		return probability;
+	}
 }
+	
+

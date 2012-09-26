@@ -6,7 +6,8 @@ public class CardSet {
 	
 	private int[][] CardDeck;
 	private int[] CurrentCard;
-	private boolean highAss;
+	private int lengthSym;
+	private int lengthVal;
 	
 
 	/**
@@ -30,6 +31,8 @@ public class CardSet {
 	public CardSet(boolean refresh) {
 		
 		int i=0, j=0;
+		setLengthSym(3);
+		setLengthVal(12);
 		
 		if (refresh==false) {
 		setCardDeck(new int[4][14]);
@@ -102,5 +105,20 @@ public class CardSet {
 	
 	public void setCardDeck(int[][] cardDeck) {
 		CardDeck = cardDeck;
+	}
+	public int getLengthSym() {
+		return lengthSym;
+	}
+
+	public void setLengthSym(int lengthSym) {
+		this.lengthSym = lengthSym;
+	}
+
+	public int getLengthVal() {
+		return lengthVal;
+	}
+
+	public void setLengthVal(int lengthVal) {
+		this.lengthVal = lengthVal;
 	}
 }
