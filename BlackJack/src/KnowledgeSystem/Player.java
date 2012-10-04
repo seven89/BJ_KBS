@@ -32,19 +32,8 @@ public class Player extends Participant{
 		//TODO: implement function
 	}
 	
-	public void setCredit(int m) {
-		credit += m;
-	}
-	
-	public void setCard(int[] pC) {		
-		if(countCards==1 && pC[2]<11) {
-			System.out.println("Verdoppeln? (Spielmodus)");
-		}
-		if (countCards==1 && card==pC) {
-			System.out.println("Splitten? (Spielmodus)");
-		}
-		card = pC;
-		cardScore += pC[2];
+	public void setCredit(double d) {
+		credit += d;
 	}
 	
 	public int getCredit() {
@@ -66,7 +55,8 @@ public class Player extends Participant{
 	public void newGame() {
 		countCards = 0;
 		Bet = 0;
-		cardScore = 0;
+		cardScore[0] = 0;
+		cardScore[1] = 0;
 		inGame = false;
 	}
 }

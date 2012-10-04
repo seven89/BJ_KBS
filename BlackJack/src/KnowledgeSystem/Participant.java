@@ -13,12 +13,15 @@ public class Participant {
 	
 	//private CardSet [] cards;
 	protected int[] card;
-	protected int cardScore;
+	protected int[] cardScore;
 	protected boolean inGame;
+	
 	
 	public Participant ()
 	{
-		cardScore = 0;
+		cardScore = new int[2];
+		cardScore[0] = 0;
+		cardScore[1] = 0;
 		inGame=true;
 	}
 	
@@ -34,11 +37,20 @@ public class Participant {
 		/**
 		 * Participant pulls another card
 		 */
+		
+		// if Ass (eleven or one score)
+		if (pC[2]==0) {
+			cardScore[0] += 11;
+			cardScore[1] += 1;
+		}
+		else {
+			cardScore[0] += pC[2];
+			cardScore[1] += pC[2];
+		}
 		card = pC;
-		cardScore += pC[2];
 	}
 	
-	public int getCardScore() {
+	public int[] getCardScore() {
 		return cardScore;
 	}
 	

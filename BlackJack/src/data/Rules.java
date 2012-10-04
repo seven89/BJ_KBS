@@ -50,7 +50,7 @@ public class Rules {
 		/**
 		 * This method checks whether player and bank have a BlackJack simultaneously
 		 */
-		if(bank.getCardScore() == 21 && player.getCardScore() == 21)
+		if((bank.getCardScore()[0] == 21 || bank.getCardScore()[1] == 21) && (player.getCardScore()[0] == 21 || player.getCardScore()[1] == 21))
 		{
 			if(!checkTripleSeven(openCards)) return true;
 		}

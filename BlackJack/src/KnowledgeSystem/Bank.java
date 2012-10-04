@@ -39,10 +39,7 @@ public class Bank extends Participant{
 		//cash out the price for the winning player
 		return price;
 	}
-	public void takeMoney()
-	{
-		//TODO: nimmt das Geld, was von einem Spieler gesetzt wurde
-	}
+
 
 	public int getValueBorder() {
 		return valueBorder;
@@ -53,7 +50,8 @@ public class Bank extends Participant{
 	}
 	
 	public void newGame() {
-		cardScore = 0;
+		cardScore[0] = 0;
+		cardScore[1] = 0;
 	}
 	
 }

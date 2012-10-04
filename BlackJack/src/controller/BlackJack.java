@@ -91,7 +91,7 @@ public class BlackJack {
 			//System.out.println("GAME " + Game);
 			while(p.getCredit()>0){
 				//refresh time
-				wait(1);	// waits for 1000 ms
+				wait(1000);	// waits for 1000 ms
 				
 				if(newgame){
 					int[] initialcard = CardDeck.getRandCard();
@@ -106,13 +106,14 @@ public class BlackJack {
 						//players turn?
 						if(pullCard(p.getCardScore())){  //TODO pullCard (implemented below to Agent a
 							int[] card = CardDeck.getRandCard();
+							
 							p.setCard(card);
 							gc.newPlayerCard(card[0], card[1]);
 							//System.out.println("Farbe " + (card[0]+1) + "Typ " + (card[1]+1) + "Score " + card[2]);
 						}
 						//now banks turn
 						else{
-							if(bank.getCardScore()<17 && (p.getCardScore()<21)){
+							if(bank.getCardScore()[0]<17 && bank.getCardScore()[1]<17 && (p.getCardScore()[0]<21) && (p.getCardScore()[1]<21)){
 								int[] card = CardDeck.getRandCard();
 								bank.setCard(card);
 								gc.newBankCard(card[0], card[1]);
@@ -142,40 +143,40 @@ public class BlackJack {
 			System.exit(0);
 	  }
 	  
-	  public static Boolean pullCard(int currentPlayerValue){
-		  if((currentPlayerValue-21)*(-1)>7) return true;
+	  public static Boolean pullCard(int[] currentPlayerValue){
+		  if((currentPlayerValue[0]-21)*(-1)>7 || (currentPlayerValue[1]-21)*(-1)>7) return true;
 		  return false;
 	  }
 	  
 	  private static void printResult(){
 //		  System.out.println("-----------------------------");
 			
-			if(p.getCardScore()<21) {
+			if(p.getCardScore()[0]<21 || p.getCardScore()[1]<21) {
 				//System.out.println("Player under 21");
 			}
-			else if (p.getCardScore()==21) {
+			else if (p.getCardScore()[0]==21 || p.getCardScore()[1]==21) {
 				//System.out.println("BlackJack! (player)");
-				p.setBet(bet+bet*1.5);
+				p.setCredit(bet+bet*1.5);
 			}
 			
 			
-			if(p.getCardScore()>21){
+			if(p.getCardScore()[0]>21 || p.getCardScore()[1]>21){
 				//System.out.println("Player lose!");
 				p.setInGame(false);
 				p.setCredit(-bet);
 				p.gamesLost++;
 			}
-			else if (bank.getCardScore()>21) {
+			else if (bank.getCardScore()[0]>21 || bank.getCardScore()[1]>21) {
 					//System.out.println("Player win!");
-					p.setCredit(bet);
+					p.setCredit(bet*2);
 					p.gamesWon++;
 			}
-			else if (bank.getCardScore() > p.getCardScore()) {
+			else if (bank.getCardScore()[0] > p.getCardScore()[0] || bank.getCardScore()[1] > p.getCardScore()[1]) {
 						//System.out.println("Bank win!");
 						p.setCredit(-bet);
 						p.gamesLost++;
 			}
-			else if (bank.getCardScore() == p.getCardScore() && p.getCardScore()!=21) {
+			else if ((bank.getCardScore()[0] == p.getCardScore()[0] || bank.getCardScore()[0] == p.getCardScore()[0]) && (p.getCardScore()[0]!=21 || p.getCardScore()[0]!=21)) {
 //						System.out.println("drawn");
 						p.setCredit(0);
 						p.gamesDraw++;
