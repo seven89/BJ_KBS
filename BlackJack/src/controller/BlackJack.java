@@ -148,7 +148,7 @@ public class BlackJack {
 	  }
 	  
 	  public static Boolean pullCard(int[] currentPlayerValue){
-		  if((currentPlayerValue[0]-21)*(-1)>7 || (currentPlayerValue[1]-21)*(-1)>7) return true;
+		  if((currentPlayerValue[0]-21)*(-1)>7 || (currentPlayerValue[1]-21)*(-1)>7 && a.evalStrategy()) return true;
 		  return false;
 	  }
 	  

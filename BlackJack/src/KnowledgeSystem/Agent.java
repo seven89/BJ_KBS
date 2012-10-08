@@ -116,6 +116,19 @@ public class Agent extends Player{
 		System.out.println("---------");
 	}
 	
+	public boolean evalStrategy()
+	{
+		//needed value until 21 is reached
+		int diff = 21 - super.cardScore[0];
+		int diffHiAce = 21 - super.cardScore[1];
+		//cardScore[0] = stack with ace value equals 1
+		if(super.cardScore[0] < 10)
+		{
+			return true;
+		}
+		return false;
+	}
+	
 	//getters & setters
 	public float[] getProbability() {
 		return probability;
