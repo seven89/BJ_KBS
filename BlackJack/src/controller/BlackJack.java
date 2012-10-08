@@ -13,7 +13,7 @@ public class BlackJack {
 	int startMoney;
 	protected static GraphicsController gc;
 	protected static CardSet CardDeck;
-	protected Agent a;
+	protected static Agent a;
 	protected static Player p;
 	protected static Bank bank;
 	static int bet;
@@ -81,6 +81,8 @@ public class BlackJack {
 			CardDeck=new CardSet(false);
 			p.newGame();
 			bank.newGame();
+			a.initializeProbability();
+			System.out.println("------------New Game-----------");
 	  }
 	  
 	  private static void nextStep(){
@@ -95,6 +97,7 @@ public class BlackJack {
 				
 				if(newgame){
 					int[] initialcard = CardDeck.getRandCard();
+					a.updateProbability(initialcard);
 					bank.setCard(initialcard);
 					gc.newBankCard(initialcard[0], initialcard[1]);
 					newgame=false;
@@ -106,9 +109,9 @@ public class BlackJack {
 						//players turn?
 						if(pullCard(p.getCardScore())){  //TODO pullCard (implemented below to Agent a
 							int[] card = CardDeck.getRandCard();
-							
 							p.setCard(card);
 							gc.newPlayerCard(card[0], card[1]);
+							a.updateProbability(card);
 							//System.out.println("Farbe " + (card[0]+1) + "Typ " + (card[1]+1) + "Score " + card[2]);
 						}
 						//now banks turn
@@ -117,6 +120,7 @@ public class BlackJack {
 								int[] card = CardDeck.getRandCard();
 								bank.setCard(card);
 								gc.newBankCard(card[0], card[1]);
+								a.updateProbability(card);
 							}
 							//new game
 							else{

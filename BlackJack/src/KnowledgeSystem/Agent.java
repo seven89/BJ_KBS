@@ -22,7 +22,6 @@ public class Agent extends Player{
 		initializeProbability();
 	}
 
-	//TODO: Wahrscheinlichkeit berechnen
 	//TODO: Strategie --> Entscheidung anhand von Kriterien treffen
 	
 	public double calcBetValue(Rules rules)
@@ -37,7 +36,7 @@ public class Agent extends Player{
 		return betValue;
 	}
 	
-	private void initializeProbability()
+	public void initializeProbability()
 	{
 		/**
 		 * At the beginning each card value from 1 to 9 and 11 is contained in the
@@ -61,6 +60,7 @@ public class Agent extends Player{
 				probCounter[i]= 4;
 			}
 		}
+		this.setProbability();
 
 	}
 
@@ -94,9 +94,11 @@ public class Agent extends Player{
 			case 11: probCounter[0]--;
 					break;
 		}
+		probCounter[10]--;
+		this.setProbability();
 	}
 	
-	public void setProbability()
+	private void setProbability()
 	{
 		for(int i = 0; i < probability.length; i++)
 		{
@@ -107,9 +109,11 @@ public class Agent extends Player{
 			}
 			else 
 			{
-				probability[i] = probCounter[i]/52*100;
+				probability[i] = (float) (Math.round((float)probCounter[i]/probCounter[10]*100*100)/100.0);
+				System.out.println(i+1 + " = " + probability[i]);
 			}
 		}
+		System.out.println("---------");
 	}
 	
 	//getters & setters
