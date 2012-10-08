@@ -148,6 +148,8 @@ public class BlackJack {
 	  }
 	  
 	  public static Boolean pullCard(int[] currentPlayerValue){
+		  // Muss dann noch in die agent klasse eingefügt werden am Ende und hier raus genommen werden.
+		  //!!!!!!hier bitte keine updates mehr eintragen. Die komplette strategy implementiere ich in evalStrategy und anhand dessen das pullcard bestimmen.
 		  if((currentPlayerValue[0]-21)*(-1)>7 || (currentPlayerValue[1]-21)*(-1)>7 && a.evalStrategy()) return true;
 		  return false;
 	  }

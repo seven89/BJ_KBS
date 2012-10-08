@@ -118,14 +118,46 @@ public class Agent extends Player{
 	
 	public boolean evalStrategy()
 	{
-		//needed value until 21 is reached
-		int diff = 21 - super.cardScore[0];
-		int diffHiAce = 21 - super.cardScore[1];
+		int diffLoStack = 21 - super.cardScore[0];
+		int diffHiStack = 21 - super.cardScore[1];
 		//cardScore[0] = stack with ace value equals 1
-		if(super.cardScore[0] < 10)
+		if(diffLoStack > 10 && diffHiStack == 10)
 		{
+			//In this case always a new card is pulled.
 			return true;
 		}
+		else
+		{
+			if(diffHiStack > 21)
+			{
+				//grenze zwischen High and low stack bestimmen
+				//wo ist die höhere wahrscheinlichkeit zu gewinnen? - Noch eine karte nehmen oder den stapel mit high ass nehmen
+			}
+			//needed value until 21 is reached
+			float tempProbability;
+			//TODO: decision between both stacks
+			//strategy with stack zero
+			switch(diffLoStack)
+			{
+				case 1:
+				case 2:
+				case 3:
+				case 4:
+				case 5:
+				case 6:
+				case 7:
+				case 8:
+				case 9:
+				case 10:
+				case 11:
+			}
+		
+			//strategy with stack one
+		
+		
+			//summary strategy (both stacks)
+		}
+		
 		return false;
 	}
 	

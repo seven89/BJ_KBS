@@ -20,8 +20,8 @@ public class Participant {
 	public Participant ()
 	{
 		cardScore = new int[2];
-		cardScore[0] = 0;
-		cardScore[1] = 0;
+		cardScore[0] = 0;	//Low Stack
+		cardScore[1] = 0;	//High Stack
 		inGame=true;
 	}
 	
