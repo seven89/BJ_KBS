@@ -40,8 +40,8 @@ public class Participant {
 		
 		// if Ass (eleven or one score)
 		if (pC[2]==0) {
-			cardScore[0] += 11;
-			cardScore[1] += 1;
+			cardScore[0] += 1;
+			cardScore[1] += 11;
 		}
 		else {
 			cardScore[0] += pC[2];
