@@ -55,9 +55,7 @@ public class Participant {
 	}
 	
 	
-	
 	//getters & setters
-
 	public boolean getInGame() {
 		return inGame;
 	}
