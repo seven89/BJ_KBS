@@ -13,7 +13,7 @@ public class BlackJack {
 	int startMoney;
 	protected static GraphicsController gc;
 	protected static CardSet CardDeck;
-	protected static Agent a;
+	protected static Agent agent;
 	protected static Player p;
 	protected static Bank bank;
 	static int bet;
@@ -27,8 +27,8 @@ public class BlackJack {
 		
 		CardDeck = new CardSet(false);	// create card deck
 		Rules rules = new Rules(7, 5);	
-		a = new Agent (500);
-		a.calcBetValue(rules);
+		agent = new Agent (5000);
+		agent.calcBetValue(rules);
 		
 		p = new Player(50);		// create player(s)
 		setPlayers(1);			// count player
@@ -41,17 +41,7 @@ public class BlackJack {
 		
 	}
 	
-	// getter & setter
-	public int getPlayers() {
-		return Players;
-	}
-	
-	public void setPlayers(int p) {
-		Players = p;
-	}
-	/**
-	 * only for test
-	 */
+
 	public static void main(String [ ] args)
 	{
 		BlackJack table = new BlackJack();		//create table
@@ -79,9 +69,10 @@ public class BlackJack {
 
 			gc.clearArray();
 			CardDeck=new CardSet(false);
-			p.newGame();
+			//p.newGame();
+			agent.newGame();
 			bank.newGame();
-			a.initializeProbability();
+			agent.initializeProbability();
 			System.out.println("------------New Game-----------");
 	  }
 	  
@@ -97,7 +88,7 @@ public class BlackJack {
 				
 				if(newgame){
 					int[] initialcard = CardDeck.getRandCard();
-					a.updateProbability(initialcard);
+					agent.updateProbability(initialcard);
 					bank.setCard(initialcard);
 					gc.newBankCard(initialcard[0], initialcard[1]);
 					newgame=false;
@@ -107,11 +98,12 @@ public class BlackJack {
 				if(step==2) {
 					step=0;
 						//players turn?
-						if(pullCard(p.getCardScore())){  //TODO pullCard (implemented below to Agent a
+						if(agent.pullCard(bank.getCardScore())){  
 							int[] card = CardDeck.getRandCard();
-							p.setCard(card);
+							//p.setCard(card);
+							agent.setCard(card);
 							gc.newPlayerCard(card[0], card[1]);
-							a.updateProbability(card);
+							agent.updateProbability(card);
 							//System.out.println("Farbe " + (card[0]+1) + "Typ " + (card[1]+1) + "Score " + card[2]);
 						}
 						//now banks turn
@@ -120,7 +112,7 @@ public class BlackJack {
 								int[] card = CardDeck.getRandCard();
 								bank.setCard(card);
 								gc.newBankCard(card[0], card[1]);
-								a.updateProbability(card);
+								agent.updateProbability(card);
 							}
 							//new game
 							else{
@@ -147,12 +139,6 @@ public class BlackJack {
 			System.exit(0);
 	  }
 	  
-	  public static Boolean pullCard(int[] currentPlayerValue){
-		  // Muss dann noch in die agent klasse eingefügt werden am Ende und hier raus genommen werden.
-		  //!!!!!!hier bitte keine updates mehr eintragen. Die komplette strategy implementiere ich in evalStrategy und anhand dessen das pullcard bestimmen.
-		  if((currentPlayerValue[0]-21)*(-1)>7 || (currentPlayerValue[1]-21)*(-1)>7 && a.evalStrategy()) return true;
-		  return false;
-	  }
 	  
 	  private static void printResult(){
 //		  System.out.println("-----------------------------");
@@ -195,5 +181,17 @@ public class BlackJack {
 //				System.out.println("Bank Score: "+bank.getCardScore());
 //				System.out.println("Money: "+p.getCredit());
 	  }
+	  
+		// getter & setter
+		public int getPlayers() {
+			return Players;
+		}
+		
+		public void setPlayers(int p) {
+			Players = p;
+		}
+		/**
+		 * only for test
+		 */
 		
 }

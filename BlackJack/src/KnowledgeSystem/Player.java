@@ -9,17 +9,19 @@ package KnowledgeSystem;
 public class Player extends Participant{
 	
 	protected int credit;
-	private double countCards;
 	private double Bet;
-	public int gamesPlayed=0;
-	public int gamesWon=0;
-	public int gamesLost=0;
-	public int gamesDraw=0;
+	public int gamesPlayed;
+	public int gamesWon;
+	public int gamesLost;
+	public int gamesDraw;
 	
 	public Player(int credit) 
 	{
 		super();
-		countCards=0;
+		gamesPlayed=0;
+		gamesWon=0;
+		gamesLost=0;
+		gamesDraw=0;
 	}
 	
 	public void splitt()
@@ -53,7 +55,6 @@ public class Player extends Participant{
 	}
 	
 	public void newGame() {
-		countCards = 0;
 		Bet = 0;
 		cardScore[0] = 0;
 		cardScore[1] = 0;

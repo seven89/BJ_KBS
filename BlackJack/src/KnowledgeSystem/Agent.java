@@ -116,12 +116,12 @@ public class Agent extends Player{
 		System.out.println("---------");
 	}
 	
-	public boolean evalStrategy()
+	public boolean pullCard(int [] bankScore)
 	{
 		int diffLoStack = 21 - super.cardScore[0];
 		int diffHiStack = 21 - super.cardScore[1];
 		//cardScore[0] = stack with ace value equals 1
-		if(diffLoStack > 10 && diffHiStack == 10)
+		if(diffLoStack > 10 && diffLoStack > 0)
 		{
 			//In this case always a new card is pulled.
 			return true;
