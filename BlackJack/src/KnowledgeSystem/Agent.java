@@ -240,17 +240,11 @@ public class Agent extends Player{
 		 * bank muss bis einschließlich 16 immer ziehen
 		 * --> ab 17 ist ende
 		 */
-		if(diffHiStack < 11)
-		{
+		if(diffHiStack > 11)
 			return true;
-		}
-		else if(diffLoStack <= 21-pullBorder)
-		{
-			//AgentScore >= 16
+		else if(diffLoStack <= 21-pullBorder)//AgentScore >= 16
 			return false;
-		}
-		else
-		{
+		else {
 			int bankDiffLoStack = 21 - bankScore[0];
 			int bankDiffHiStack = 21 - bankScore[1];
 			int bankDiff, agentDiff;
