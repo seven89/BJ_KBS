@@ -31,7 +31,7 @@ import data.CardSet;
 import data.Rules;
 
 
-public class GraphicsController extends JWindow {
+public class GraphicsController extends JFrame {
 
 	/**
 	 * 
@@ -309,7 +309,7 @@ public GraphicsController(){
 		private static final long serialVersionUID = 1L;
 		BufferedImage image = null;
 
-		BackgroundPanel(JWindow window) {
+		BackgroundPanel(GraphicsController graphicsController) {
 			try {
 				image = ImageIO.read( new File( "images/textureb.png" ) );
 			} catch (IOException e) {
