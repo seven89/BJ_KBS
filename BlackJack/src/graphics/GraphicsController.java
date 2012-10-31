@@ -138,7 +138,7 @@ public GraphicsController(){
 		}
 	});
 	
-	closeButton.addActionListener(new ActionListener() {
+	pauseButton.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			if(GraphicsController.this.pause)GraphicsController.this.pause=false;
 			else{GraphicsController.this.pause=true;}
@@ -307,20 +307,21 @@ public GraphicsController(){
 		 * 
 		 */
 		private static final long serialVersionUID = 1L;
-		BufferedImage image = null;
+//		BufferedImage image = null;
 
 		BackgroundPanel(GraphicsController graphicsController) {
-			try {
+			/*try {
 				image = ImageIO.read( new File( "images/textureb.png" ) );
 			} catch (IOException e) {
 				System.out.println("Hintergrund konnte nciht geladen werden da file nicht vorhanden!");
 				e.printStackTrace();
-			}
+			}*/
 		}
-
+/*
 		protected void paintComponent(Graphics g) {
 			g.drawImage(image, 0, 0, this);
 		}
+	*/
 	}
 	
 	    private JFrame frame;
