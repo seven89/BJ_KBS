@@ -107,6 +107,7 @@ public class GraphicsController extends JWindow {
 	private int playercards=0;
 	private int bankcards=0;
 	private int cards=0;
+	public boolean pause=false;
 	   
 public GraphicsController(){
 	 createAndShowWindow(); 
@@ -127,6 +128,7 @@ public GraphicsController(){
 	
 	BackgroundPanel backgroundPanel = new BackgroundPanel(this);
 	JButton closeButton = new JButton("Close");
+	JButton pauseButton = new JButton("Pause");
 	
 	closeButton.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
@@ -135,7 +137,16 @@ public GraphicsController(){
 			System.exit(0);
 		}
 	});
+	
+	closeButton.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			if(GraphicsController.this.pause)GraphicsController.this.pause=false;
+			else{GraphicsController.this.pause=true;}
+		}
+	});
+	
 	backgroundPanel.add(closeButton);
+	backgroundPanel.add(pauseButton);
 	getContentPane().add(backgroundPanel);
 }
 	   

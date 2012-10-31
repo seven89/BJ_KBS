@@ -85,7 +85,8 @@ public class BlackJack {
 			while(p.getCredit()>0){
 				//refresh time
 				wait(1000);	// waits for 1000 ms
-				
+				if(!gc.pause){
+					
 				if(newgame){
 					int[] initialcard = CardDeck.getRandCard();
 					agent.updateProbability(initialcard);
@@ -129,7 +130,8 @@ public class BlackJack {
 				}
 				step++;
 				gc.repaint();
-			}  
+			}
+			}
 			System.out.println("You have lost! ;( ");
 			System.out.println("You won "+ p.gamesWon +"/"+ p.gamesPlayed + " " + (((float)p.gamesWon/(float)p.gamesPlayed)*100.0) + "% of games!");
 			System.out.println("You lost "+ p.gamesLost +"/"+ p.gamesPlayed + " " + (((float)p.gamesLost/(float)p.gamesPlayed)*100.0) + "% of games!");
