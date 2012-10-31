@@ -274,10 +274,47 @@ public class Agent extends Player{
 		return curProb;
 	}
 	
+	private float calcBankOff (int border)
+	{
+		/**
+		 * Calculates all combination which overrun the border
+		 */
+		int y,y1,x,x1;
+		float tmpProb = 0;
+		x = 0; y = 10;
+    	x1 = 10; y1 = 0;
+    	for(int i = 0; i < probability.length-1; i++)
+    	{
+    		if((y-i)+(x+i+1) > border)
+    		{
+    			//vorwärts
+    			tmpProb = tempProb[y-1-i];
+    			calcProb(y-i);
+    			tmpProb += tempProb[x+i];
+    			checkState = true;
+    		}
+    		
+    		if((y1+i+1)+(x1-i) > border)
+    		{
+    			//rückwärts
+    			if(!(y-i == x+i))
+    			{
+    				tmpProb = tempProb[y1+i];
+    				calcProb(y1+i+1);
+    				tmpProb += tempProb[x1-1-i];
+    				checkState = true;
+    			}
+    		}
+    	}	
+    	return tmpProb;
+	}
+	
 	public boolean pullCard(int [] bankScore)
 	{
 		//-->used in funtion calcProb
 		checkState = true;
+		float bankBj = 0;
+		
 		
 		//bank score is between 17 and 21
 		float bankHiScore = 0;
@@ -292,9 +329,7 @@ public class Agent extends Player{
 		 * --> ab 17 ist ende
 		 */
 		if(isDoubled)
-		{
 			return false;
-		}
 		else if(diffHiStack > 11)
 			return true;
 		else if(diffLoStack <= 21-pullBorder)//AgentScore >= 16
@@ -431,22 +466,9 @@ public class Agent extends Player{
 						tmpProb += tempProb[9];
 						checkState = true;
 						bankOverTop = tmpProb;
+						bankHiScore = 100-tmpProb;
 						tmpProb = 0;
 						
-				}
-				{
-					for(int i = 0; i < probability.length-1; i++)
-					{
-						tmpProb += probability[i];
-						calcProb(i);
-						for(int y = 0; y < probability.length; i++)
-						{
-							tmpProb += probability[y];
-						}
-						checkState = true;
-					}
-					bankHiScore = tmpProb;
-					
 				}
 				//3
 				case 18:
@@ -463,199 +485,73 @@ public class Agent extends Player{
 					calcProb(10);
 					tmpProb += tempProb[9];
 					bankOverTop = tmpProb;
+					bankHiScore = 100-tmpProb;
 					tmpProb = 0;
 					checkState = true;
-				}
-				{
-					for(int i = 0; i < probability.length-1; i++)
-					{
-						tmpProb += probability[i];
-						calcProb(i);
-						for(int y = 0; y < probability.length-1; i++)
-						{
-							tmpProb += probability[y];
-						}
-						checkState = true;
-					}
-					bankHiScore = tmpProb;
-					tmpProb = 0;
-					checkState = true;
-				
 				}
 				//4
 			    case 17:
 			    {//4+10+8| 4+8+10 | 4+9+9
-			    	tmpProb = tempProb[9];
-					calcProb(10);
-					tmpProb += tempProb[9];
-					checkState = true;
-					tmpProb = tempProb[9];
-					calcProb(10);
-					tmpProb += tempProb[8];
-					checkState = true;
-					tmpProb += tempProb[8];
-					calcProb(10);
-					tmpProb += tempProb[9];
+			    	tmpProb = calcBankOff (17);
 					bankOverTop = tmpProb;
-					tmpProb = 0;
-					checkState = true;
-					tmpProb = tempProb[9];
-					calcProb(10);
-					tmpProb += tempProb[7];
-					checkState = true;
-					tmpProb += tempProb[7];
-					calcProb(8);
-					tmpProb += tempProb[9];
-					checkState = true;
-					tmpProb += tempProb[8];
-					calcProb(9);
-					tmpProb += tempProb[8];
-					checkState = true;
-					
-					bankOverTop = tmpProb;
+					bankHiScore = 100-tmpProb;
 					tmpProb = 0;
 					
-				}
-				{
-					for(int i = 0; i < probability.length-2; i++)
-					{
-						tmpProb += probability[i];
-						calcProb(i);
-						for(int y = 0; y < probability.length-1; i++)
-						{
-							tmpProb += probability[y];
-						}
-						checkState = true;
-					}
-					bankHiScore = tmpProb;
-					tmpProb = 0;
-					checkState = true;
-				
 				}
 				//5
 			    case 16:
 			    {//8+9|9+8|10+7|7+10
-			    	tmpProb = tempProb[9];
-					calcProb(10);
-					tmpProb += tempProb[9];
-					checkState = true;
-					tmpProb = tempProb[9];
-					calcProb(10);
-					tmpProb += tempProb[8];
-					checkState = true;
-					tmpProb += tempProb[8];
-					calcProb(10);
-					tmpProb += tempProb[9];
+			    	tmpProb = calcBankOff (16);
 					bankOverTop = tmpProb;
-					tmpProb = 0;
-					checkState = true;
-					tmpProb = tempProb[9];
-					calcProb(10);
-					tmpProb += tempProb[7];
-					checkState = true;
-					tmpProb += tempProb[7];
-					calcProb(8);
-					tmpProb += tempProb[9];
-					checkState = true;
-					tmpProb += tempProb[8];
-					calcProb(9);
-					tmpProb += tempProb[8];
-					checkState = true;
-					tmpProb = tempProb[7];
-					calcProb(8);
-					tmpProb += tempProb[8];
-					checkState = true;
-					tmpProb += tempProb[8];
-					calcProb(9);
-					tmpProb += tempProb[7];
-					checkState = true;
-					tmpProb += tempProb[9];
-					calcProb(10);
-					tmpProb += tempProb[6];
-					checkState = true;
-					tmpProb += tempProb[6];
-					calcProb(7);
-					tmpProb += tempProb[9];
-					checkState = true;
-					
-					bankOverTop = tmpProb;
-					tmpProb = 0;
-					
-				}
-				{
-					for(int i = 0; i < probability.length-2; i++)
-					{
-						tmpProb += probability[i];
-						calcProb(i);
-						for(int y = 0; y < probability.length-2; i++)
-						{
-							tmpProb += probability[y];
-						}
-						checkState = true;
-					}
-					bankHiScore = tmpProb;
-					tmpProb = 0;
-					checkState = true;
-				
+					bankHiScore = 100-tmpProb;
+					tmpProb = 0;				
 				}
 				//6
 			    case 15:
 			    {//8+8|9+7|7+9|10+6|6+10
-					tmpProb = tempProb[7];
-					calcProb(8);
-					tmpProb += tempProb[7];
-					checkState = true;
-					tmpProb += tempProb[8];
-					calcProb(9);
-					tmpProb += tempProb[6];
-					checkState = true;
-					tmpProb += tempProb[6];
-					calcProb(7);
-					tmpProb += tempProb[8];
-					checkState = true;
-					tmpProb += tempProb[9];
-					calcProb(10);
-					tmpProb += tempProb[5];
-					checkState = true;
-					tmpProb += tempProb[5];
-					calcProb(6);
-					tmpProb += tempProb[9];
-					checkState = true;
-					
+			    	tmpProb = calcBankOff (15);
 					bankOverTop = tmpProb;
+					bankHiScore = 100-tmpProb;
 					tmpProb = 0;
-					
-				}
-				{
-					for(int i = 0; i < probability.length-3; i++)
-					{
-						tmpProb += probability[i];
-						calcProb(i);
-						for(int y = 0; y < probability.length-2; i++)
-						{
-							tmpProb += probability[y];
-						}
-						checkState = true;
-					}
-					bankHiScore = tmpProb;
-					tmpProb = 0;
-					checkState = true;
-				
 				}
 				//7
 			    case 14:
-			    	
+			    {//5+10|10+5|7+8|8+7|6+9|9+6
+			    	tmpProb = calcBankOff (14);
+					bankOverTop = tmpProb;
+					bankHiScore = 100-tmpProb;
+					tmpProb = 0;
+				}	 	
 				//8
 			    case 13:
-			    		return true;
+			    	tmpProb = calcBankOff (13);
+					bankOverTop = tmpProb;
+					bankHiScore = 100-tmpProb;
+					tmpProb = 0;
 				//9
 			    case 12:
-			    		return true;
+			    	tmpProb = calcBankOff (12);
+					bankOverTop = tmpProb;
+					bankHiScore = 100-tmpProb;
+					tmpProb = 0;
 				//10
 			    case 11:
-			    		return true;
-				
+			    	tmpProb = calcBankOff (11);
+					bankOverTop = tmpProb;
+					bankHiScore = 100-tmpProb;
+					tmpProb = 0;
+					bankBj = probability[9];
 			}
+			//TODO:Spielerwahrscheinlichkeit
+			if(bankHiScore > 50 && bankOverTop <= 50 && bankHiScore >= bankOverTop)
+			{
+				return false;
+			}
+			else if(bankOverTop > 50 && bankOverTop > bankHiScore)
+			{
+				return true;
+			}
+			
 		}
 		return false;
 	}
