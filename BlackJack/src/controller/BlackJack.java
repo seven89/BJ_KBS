@@ -78,7 +78,7 @@ public class BlackJack {
 			agent.newGame();
 			bank.newGame();
 			agent.initializeProbability();
-			System.out.println("------------New Game-----------");
+//			System.out.println("------------New Game-----------");
 	  }
 	  
 	  private static void nextStep(){
