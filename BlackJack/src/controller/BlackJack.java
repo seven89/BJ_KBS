@@ -35,7 +35,7 @@ public class BlackJack {
 		
 		p = new Player(50);		// create player(s)
 		setPlayers(1);			// count player
-		agent.setCredit(200);				// give player 100 money
+		//agent.setCredit(200);				// give player 100 money
 		p.setBet(bet);					// player set 10 money
 		
 		// Bank (first card)
@@ -114,7 +114,7 @@ public class BlackJack {
 							int[] card = CardDeck.getRandCard();
 							//p.setCard(card);
 
-//							// splitting (teilen, spielmodus)
+							// splitting (teilen, spielmodus)
 //							if (agent.getCards()==1 && agent.getCurrentCard()==card[2] && agentSplit==null && modus==false) {
 //								System.out.println("Teilen? (spielmodus)");
 //								agentSplit = agent;
@@ -138,10 +138,10 @@ public class BlackJack {
 							
 							gc.newPlayerCard(card[0], card[1]);
 							agent.updateProbability(card);
-							//System.out.println("Farbe " + (card[0]+1) + "Typ " + (card[1]+1) + "Score " + card[2]);
+//							System.out.println("Farbe " + (card[0]+1) + "Typ " + (card[1]+1) + "Score " + card[2]);
 						}
 						
-						// for AgentSplit
+//						// for AgentSplit
 //						else if (agentSplit!=null) {
 //							if(agentSplit.pullCard(bank.getCardScore())) {  
 //								int[] card = CardDeck.getRandCard();
