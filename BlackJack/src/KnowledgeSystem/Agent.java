@@ -29,7 +29,7 @@ public class Agent extends Player{
 		probCounter = new int [11];
 		tempProb = new float [11];
 		tempProbCounter = new int [11];
-		pullBorder = 16;
+		pullBorder = 21;
 		setDoubled(false);
 		initializeProbability();
 	}
@@ -122,10 +122,10 @@ public class Agent extends Player{
 			else 
 			{
 				probability[i] = (float) (Math.round((float)probCounter[i]/probCounter[10]*100*100)/100.0);
-				System.out.println(i+1 + " = " + probability[i]);
+//				System.out.println(i+1 + " = " + probability[i]);
 			}
 		}
-		System.out.println("---------");
+//		System.out.println("---------");
 	}
 	
 	public void calcProb(int card)
@@ -174,105 +174,105 @@ public class Agent extends Player{
 		}		
 	}
 	
-	public float calcBankWinProb (int curVal, float curProb, boolean ace)
-	{
-		int aceCount = 0;
-		if(ace)
-		{
-			aceCount++;
-		}
-		resultProb = new float [16];
-		float tmpProb = 0;
-		int tempVal = 0;
-		int diffVal = 21-curVal;
-		resultProb[0] = curProb;
-		if(diffVal > 4)//unter 17
-		{
-			switch(diffVal)
-			{
-				/**
-				 * Minimum was die Bank haben kann ist ein Ass (als erste karte), deshalb fangen wir hier mit 2 an,
-				 * da die Wahrscheinlichkeiten für folgende karten berechnet wird
-				 */						
-				case 5: 
-					int z = 0;
-					for(int y= 1; y <= 5; y++)
-					{
-						tempVal = diffVal;
-						if(y == 1) aceCount++;
-						if(tempVal > 5)
-						{
-							//Wenn 21 überschritten wird
-							y++;
-						}
-						calcProb(y);
-						tmpProb+=tempProb[y];
-						tempVal+=y;
-						for(int i = 1; i <= 5-y; i++)
-						{
-							i = z;
-							while(true)
-							{
-								if(z == 1) aceCount++;
-								if(tempVal > 5 || aceCount == 4)
-								{
-									i++;
-									break;
-								}
-								calcProb(i);
-								tmpProb+=tempProb[i];
-								tempVal+=i;
-							}
-						}
-						
-						//reset + Transition
-						resultProb[y]= tmpProb;
-						tempVal = diffVal;
-						tmpProb = 0;
-						
-					}
-					/**
-					 * 5
-					 * 4,1
-					 * 3,2
-					 * 3,1,1
-					 * 2,3
-					 * 2,2,1
-					 * 2,1,2
-					 * 2,1,1,1
-					 * 1,2,2
-					 * 1,3,1
-					 * 1,4
-					 * 1,1,1,2
-					 * 1,2,1,1
-					 * 1,1,2,1
-					 */
-						
-				case 6: calcProb(6);
-						calcBankWinProb(curVal+6,tempProb[5], false);
-				case 7: calcProb(7);
-						calcBankWinProb(curVal+7,tempProb[6], false);
-				case 8: calcProb(8);
-						calcBankWinProb(curVal+8,tempProb[7], false);
-				case 9: calcProb(9);
-						calcBankWinProb(curVal+9,tempProb[8], false);
-				case 10: calcProb(10);
-						calcBankWinProb(curVal+10,tempProb[9], false);
-				case 11:
-				case 12:
-				case 13:
-				case 14:
-				case 15:
-				case 16:
-				case 17:
-				case 18:
-				case 19:
-				case 20:
-					
-			}
-		}
-		return curProb;
-	}
+//	public float calcBankWinProb (int curVal, float curProb, boolean ace)
+//	{
+//		int aceCount = 0;
+//		if(ace)
+//		{
+//			aceCount++;
+//		}
+//		resultProb = new float [16];
+//		float tmpProb = 0;
+//		int tempVal = 0;
+//		int diffVal = 21-curVal;
+//		resultProb[0] = curProb;
+//		if(diffVal > 4)//unter 17
+//		{
+//			switch(diffVal)
+//			{
+//				/**
+//				 * Minimum was die Bank haben kann ist ein Ass (als erste karte), deshalb fangen wir hier mit 2 an,
+//				 * da die Wahrscheinlichkeiten für folgende karten berechnet wird
+//				 */						
+//				case 5: 
+//					int z = 0;
+//					for(int y= 1; y <= 5; y++)
+//					{
+//						tempVal = diffVal;
+//						if(y == 1) aceCount++;
+//						if(tempVal > 5)
+//						{
+//							//Wenn 21 überschritten wird
+//							y++;
+//						}
+//						calcProb(y);
+//						tmpProb+=tempProb[y];
+//						tempVal+=y;
+//						for(int i = 1; i <= 5-y; i++)
+//						{
+//							i = z;
+//							while(true)
+//							{
+//								if(z == 1) aceCount++;
+//								if(tempVal > 5 || aceCount == 4)
+//								{
+//									i++;
+//									break;
+//								}
+//								calcProb(i);
+//								tmpProb+=tempProb[i];
+//								tempVal+=i;
+//							}
+//						}
+//						
+//						//reset + Transition
+//						resultProb[y]= tmpProb;
+//						tempVal = diffVal;
+//						tmpProb = 0;
+//						
+//					}
+//					/**
+//					 * 5
+//					 * 4,1
+//					 * 3,2
+//					 * 3,1,1
+//					 * 2,3
+//					 * 2,2,1
+//					 * 2,1,2
+//					 * 2,1,1,1
+//					 * 1,2,2
+//					 * 1,3,1
+//					 * 1,4
+//					 * 1,1,1,2
+//					 * 1,2,1,1
+//					 * 1,1,2,1
+//					 */
+//						
+//				case 6: calcProb(6);
+//						calcBankWinProb(curVal+6,tempProb[5], false);
+//				case 7: calcProb(7);
+//						calcBankWinProb(curVal+7,tempProb[6], false);
+//				case 8: calcProb(8);
+//						calcBankWinProb(curVal+8,tempProb[7], false);
+//				case 9: calcProb(9);
+//						calcBankWinProb(curVal+9,tempProb[8], false);
+//				case 10: calcProb(10);
+//						calcBankWinProb(curVal+10,tempProb[9], false);
+//				case 11:
+//				case 12:
+//				case 13:
+//				case 14:
+//				case 15:
+//				case 16:
+//				case 17:
+//				case 18:
+//				case 19:
+//				case 20:
+//					
+//			}
+//		}
+//		return curProb;
+//	}
 	
 	private float calcBankOff (int border)
 	{
@@ -313,6 +313,7 @@ public class Agent extends Player{
 	{
 		//-->used in funtion calcProb
 		checkState = true;
+		@SuppressWarnings("unused")
 		float bankBj = 0;
 		
 		
@@ -335,9 +336,12 @@ public class Agent extends Player{
 		else if(diffLoStack <= 21-pullBorder)//AgentScore >= 16
 			return false;
 		else {
+			boolean check = calcPullBorder (diffLoStack, diffHiStack);
+			if(!check)
+				return false;
 			int bankDiffLoStack = 21 - bankScore[0];
 			int bankDiffHiStack = 21 - bankScore[1];
-			int bankDiff, agentDiff;
+			int bankDiff;
 			if(bankDiffLoStack != bankDiffHiStack){
 				//in case of ace
 				bankDiff = 0;
@@ -543,6 +547,7 @@ public class Agent extends Player{
 					bankBj = probability[9];
 			}
 			//TODO:Spielerwahrscheinlichkeit
+			//TODO:Spieler wahrscheinlichkeit für über 21
 			if(bankHiScore > 50 && bankOverTop <= 50 && bankHiScore >= bankOverTop)
 			{
 				return false;
@@ -551,9 +556,23 @@ public class Agent extends Player{
 			{
 				return true;
 			}
-			
 		}
 		return false;
+	}
+	
+	private boolean calcPullBorder (int lo, int hi)
+	{
+		float probHi = calcBankOff (hi);
+		float probLo = calcBankOff (lo);
+		float tmpProb;
+		//Probability that agent overruns 21
+		tmpProb = (probLo + probHi)/2;
+		if(tmpProb > 40)
+		{
+			pullBorder = lo;
+			return false;
+		}
+		return true;
 	}
 	
 	//getters & setters
