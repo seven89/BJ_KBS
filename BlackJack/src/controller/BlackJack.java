@@ -103,6 +103,21 @@ public class BlackJack {
 							int[] card = CardDeck.getRandCard();
 							//p.setCard(card);
 							agent.setCard(card);
+							
+							
+							// Insurance (versichern, spielmodus)
+							if (bank.getCards()==1 && bank.getCardScore()[1]==11) {
+								System.out.println("Versichern? (Spielmodus)");
+							}
+							
+							// doubling down (doppeln, spielmodus)
+							if (agent.getCards()==2 && (agent.getCardScore()[0]>=9 && agent.getCardScore()[0]<=11) || (agent.getCardScore()[1]>=9 && agent.getCardScore()[1]<=11)) {
+								System.out.println("Doppeln? (Spielmodus)");
+							}
+							
+							// splitting (teilen, spielmodus)
+							//if (agent.getCards()==2 && )
+							
 							gc.newPlayerCard(card[0], card[1]);
 							agent.updateProbability(card);
 							//System.out.println("Farbe " + (card[0]+1) + "Typ " + (card[1]+1) + "Score " + card[2]);
@@ -126,10 +141,10 @@ public class BlackJack {
 							}
 							
 						}
-					
+						gc.repaint();
 				}
 				step++;
-				gc.repaint();
+				
 			}
 			}
 			System.out.println("You have lost! ;( ");
