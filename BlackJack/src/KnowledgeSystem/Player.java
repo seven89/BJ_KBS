@@ -25,11 +25,11 @@ public class Player extends Participant{
 	}
 	
 	public void splitt() {
-		//TODO: implement function
+		Bet = Bet*2;
 	}
 	
 	public void insure () {
-		//TODO: implement function
+		Bet = Bet + Bet/2;
 	}
 	
 	public void doubling() {
