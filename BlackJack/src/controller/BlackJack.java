@@ -30,7 +30,7 @@ public class BlackJack {
 		
 		CardDeck = new CardSet(false);	// create card deck
 		Rules rules = new Rules(7, 5);	
-		agent = new Agent (5000);
+		agent = new Agent (200);
 		agent.calcBetValue(rules);
 		
 		p = new Player(50);		// create player(s)
