@@ -87,7 +87,8 @@ public class BlackJack {
 		  boolean newgame=true;
 		  //Render loop
 			System.out.println("GAME " + Game);
-			while(agent.getCredit()>0){
+			while(agent.getCredit()>0 && Game<1000){
+			
 				//refresh time
 				wait(1);	// waits for 1000 ms
 				if(!gc.pause){
@@ -100,10 +101,10 @@ public class BlackJack {
 					newgame=false;
 					
 					// Insurance (versichern, spielmodus)
-					if (bank.getCards()==1 && bank.getCardScore()[1]==11) {
-						System.out.println("Versichern? (Spielmodus)");
-						agent.insure();
-					}
+//					if (bank.getCards()==1 && bank.getCardScore()[1]==11) {
+//						System.out.println("Versichern? (Spielmodus)");
+//						agent.insure();
+//					}
 				}
 				
 				//reset turn + player handling
@@ -127,14 +128,14 @@ public class BlackJack {
 							agent.setCard(card);
 						
 							// doubling down (doppeln, spielmodus)
-							if (agent.getCards()==2 && (agent.getCardScore()[0]>=9 && agent.getCardScore()[0]<=11) || (agent.getCardScore()[1]>=9 && agent.getCardScore()[1]<=11) && modus==false) {
-								System.out.println("Doppeln? (Spielmodus)");
-								agent.doubling();
-								card = CardDeck.getRandCard();
-								agent.setCard(card);
-								agent.setDoubled(true);
-								modus=true;
-							}
+//							if (agent.getCards()==2 && (agent.getCardScore()[0]>=9 && agent.getCardScore()[0]<=11) || (agent.getCardScore()[1]>=9 && agent.getCardScore()[1]<=11) && modus==false) {
+//								System.out.println("Doppeln? (Spielmodus)");
+//								agent.doubling();
+//								card = CardDeck.getRandCard();
+//								agent.setCard(card);
+//								agent.setDoubled(true);
+//								modus=true;
+//							}
 							
 							gc.newPlayerCard(card[0], card[1]);
 							agent.updateProbability(card);
@@ -178,7 +179,7 @@ public class BlackJack {
 			System.out.println("You have lost! ;( ");
 			System.out.println("You won "+ agent.gamesWon +"/"+ agent.gamesPlayed + " " + (((float)agent.gamesWon/(float)agent.gamesPlayed)*100.0) + "% of games!");
 			System.out.println("You lost "+ agent.gamesLost +"/"+ agent.gamesPlayed + " " + (((float)agent.gamesLost/(float)agent.gamesPlayed)*100.0) + "% of games!");
-			System.out.println("You had a draw in "+ p.gamesDraw +"/"+ agent.gamesPlayed + " " + (((float)agent.gamesDraw/(float)agent.gamesPlayed)*100.0) + "% of games!");
+			System.out.println("You had a draw in "+ agent.gamesDraw +"/"+ agent.gamesPlayed + " " + (((float)agent.gamesDraw/(float)agent.gamesPlayed)*100.0) + "% of games!");
 			gc.setVisible(false);
 			gc.dispose();
 			System.exit(0);
@@ -213,8 +214,8 @@ public class BlackJack {
 						agent.setCredit(-bet);
 						agent.gamesLost++;
 			}
-			else if ((bank.getCardScore()[0] == agent.getCardScore()[0] || bank.getCardScore()[0] == agent.getCardScore()[0]) && (agent.getCardScore()[0]!=21 || agent.getCardScore()[0]!=21)) {
-//						System.out.println("drawn");
+			else if (bank.getCardScore()[0] == agent.getCardScore()[0] || bank.getCardScore()[1] == agent.getCardScore()[1]) {
+						System.out.println("drawn");
 						agent.setCredit(0);
 						agent.gamesDraw++;
 			}
