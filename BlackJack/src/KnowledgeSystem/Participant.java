@@ -40,6 +40,10 @@ public class Participant {
 		 * Participant pulls another card
 		 */
 		
+//		if (pC[2] == card[2]) {
+//			sameCard();
+//		}
+		
 		// if Ass (eleven or one score)
 		if (pC[2]==0) {
 			cardScore[0] += 1;
@@ -59,6 +63,14 @@ public class Participant {
 	
 	public int getCards() {
 		return countCards;
+	}
+	
+//	public boolean sameCard() {
+//		return true;
+//	}
+	
+	public int getCurrentCard() {
+		return card[2];
 	}
 	
 	

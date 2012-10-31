@@ -104,7 +104,6 @@ public class BlackJack {
 							//p.setCard(card);
 							agent.setCard(card);
 							
-							
 							// Insurance (versichern, spielmodus)
 							if (bank.getCards()==1 && bank.getCardScore()[1]==11) {
 								System.out.println("Versichern? (Spielmodus)");
@@ -116,7 +115,9 @@ public class BlackJack {
 							}
 							
 							// splitting (teilen, spielmodus)
-							//if (agent.getCards()==2 && )
+							if (agent.getCards()==1 && agent.getCurrentCard()==card[2]) {
+								System.out.println("Teilen? (spielmodus)");
+							}
 							
 							gc.newPlayerCard(card[0], card[1]);
 							agent.updateProbability(card);
