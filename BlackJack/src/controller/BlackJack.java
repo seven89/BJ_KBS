@@ -17,6 +17,8 @@ public class BlackJack {
 	protected static Player p;
 	protected static Bank bank;
 	static int bet;
+	protected static boolean modus;
+	protected static Agent agentSplit;
 	
 	public BlackJack() {
 		startMoney=100;
@@ -24,6 +26,7 @@ public class BlackJack {
 		gc.setVisible(true);
 		
 		bet=10;
+		modus = false;
 		
 		CardDeck = new CardSet(false);	// create card deck
 		Rules rules = new Rules(7, 5);	
@@ -66,9 +69,10 @@ public class BlackJack {
 	}
 	  
 	  private static void newGame(){
-
+		  	
 			gc.clearArray();
 			CardDeck=new CardSet(false);
+			agentSplit=null;
 			//p.newGame();
 			agent.newGame();
 			bank.newGame();
@@ -93,6 +97,12 @@ public class BlackJack {
 					bank.setCard(initialcard);
 					gc.newBankCard(initialcard[0], initialcard[1]);
 					newgame=false;
+					
+					// Insurance (versichern, spielmodus)
+					if (bank.getCards()==1 && bank.getCardScore()[1]==11) {
+						System.out.println("Versichern? (Spielmodus)");
+						agent.insure();
+					}
 				}
 				
 				//reset turn + player handling
@@ -102,28 +112,43 @@ public class BlackJack {
 						if(agent.pullCard(bank.getCardScore())){  
 							int[] card = CardDeck.getRandCard();
 							//p.setCard(card);
-							agent.setCard(card);
-							
-							// Insurance (versichern, spielmodus)
-							if (bank.getCards()==1 && bank.getCardScore()[1]==11) {
-								System.out.println("Versichern? (Spielmodus)");
-							}
-							
-							// doubling down (doppeln, spielmodus)
-							if (agent.getCards()==2 && (agent.getCardScore()[0]>=9 && agent.getCardScore()[0]<=11) || (agent.getCardScore()[1]>=9 && agent.getCardScore()[1]<=11)) {
-								System.out.println("Doppeln? (Spielmodus)");
-							}
-							
+
 							// splitting (teilen, spielmodus)
-							if (agent.getCards()==1 && agent.getCurrentCard()==card[2]) {
+							if (agent.getCards()==1 && agent.getCurrentCard()==card[2] && agentSplit==null && modus==false) {
 								System.out.println("Teilen? (spielmodus)");
+								agentSplit = agent;
+								agentSplit.setCard(card);
+								modus=true;
+							}
+							else {
+								agent.setCard(card);
+							}
+						
+							// doubling down (doppeln, spielmodus)
+							if (agent.getCards()==2 && (agent.getCardScore()[0]>=9 && agent.getCardScore()[0]<=11) || (agent.getCardScore()[1]>=9 && agent.getCardScore()[1]<=11) && modus==false) {
+								System.out.println("Doppeln? (Spielmodus)");
+								agent.doubling();
+								card = CardDeck.getRandCard();
+								agent.setCard(card);
+								agent.setDoubled(true);
+								modus=true;
 							}
 							
 							gc.newPlayerCard(card[0], card[1]);
 							agent.updateProbability(card);
 							//System.out.println("Farbe " + (card[0]+1) + "Typ " + (card[1]+1) + "Score " + card[2]);
 						}
-						//now banks turn
+						
+						// for AgentSplit
+						else if (agentSplit!=null) {
+							if(agentSplit.pullCard(bank.getCardScore())) {  
+								int[] card = CardDeck.getRandCard();
+								// TODO Marvin AgenSplitt zeichnen (Splitt=1))
+								gc.newPlayerCard(card[0], card[1]);
+								agentSplit.updateProbability(card);
+							}
+						}
+							//now banks turn
 						else{
 							if(bank.getCardScore()[0]<17 && bank.getCardScore()[1]<17 && (p.getCardScore()[0]<21) && (p.getCardScore()[1]<21)){
 								int[] card = CardDeck.getRandCard();
@@ -143,11 +168,11 @@ public class BlackJack {
 							
 						}
 						gc.repaint();
-				}
+					}
 				step++;
-				
+				}
 			}
-			}
+			
 			System.out.println("You have lost! ;( ");
 			System.out.println("You won "+ p.gamesWon +"/"+ p.gamesPlayed + " " + (((float)p.gamesWon/(float)p.gamesPlayed)*100.0) + "% of games!");
 			System.out.println("You lost "+ p.gamesLost +"/"+ p.gamesPlayed + " " + (((float)p.gamesLost/(float)p.gamesPlayed)*100.0) + "% of games!");
@@ -159,7 +184,7 @@ public class BlackJack {
 	  
 	  
 	  private static void printResult(){
-//		  System.out.println("-----------------------------");
+		  System.out.println("-----------------------------");
 			
 			if(p.getCardScore()[0]<21 || p.getCardScore()[1]<21) {
 				//System.out.println("Player under 21");
@@ -195,9 +220,9 @@ public class BlackJack {
 				p.setCredit(bet);
 				p.gamesWon++;
 			}
-//				System.out.println("Player Score: "+p.getCardScore());
-//				System.out.println("Bank Score: "+bank.getCardScore());
-//				System.out.println("Money: "+p.getCredit());
+				System.out.println("Player Score: "+p.getCardScore()[0]);
+				System.out.println("Bank Score: "+bank.getCardScore()[0]);
+				System.out.println("Money: "+p.getCredit());
 	  }
 	  
 		// getter & setter

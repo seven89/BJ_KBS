@@ -24,15 +24,18 @@ public class Player extends Participant{
 		gamesDraw=0;
 	}
 	
-	public void splitt()
-	{
-		//TODO: implement function
+	public void splitt() {
+		Bet = Bet*2;
 	}
 	
-	public void insure ()
-	{
-		//TODO: implement function
+	public void insure () {
+		Bet = Bet + Bet/2;
 	}
+	
+	public void doubling() {
+		Bet = Bet*2;
+	}
+	
 	
 	public void setCredit(double d) {
 		credit += d;
