@@ -184,7 +184,7 @@ public class BlackJack {
 	  
 	  
 	  private static void printResult(){
-//		  System.out.println("-----------------------------");
+		  System.out.println("-----------------------------");
 			
 			if(p.getCardScore()[0]<21 || p.getCardScore()[1]<21) {
 				//System.out.println("Player under 21");
@@ -220,9 +220,9 @@ public class BlackJack {
 				p.setCredit(bet);
 				p.gamesWon++;
 			}
-//				System.out.println("Player Score: "+p.getCardScore());
-//				System.out.println("Bank Score: "+bank.getCardScore());
-//				System.out.println("Money: "+p.getCredit());
+				System.out.println("Player Score: "+p.getCardScore()[0]);
+				System.out.println("Bank Score: "+bank.getCardScore()[0]);
+				System.out.println("Money: "+p.getCredit());
 	  }
 	  
 		// getter & setter
