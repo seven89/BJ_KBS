@@ -188,17 +188,23 @@ public class BlackJack {
 	  
 	  private static void printResult(){
 		  System.out.println("-----------------------------");
+		  
+		  int a0 = agent.getCardScore()[0];
+		  int a1 = agent.getCardScore()[1];
+		  int b0 = agent.getCardScore()[0];
+		  int b1 = agent.getCardScore()[1];
+			System.out.println("oooooooooooooo "+ agent.getCardScore()[0] +"   "+bank.getCardScore()[0]);
+			System.out.println("oooooooooooooo "+ agent.getCardScore()[1] +"   "+bank.getCardScore()[1]);
 			
 			if(agent.getCardScore()[0]<21 || agent.getCardScore()[1]<21) {
-				//System.out.println("Player under 21");
+				System.out.println("Player under 21");
 			}
-			else if (agent.getCardScore()[0]==21 || agent.getCardScore()[1]==21) {
-				//System.out.println("BlackJack! (player)");
+			
+			if (agent.getCardScore()[0]==21 || agent.getCardScore()[1]==21) {
+				System.out.println("BlackJack! (player)");
 				agent.setCredit(bet+bet*1.5);
 			}
-			
-			
-			if(agent.getCardScore()[0]>21 || agent.getCardScore()[1]>21){
+			else if(agent.getCardScore()[0]>21 || agent.getCardScore()[1]>21){
 				//System.out.println("Player lose!");
 				agent.setInGame(false);
 				agent.setCredit(-bet);
@@ -214,7 +220,7 @@ public class BlackJack {
 						agent.setCredit(-bet);
 						agent.gamesLost++;
 			}
-			else if (bank.getCardScore()[0] == agent.getCardScore()[0] || bank.getCardScore()[1] == agent.getCardScore()[1]) {
+			else if (b0 == a0 || b0==a1 || b1==a0 || b1==a1) {
 						System.out.println("drawn");
 						agent.setCredit(0);
 						agent.gamesDraw++;
