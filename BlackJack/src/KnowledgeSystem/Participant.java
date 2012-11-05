@@ -131,5 +131,9 @@ public class Participant {
 		this.inGame = inGame;
 	}
 	
+	public void resetCountCards() {
+		countCards=0;
+	}
+	
 
 }

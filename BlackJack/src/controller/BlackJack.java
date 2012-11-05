@@ -212,10 +212,15 @@ public class BlackJack {
 		  if (debug==1) {
 			  System.out.println("GAME " + Game);
 			  System.out.println("Bet    "+bet);
-			  System.out.println("Bank   Score "+ bank.getHighCardScore() + "    Einzeln: " + bank.getCardScore()[0] +" "+ bank.getCardScore()[1]);
-			  System.out.println("Player Score "+ agent.getHighCardScore() + "    Einzeln: " + agent.getCardScore()[0] +" "+ agent.getCardScore()[1]);
+			  System.out.println("Bank   Cards "+bank.getCards());
+			  System.out.println("Agent  Cards "+agent.getCards());
 			  if (agentSplit!=null) {
-				  System.out.println("PSPLIT Score "+ agentSplit.getHighCardScore() + "    Einzeln: " + agentSplit.getCardScore()[0] +" "+ agent.getCardScore()[1]);
+				  System.out.println("AgentS Cards "+agentSplit.getCards());
+			  }
+			  System.out.println("Bank    Score "+ bank.getHighCardScore() + "    Einzeln: " + bank.getCardScore()[0] +" "+ bank.getCardScore()[1]);
+			  System.out.println("Player  Score "+ agent.getHighCardScore() + "    Einzeln: " + agent.getCardScore()[0] +" "+ agent.getCardScore()[1]);
+			  if (agentSplit!=null) {
+				  System.out.println("PlayerS Score "+ agentSplit.getHighCardScore() + "    Einzeln: " + agentSplit.getCardScore()[0] +" "+ agentSplit.getCardScore()[1]);
 			  }
 			  System.out.println("Money  Before : "+agent.getCredit());
 		  }
@@ -225,11 +230,10 @@ public class BlackJack {
 		// TODO agentsplitt bei der auszahlung einbinden
 			
 			if (agent.getHighCardScore()==21 && agent.getCards()==2) {
-				System.out.println("> > > > > > > > > > BlackJack! < < < < < < < < < < (player)");
+				System.out.println("> > > > > > > > > > BlackJack! < < < < < < < < < <");
 				agent.setCredit(bet+bet*1.5);
 			}
 			else if(agent.getHighCardScore()>21){
-				//System.out.println("Player lose!");
 				agent.setInGame(false);
 				agent.setCredit(-bet);
 				agent.gamesLost++;
@@ -246,9 +250,10 @@ public class BlackJack {
 			}
 			else if (bank.getHighCardScore() == agent.getHighCardScore()) {
 						System.out.println("drawn");
-						agent.setCredit(0);
+						//agent.setCredit(0);
 						agent.gamesDraw++;
 			}
+			// else: bank < player < 21
 			else{
 				agent.setCredit(bet);
 				agent.gamesWon++;

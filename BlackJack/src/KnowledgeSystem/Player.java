@@ -11,6 +11,7 @@ public class Player extends Participant{
 	protected int credit;
 	private double Bet;
 	public int gamesPlayed;
+	protected int countCards;
 	public int gamesWon;
 	public int gamesLost;
 	public int gamesDraw;
@@ -64,5 +65,6 @@ public class Player extends Participant{
 		cardScore[0] = 0;
 		cardScore[1] = 0;
 		inGame = false;
+		resetCountCards();
 	}
 }
