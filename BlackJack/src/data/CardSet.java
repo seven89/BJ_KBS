@@ -68,7 +68,6 @@ public class CardSet {
 			CurrentCard[1]=r;
 			CurrentCard[2]= getCardScore(r);
 			CardDeck[l][r]= 0;				// set 0, (card not more in the deck) 
-
 		return CurrentCard;
 	}
 	
