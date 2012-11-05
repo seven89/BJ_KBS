@@ -19,11 +19,15 @@ public class BlackJack {
 	static int bet;
 	protected static boolean modus;
 	protected static Agent agentSplit;
+	static boolean agentHelp, agentSplitHelp, agentSplitCardHelp;
 	
 	public BlackJack() {
 		startMoney=100;
 		gc = new GraphicsController(); //create gui
 		gc.setVisible(false);
+		agentHelp=true;
+		agentSplitHelp=false;
+		agentSplitCardHelp=true;
 		
 		bet=10;
 		modus = false;
@@ -74,6 +78,14 @@ public class BlackJack {
 			CardDeck=new CardSet(false);
 			agentSplit=null;
 			modus=false;
+			agentHelp=true;
+			agentSplitHelp=false;
+			agentSplitCardHelp=true;
+			agent.resetHelpAss();
+			bank.resetHelpAss();
+			if (agentSplit!=null) {
+				agentSplit.resetHelpAss();
+			}
 			//p.newGame();
 			agent.newGame();
 			bank.newGame();
@@ -87,7 +99,7 @@ public class BlackJack {
 		  boolean newgame=true;
 		  //Render loop
 			System.out.println("GAME " + Game);
-			while(agent.getCredit()>0 && Game<1000){
+			while(agent.getCredit()>0 && Game<100){
 			
 				//refresh time
 				wait(1);	// waits for 1000 ms
@@ -110,24 +122,26 @@ public class BlackJack {
 				//reset turn + player handling
 				if(step==2) {
 					step=0;
-						//players turn?
-						if(agent.pullCard(bank.getCardScore())){  
+					//players turn?
+					if (agentHelp || agentSplitHelp) {
+						if(agent.pullCard(bank.getCardScore())){
 							int[] card = CardDeck.getRandCard();
 							//p.setCard(card);
 
 							// splitting (teilen, spielmodus)
-//							if (agent.getCards()==1 && agent.getCurrentCard()==card[2] && agentSplit==null && modus==false) {
-//								System.out.println("Teilen? (spielmodus)");
-//								agentSplit = agent;
-//								agentSplit.setCard(card);
-//								modus=true;
-//							}
-//							else {
-//								agent.setCard(card);
-//							}
-							agent.setCard(card);
+							if (agent.getCards()==1 && agent.getCurrentCard()==card[2] && agentSplit==null && modus==false) {
+								System.out.println("Teilen? (spielmodus)");
+								agentSplit = agent;
+								agentSplit.setCard(card);
+								agentSplitHelp=true;
+								modus=true;
+							}
+							else {
+								agent.setCard(card);
+							}
+							//agent.setCard(card);
 						
-							// doubling down (doppeln, spielmodus)
+//							// doubling down (doppeln, spielmodus)
 //							if (agent.getCards()==2 && (agent.getCardScore()[0]>=9 && agent.getCardScore()[0]<=11) || (agent.getCardScore()[1]>=9 && agent.getCardScore()[1]<=11) && modus==false) {
 //								System.out.println("Doppeln? (Spielmodus)");
 //								agent.doubling();
@@ -140,37 +154,47 @@ public class BlackJack {
 							gc.newPlayerCard(card[0], card[1]);
 							agent.updateProbability(card);
 //							System.out.println("Farbe " + (card[0]+1) + "Typ " + (card[1]+1) + "Score " + card[2]);
+						} 
+						else {
+							agentHelp=false;
 						}
-						
-//						// for AgentSplit
-//						else if (agentSplit!=null) {
-//							if(agentSplit.pullCard(bank.getCardScore())) {  
-//								int[] card = CardDeck.getRandCard();
-//								// TODO Marvin AgenSplitt zeichnen (Splitt=1))
-//								gc.newPlayerCard(card[0], card[1]);
-//								agentSplit.updateProbability(card);
-//							}
-//						}
-							//now banks turn
-						else{
-							if(bank.getCardScore()[0]<17 && bank.getCardScore()[1]<17 && (p.getCardScore()[0]<21) && (p.getCardScore()[1]<21)){
+						// for AgentSplit
+						if (agentSplit!=null) {
+							if(agentSplit.pullCard(bank.getCardScore())) {  
 								int[] card = CardDeck.getRandCard();
-								bank.setCard(card);
-								gc.newBankCard(card[0], card[1]);
-								agent.updateProbability(card);
+								// TODO Marvin AgenSplitt zeichnen (Splitt=1))
+								gc.newPlayerCard(card[0], card[1]);
+								agentSplit.updateProbability(card);
+								
+								if (!(agentSplit.getCardScore()[0]<21 || agentSplit.getCardScore()[1]<21)) {
+									agentSplitCardHelp=false;
+								}
+								agentSplitHelp=true;
 							}
-							//new game
-							else{
-								printResult();
-								newGame();
-								newgame=true;
-								agent.gamesPlayed++;
-								Game++;
-								System.out.println("GAME " + Game);
+							else {
+								agentSplitHelp=false;
 							}
-							
 						}
-						gc.repaint();
+					}
+					//now banks turn
+					else {
+						if(bank.getCardScore()[0]<17 || bank.getCardScore()[1]<17 && (agent.getHighCardScore()<21) && agentSplitCardHelp){
+							int[] card = CardDeck.getRandCard();
+							bank.setCard(card);
+							gc.newBankCard(card[0], card[1]);
+							agent.updateProbability(card);
+						}
+						//new game
+						else{
+							printResult();
+							newGame();
+							newgame=true;
+							agent.gamesPlayed++;
+							Game++;
+							System.out.println("GAME " + Game);
+						}	
+					}
+					gc.repaint();
 					}
 				step++;
 				}
@@ -187,18 +211,16 @@ public class BlackJack {
 	  
 	  
 	  private static void printResult(){
-		  System.out.println("-----------------------------");
+		  System.out.println("-------------BEGIN----------------");
 		  
 		  int a0 = agent.getCardScore()[0];
-		  int a1 = agent.getCardScore()[1];
+		  int a1 = agent.getCardScore()[1];   
 		  int b0 = agent.getCardScore()[0];
 		  int b1 = agent.getCardScore()[1];
-			System.out.println("oooooooooooooo "+ agent.getCardScore()[0] +"   "+bank.getCardScore()[0]);
-			System.out.println("oooooooooooooo "+ agent.getCardScore()[1] +"   "+bank.getCardScore()[1]);
-			
-			if(agent.getCardScore()[0]<21 && agent.getCardScore()[1]<21) {
-				System.out.println("Player under 21");
-			}
+		  
+		  System.out.println("Bank   Score "+ bank.getHighCardScore() + "    Einzeln: " + bank.getCardScore()[0] +" "+ bank.getCardScore()[1]);
+		  System.out.println("Player Score "+ agent.getHighCardScore() + "    Einzeln: " + agent.getCardScore()[0] +" "+ agent.getCardScore()[1]);
+
 			
 			if (agent.getCardScore()[0]==21 || agent.getCardScore()[1]==21) {
 				System.out.println("BlackJack! (player)");
@@ -230,6 +252,7 @@ public class BlackJack {
 				agent.gamesWon++;
 			}
 				System.out.println("Money: "+agent.getCredit());
+				System.out.println("-------------END------------------");
 	  }
 	  
 		// getter & setter

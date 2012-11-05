@@ -17,6 +17,7 @@ public class Participant {
 	protected int[] cardScore;
 	protected boolean inGame;
 	protected int helpAss;
+	boolean secondCardScore;
 	
 	
 	public Participant ()
@@ -27,6 +28,8 @@ public class Participant {
 		countCards=0;
 		inGame=true;
 		helpAss=0;
+		secondCardScore=false;
+		
 	}
 	
 	
@@ -47,17 +50,18 @@ public class Participant {
 //		}
 		
 		// if Ass (eleven or one score)
-		if (pC[2]==0 && helpAss==0) {
+		if (pC[2]==11 && helpAss==0) {
 			cardScore[0] += 1;
 			cardScore[1] += 11;
 			helpAss++;
+			secondCardScore=true;
 		}
-		else if (pC[2]==0 && helpAss==1) {
+		else if (pC[2]==11 && helpAss==1) {
 			cardScore[0] += 11;
 			cardScore[1] += 1;
 			helpAss++;
 		}
-		else if (pC[2]==0 && helpAss>1) {
+		else if (pC[2]==11 && helpAss>1) {
 			cardScore[0] += 1;
 			cardScore[1] += 1;
 			helpAss++;
@@ -75,12 +79,35 @@ public class Participant {
 		}
 	}
 	
+	// return all scores
 	public int[] getCardScore() {
 		return cardScore;
 	}
 	
+	public void resetHelpAss() {
+		helpAss=0;
+	}
+	
+	// return one high score (higher)
+	public int getHighCardScore() {
+		if (cardScore[0]>cardScore[1]) {
+			if (cardScore[0]<=21) { 
+				return cardScore[0]; }
+			else return cardScore[1];
+		} else return cardScore[1];
+	}
+	// TODO Weitermachen
+	
 	public int getCards() {
 		return countCards;
+	}
+	
+	public void setSecondCardScore(boolean score) {
+		secondCardScore=score;
+	}
+	
+	public boolean getSecondCardScore() {
+		return secondCardScore;
 	}
 	
 //	public boolean sameCard() {
@@ -90,7 +117,6 @@ public class Participant {
 	public int getCurrentCard() {
 		return card[2];
 	}
-	
 	
 	//getters & setters
 	public boolean getInGame() {
