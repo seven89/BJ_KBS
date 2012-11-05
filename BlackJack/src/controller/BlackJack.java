@@ -36,8 +36,6 @@ public class BlackJack {
 		rules = new Rules(7, 5);	
 		agent = new Agent (100);
 		bet = (int) agent.calcBetValue(rules);
-		System.out.println("Bet + " +bet);
-
 		
 		//p = new Player(50);		// create player(s)
 		//setPlayers(1);			// count player
@@ -98,7 +96,7 @@ public class BlackJack {
 		  boolean newgame=true;
 		  //Render loop
 			//System.out.println("GAME " + Game);
-			while(agent.getCredit()>0 && Game<100){
+			while(agent.getCredit()>0 && Game<2){
 			
 				//refresh time
 				wait(1);	// waits for 1000 ms
@@ -128,17 +126,19 @@ public class BlackJack {
 							//p.setCard(card);
 
 							// splitting (teilen, spielmodus)
-							if (agent.getCards()==1 && agent.getCurrentCard()==card[2] && agentSplit==null && modus==false) {
-								System.out.println("Teilen? (spielmodus)");
-								agentSplit = agent;
-								agentSplit.setCard(card);
-								agentSplitHelp=true;
-								modus=true;
-							}
-							else {
-								agent.setCard(card);
-							}
-							//agent.setCard(card);
+							System.out.println("Card2 "+card[1]);
+							System.out.println("Card1 "+agent.getCurrentCard());
+//							if (agent.getCards()==1 && agent.getCurrentCard()==card[1] && agentSplit==null && modus==false) {
+//								System.out.println("Teilen? (spielmodus)");
+//								agentSplit = agent;
+//								agentSplit.setCard(card);
+//								agentSplitHelp=true;
+//								modus=true;
+//							}
+//							else {
+//								agent.setCard(card);
+//							}
+							agent.setCard(card);
 						
 //							// doubling down (doppeln, spielmodus)
 //							if (agent.getCards()==2 && (agent.getCardScore()[0]>=9 && agent.getCardScore()[0]<=11) || (agent.getCardScore()[1]>=9 && agent.getCardScore()[1]<=11) && modus==false) {
