@@ -30,7 +30,7 @@ public class BlackJack {
 		
 		CardDeck = new CardSet(false);	// create card deck
 		Rules rules = new Rules(7, 5);	
-		agent = new Agent (200);
+		agent = new Agent (100);
 		agent.calcBetValue(rules);
 		
 		p = new Player(50);		// create player(s)
@@ -196,7 +196,7 @@ public class BlackJack {
 			System.out.println("oooooooooooooo "+ agent.getCardScore()[0] +"   "+bank.getCardScore()[0]);
 			System.out.println("oooooooooooooo "+ agent.getCardScore()[1] +"   "+bank.getCardScore()[1]);
 			
-			if(agent.getCardScore()[0]<21 || agent.getCardScore()[1]<21) {
+			if(agent.getCardScore()[0]<21 && agent.getCardScore()[1]<21) {
 				System.out.println("Player under 21");
 			}
 			

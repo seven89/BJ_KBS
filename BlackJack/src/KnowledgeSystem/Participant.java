@@ -16,6 +16,7 @@ public class Participant {
 	protected int countCards;
 	protected int[] cardScore;
 	protected boolean inGame;
+	protected int helpAss;
 	
 	
 	public Participant ()
@@ -25,6 +26,7 @@ public class Participant {
 		cardScore[1] = 0;	//High Stack (Ass=11)
 		countCards=0;
 		inGame=true;
+		helpAss=0;
 	}
 	
 	
@@ -45,9 +47,20 @@ public class Participant {
 //		}
 		
 		// if Ass (eleven or one score)
-		if (pC[2]==0) {
+		if (pC[2]==0 && helpAss==0) {
 			cardScore[0] += 1;
 			cardScore[1] += 11;
+			helpAss++;
+		}
+		else if (pC[2]==0 && helpAss==1) {
+			cardScore[0] += 11;
+			cardScore[1] += 1;
+			helpAss++;
+		}
+		else if (pC[2]==0 && helpAss>1) {
+			cardScore[0] += 1;
+			cardScore[1] += 1;
+			helpAss++;
 		}
 		else {
 			cardScore[0] += pC[2];
@@ -55,6 +68,11 @@ public class Participant {
 		}
 		card = pC;
 		countCards++;
+		
+		// only for test
+		if (helpAss>3) {
+			System.out.println("ERROR: IM DECK SIND MEHR ALS 4 ASSE");
+		}
 	}
 	
 	public int[] getCardScore() {
