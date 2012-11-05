@@ -225,7 +225,7 @@ public class BlackJack {
 		// TODO agentsplitt bei der auszahlung einbinden
 			
 			if (agent.getHighCardScore()==21 && agent.getCards()==2) {
-				System.out.println("BlackJack! (player)");
+				System.out.println("> > > > > > > > > > BlackJack! < < < < < < < < < < (player)");
 				agent.setCredit(bet+bet*1.5);
 			}
 			else if(agent.getHighCardScore()>21){

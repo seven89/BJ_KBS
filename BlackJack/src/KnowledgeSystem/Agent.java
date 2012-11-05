@@ -331,7 +331,7 @@ public class Agent extends Player{
 		 */
 		if(isDoubled)
 			return false;
-		else if(diffHiStack > 11)
+		else if(diffHiStack >= 11)
 			return true;
 		else if(diffLoStack <= 21-pullBorder)//AgentScore >= 16
 			return false;
