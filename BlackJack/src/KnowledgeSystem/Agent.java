@@ -42,7 +42,7 @@ public class Agent extends Player{
 		 * This method calculates the bet-value of an agent
 		 */
 		double betValue = 0;
-		if(credit/50 < rules.getBoxLimit()) betValue =credit/50;
+		if(credit/10 < rules.getBoxLimit()) betValue =credit/10;
 		else betValue = rules.getBoxLimit();
 		
 		return betValue;

@@ -90,11 +90,15 @@ public class Participant {
 	
 	// return one high score (higher)
 	public int getHighCardScore() {
-		if (cardScore[0]>cardScore[1]) {
+		if (cardScore[0]>=cardScore[1]) {
 			if (cardScore[0]<=21) { 
 				return cardScore[0]; }
 			else return cardScore[1];
-		} else return cardScore[1];
+		}		
+		else 
+			if (cardScore[1]>21)
+				return cardScore[0];
+			else return cardScore[1];
 	}
 	// TODO Weitermachen
 	

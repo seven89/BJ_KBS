@@ -9,42 +9,43 @@ import KnowledgeSystem.Player;
 
 public class BlackJack {
 
-	int Players;
+	static int Players, Game, bet, debug;
 	int startMoney;
 	protected static GraphicsController gc;
 	protected static CardSet CardDeck;
-	protected static Agent agent;
+	protected static Agent agent, agentSplit;
 	protected static Player p;
+	protected static Rules rules;
 	protected static Bank bank;
-	static int bet;
-	protected static boolean modus;
-	protected static Agent agentSplit;
-	static boolean agentHelp, agentSplitHelp, agentSplitCardHelp;
+	static boolean agentHelp, agentSplitHelp, agentSplitCardHelp, modus;
 	
 	public BlackJack() {
-		startMoney=100;
+		debug =1; // 1 bedeutet, dass alle syso ausgegeben werden
+		//startMoney=100;
 		gc = new GraphicsController(); //create gui
 		gc.setVisible(false);
 		agentHelp=true;
 		agentSplitHelp=false;
 		agentSplitCardHelp=true;
+		Game=1;
 		
-		bet=10;
+		//bet=10;
 		modus = false;
 		
 		CardDeck = new CardSet(false);	// create card deck
-		Rules rules = new Rules(7, 5);	
+		rules = new Rules(7, 5);	
 		agent = new Agent (100);
-		agent.calcBetValue(rules);
+		bet = (int) agent.calcBetValue(rules);
+		System.out.println("Bet + " +bet);
+
 		
-		p = new Player(50);		// create player(s)
-		setPlayers(1);			// count player
+		//p = new Player(50);		// create player(s)
+		//setPlayers(1);			// count player
 		//agent.setCredit(200);				// give player 100 money
-		p.setBet(bet);					// player set 10 money
+		//p.setBet(bet);					// player set 10 money
 		
 		// Bank (first card)
-		bank = new Bank();
-				
+		bank = new Bank();				
 		
 	}
 	
@@ -52,11 +53,7 @@ public class BlackJack {
 	public static void main(String [ ] args)
 	{
 		BlackJack table = new BlackJack();		//create table
-		nextStep();
-		
-		/*if (bank.getCardScore()==10) {
-			System.out.println("Versichern? (Spielmodus)");
-		}*/
+		nextStep();		
 	}
 	
 	  public static void wait (int timeToWait){
@@ -89,16 +86,18 @@ public class BlackJack {
 			//p.newGame();
 			agent.newGame();
 			bank.newGame();
+			bet = (int) agent.calcBetValue(rules);
+			agent.setBet(bet);
 			agent.initializeProbability();
 //			System.out.println("------------New Game-----------");
 	  }
 	  
 	  private static void nextStep(){
-		  int Game=0;
+		  //int Game=0;
 		  int step=1;
 		  boolean newgame=true;
 		  //Render loop
-			System.out.println("GAME " + Game);
+			//System.out.println("GAME " + Game);
 			while(agent.getCredit()>0 && Game<100){
 			
 				//refresh time
@@ -162,11 +161,11 @@ public class BlackJack {
 						if (agentSplit!=null) {
 							if(agentSplit.pullCard(bank.getCardScore())) {  
 								int[] card = CardDeck.getRandCard();
-								// TODO Marvin AgenSplitt zeichnen (Splitt=1))
+								// TODO Marvin AgentSplitt zeichnen
 								gc.newPlayerCard(card[0], card[1]);
 								agentSplit.updateProbability(card);
 								
-								if (!(agentSplit.getCardScore()[0]<21 || agentSplit.getCardScore()[1]<21)) {
+								if (!(agentSplit.getHighCardScore()<21)) {
 									agentSplitCardHelp=false;
 								}
 								agentSplitHelp=true;
@@ -191,7 +190,7 @@ public class BlackJack {
 							newgame=true;
 							agent.gamesPlayed++;
 							Game++;
-							System.out.println("GAME " + Game);
+							//System.out.println("GAME " + Game);
 						}	
 					}
 					gc.repaint();
@@ -199,8 +198,6 @@ public class BlackJack {
 				step++;
 				}
 			}
-			
-			System.out.println("You have lost! ;( ");
 			System.out.println("You won "+ agent.gamesWon +"/"+ agent.gamesPlayed + " " + (((float)agent.gamesWon/(float)agent.gamesPlayed)*100.0) + "% of games!");
 			System.out.println("You lost "+ agent.gamesLost +"/"+ agent.gamesPlayed + " " + (((float)agent.gamesLost/(float)agent.gamesPlayed)*100.0) + "% of games!");
 			System.out.println("You had a draw in "+ agent.gamesDraw +"/"+ agent.gamesPlayed + " " + (((float)agent.gamesDraw/(float)agent.gamesPlayed)*100.0) + "% of games!");
@@ -211,38 +208,43 @@ public class BlackJack {
 	  
 	  
 	  private static void printResult(){
-		  System.out.println("-------------BEGIN----------------");
 		  
-		  int a0 = agent.getCardScore()[0];
-		  int a1 = agent.getCardScore()[1];   
-		  int b0 = agent.getCardScore()[0];
-		  int b1 = agent.getCardScore()[1];
-		  
-		  System.out.println("Bank   Score "+ bank.getHighCardScore() + "    Einzeln: " + bank.getCardScore()[0] +" "+ bank.getCardScore()[1]);
-		  System.out.println("Player Score "+ agent.getHighCardScore() + "    Einzeln: " + agent.getCardScore()[0] +" "+ agent.getCardScore()[1]);
+		  if (debug==1) {
+			  System.out.println("GAME " + Game);
+			  System.out.println("Bet    "+bet);
+			  System.out.println("Bank   Score "+ bank.getHighCardScore() + "    Einzeln: " + bank.getCardScore()[0] +" "+ bank.getCardScore()[1]);
+			  System.out.println("Player Score "+ agent.getHighCardScore() + "    Einzeln: " + agent.getCardScore()[0] +" "+ agent.getCardScore()[1]);
+			  if (agentSplit!=null) {
+				  System.out.println("PSPLIT Score "+ agentSplit.getHighCardScore() + "    Einzeln: " + agentSplit.getCardScore()[0] +" "+ agent.getCardScore()[1]);
+			  }
+			  System.out.println("Money  Before : "+agent.getCredit());
+		  }
+		
 
+
+		// TODO agentsplitt bei der auszahlung einbinden
 			
-			if (agent.getCardScore()[0]==21 || agent.getCardScore()[1]==21) {
+			if (agent.getHighCardScore()==21 && agent.getCards()==2) {
 				System.out.println("BlackJack! (player)");
 				agent.setCredit(bet+bet*1.5);
 			}
-			else if(agent.getCardScore()[0]>21 || agent.getCardScore()[1]>21){
+			else if(agent.getHighCardScore()>21){
 				//System.out.println("Player lose!");
 				agent.setInGame(false);
 				agent.setCredit(-bet);
 				agent.gamesLost++;
 			}
-			else if (bank.getCardScore()[0]>21 || bank.getCardScore()[1]>21) {
+			else if (bank.getHighCardScore()>21) {
 					//System.out.println("Player win!");
 					agent.setCredit(bet*2);
 					agent.gamesWon++;
 			}
-			else if (bank.getCardScore()[0] > agent.getCardScore()[0] || bank.getCardScore()[1] > p.getCardScore()[1]) {
+			else if (bank.getHighCardScore()>agent.getHighCardScore()) {
 						//System.out.println("Bank win!");
 						agent.setCredit(-bet);
 						agent.gamesLost++;
 			}
-			else if (b0 == a0 || b0==a1 || b1==a0 || b1==a1) {
+			else if (bank.getHighCardScore() == agent.getHighCardScore()) {
 						System.out.println("drawn");
 						agent.setCredit(0);
 						agent.gamesDraw++;
@@ -251,8 +253,11 @@ public class BlackJack {
 				agent.setCredit(bet);
 				agent.gamesWon++;
 			}
-				System.out.println("Money: "+agent.getCredit());
-				System.out.println("-------------END------------------");
+			
+			if (debug==1) {
+				System.out.println("Money  After  : "+agent.getCredit());
+				System.out.println("---------------------------------");
+			}				
 	  }
 	  
 		// getter & setter
