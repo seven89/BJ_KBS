@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -21,6 +22,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JButton;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JWindow;
@@ -109,19 +111,21 @@ public class GraphicsController extends JFrame {
 	// Array for Objects that are to be painted (z index is rising)
 	public Figure[] graphicObjects;
 	public CardPanel[] panels;
-	private int panelcounter=0;
+	public JLabel[] labels;
 	private int playercards=0;
 	private int bankcards=0;
 	private int cards=0;
-	private long idcounter = 1L;
 	public boolean pause=false;
 	//rdy grphc
-	private Image saveImg;
 	private BackgroundPanel backgroundPanel;
+	private CardPanel cardPanel;
 	   
 public GraphicsController(){
 	 
-	createAndShowWindow(); 
+	 labels=new JLabel[13];
+	 for(int i=0;i<labels.length;i++){
+		 labels[i]=null;
+	 }
 	 
 	 graphicObjects=new Figure[52];
 	 for(int i=0;i<graphicObjects.length;i++){
@@ -132,6 +136,13 @@ public GraphicsController(){
 	 for(int i=0;i<panels.length;i++){
 		 panels[i]=null;
 	 }
+	 
+	createAndShowWindow(); 
+	showpercentage();
+	
+	
+	 
+
 	setSize(1024,768);
 	initGraphics();
 	centerOnScreen(this);
@@ -168,29 +179,10 @@ public GraphicsController(){
 	
 	public void paint(Graphics g) {
 		super.paint(g);
-	
-//		for(Figure f: graphicObjects){
-//			if(f.drawn==0 & f.type==2){
-				panels[panelcounter] = new CardPanel(this, graphicObjects);
-				//panels[panelcounter].setVisible(true);
-//				f.drawn=1;
-				getContentPane().add(panels[panelcounter]);
-//				panelcounter++;
-//				panels[panelcounter].serialVersionUID=idcounter;
-//				idcounter+=1L;
-//			}
-//		}
-//		if( panels[2]!=null && panels[2]!=null && panels[1].getUI()==panels[2].getUI()) System.out.println("PROBLEM!!!!" +panels[1].getUI());
-		
-//		for(Component c: getContentPane().getComponents()){
-			//if(c!=null){
-//				c.setVisible(true);
-				//System.out.println("Karte auf: " +c.getX() + "-" + c.getY());
-				//getContentPane().add(c);
-			//}
-//		}
+				cardPanel=new CardPanel(this, graphicObjects);
+				getContentPane().add(cardPanel);
+
 		this.setVisible(true);
-		//System.out.println(getContentPane().getComponents().length);
 	}
 	
 	public static void initGraphics(){
@@ -285,6 +277,10 @@ public GraphicsController(){
 	private class CardPanel extends JPanel {
 
 
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 		Figure[] graphicObjects;
 		int  a=67;
 		int b=98;
@@ -365,14 +361,57 @@ public GraphicsController(){
 	        text.setText("Wahrscheinlichkeit für 1: "+ w1);
 	        JWindow win = new JWindow(frame);
 	        win.setLayout(new GridLayout(0, 1));
-	        this.add(text);
+	        getContentPane().add(text);
+	        text.setLocation(100, 100);
+	        text.setVisible(true);
 	        win.pack();
 	        win.setLocation(0, 0);
 	        win.setVisible(true);
 	    }
+	    
+	    JLabel label1;
 
-
+		private void showpercentage(){
+			int positionx = 0;
+			int positiony = 60;
+			
+			JLabel label = new JLabel("Wahrscheinlichkeiten:");
+			label.setFont(new Font("Serif", Font.PLAIN, 20));
+		    label.setForeground(Color.WHITE);
+		    this.add(label);
+		    this.setSize(230, positiony);
+		    this.setVisible(true);
+			
+			
+		    labels[0] = new JLabel("1 ist : ");
+		    labels[1] = new JLabel("2 ist : ");
+		    labels[2] = new JLabel("3 ist : ");
+		    labels[3] = new JLabel("4 ist : ");
+		    labels[4] = new JLabel("5 ist : ");
+		    labels[5] = new JLabel("6 ist : ");
+		    labels[6] = new JLabel("7 ist : ");
+		    labels[7] = new JLabel("8 ist : ");
+		    labels[8] = new JLabel("9 ist : ");
+		    labels[9] = new JLabel("10 ist : ");
+		    labels[10] = new JLabel("Bube ist : ");
+		    labels[11] = new JLabel("Dame ist : ");
+		    labels[12] = new JLabel("König ist : ");
+		    
+		    for(JLabel l : labels){
+		    	l.setFont(new Font("Serif", Font.PLAIN, 20));
+			    l.setForeground(Color.WHITE);
+			    this.add(l);
+			    this.setSize(230, positiony);
+			    positiony+=30;
+			    this.setVisible(true);
+		    }
+		    
+		}
 	
+		private void changepercentage(){
+			float w = 1.5f;
+			labels[0].setText("1 ist: "+ w + "%");
+		}
 	
 	public void newPlayerCard(int color, int value){
 		 graphicObjects[cards].type=2;
@@ -382,6 +421,7 @@ public GraphicsController(){
 		 graphicObjects[cards].y=490;
 		 playercards++;
 		 cards++;
+		 changepercentage();
 	}
 	
 	public void newBankCard(int color, int value){
@@ -404,7 +444,6 @@ public GraphicsController(){
 			 if(panels[i]!=null)getContentPane().remove(panels[i]);
 			 panels[i]=null;
 		 }
-		panelcounter=0;
 		playercards=0;
 		bankcards=0;
 		cards=0;
