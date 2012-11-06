@@ -169,26 +169,26 @@ public GraphicsController(){
 	public void paint(Graphics g) {
 		super.paint(g);
 	
-		for(Figure f: graphicObjects){
-			if(f.drawn==0 & f.type==2){
-				panels[panelcounter] = new CardPanel(this, f);
+//		for(Figure f: graphicObjects){
+//			if(f.drawn==0 & f.type==2){
+				panels[panelcounter] = new CardPanel(this, graphicObjects);
 				//panels[panelcounter].setVisible(true);
-				f.drawn=1;
+//				f.drawn=1;
 				getContentPane().add(panels[panelcounter]);
-				panelcounter++;
-				panels[panelcounter].serialVersionUID=idcounter;
-				idcounter+=1L;
-			}
-		}
-		if( panels[2]!=null && panels[2]!=null && panels[1].getUI()==panels[2].getUI()) System.out.println("PROBLEM!!!!" +panels[1].getUI());
+//				panelcounter++;
+//				panels[panelcounter].serialVersionUID=idcounter;
+//				idcounter+=1L;
+//			}
+//		}
+//		if( panels[2]!=null && panels[2]!=null && panels[1].getUI()==panels[2].getUI()) System.out.println("PROBLEM!!!!" +panels[1].getUI());
 		
-		for(Component c: getContentPane().getComponents()){
+//		for(Component c: getContentPane().getComponents()){
 			//if(c!=null){
-				c.setVisible(true);
+//				c.setVisible(true);
 				//System.out.println("Karte auf: " +c.getX() + "-" + c.getY());
 				//getContentPane().add(c);
 			//}
-		}
+//		}
 		this.setVisible(true);
 		//System.out.println(getContentPane().getComponents().length);
 	}
@@ -285,77 +285,75 @@ public GraphicsController(){
 	private class CardPanel extends JPanel {
 
 
-		/**
-		 * 
-		 */
-		public long serialVersionUID = 1L;
-		Figure f;
-		Image image;
+		Figure[] graphicObjects;
+		int  a=67;
+		int b=98;
+		int c=4;
 		
-		CardPanel(GraphicsController graphicsController, Figure f) {
-			int  a=67;
-			int b=98;
-			int c=4;
+		
+		CardPanel(GraphicsController graphicsController,  Figure[] graphicObjects) {
 			
-			this.f=f;
-			
-				if(f.value==0 && f.color==0) image=texture1a.getScaledInstance(a, b, c); //Ass
-				else if(f.value==0 && f.color==1) image=texture1b.getScaledInstance(a, b, c); //Ass
-				else if(f.value==0 && f.color==2) image=texture1c.getScaledInstance(a, b, c); //Ass
-				else if(f.value==0 && f.color==3) image=texture1d.getScaledInstance(a, b, c); //Ass
-				else if(f.value==1 && f.color==0) image=texture2a.getScaledInstance(a, b, c);//Zwei
-				else if(f.value==1 && f.color==1) image=texture2b.getScaledInstance(a, b, c); //Zwei
-				else if(f.value==1 && f.color==2) image=texture2c.getScaledInstance(a, b, c); //Zwei
-				else if(f.value==1 && f.color==3) image=texture2d.getScaledInstance(a, b, c); //Zwei
-				else if(f.value==1 && f.color==0) image=texture3a.getScaledInstance(a, b, c); //Drei
-				else if(f.value==2 && f.color==1) image=texture3b.getScaledInstance(a, b, c); //Drei
-				else if(f.value==2 && f.color==2) image=texture3c.getScaledInstance(a, b, c); //Drei
-				else if(f.value==2 && f.color==3) image=texture3d.getScaledInstance(a, b, c); //Drei
-				else if(f.value==3 && f.color==0) image=texture4a.getScaledInstance(a, b, c); //Vier
-				else if(f.value==3 && f.color==1) image=texture4b.getScaledInstance(a, b, c); //Vier
-				else if(f.value==3 && f.color==2) image=texture4c.getScaledInstance(a, b, c); //Vier
-				else if(f.value==3 && f.color==3) image=texture4d.getScaledInstance(a, b, c); //Vier
-				else if(f.value==4 && f.color==0) image=texture5a.getScaledInstance(a, b, c); //Fuenf
-				else if(f.value==4 && f.color==1) image=texture5b.getScaledInstance(a, b, c); //Fuenf
-				else if(f.value==4 && f.color==2) image=texture5c.getScaledInstance(a, b, c); //Fuenf
-				else if(f.value==4 && f.color==3) image=texture5d.getScaledInstance(a, b, c); //Fuenf
-				else if(f.value==5 && f.color==0) image=texture6a.getScaledInstance(a, b, c); //Sechs
-				else if(f.value==5 && f.color==1) image=texture6b.getScaledInstance(a, b, c); //Sechs
-				else if(f.value==5 && f.color==2) image=texture6c.getScaledInstance(a, b, c); //Sechs
-				else if(f.value==5 && f.color==3) image=texture6d.getScaledInstance(a, b, c); //Sechs
-				else if(f.value==6 && f.color==0) image=texture7a.getScaledInstance(a, b, c); //Sieben
-				else if(f.value==6 && f.color==1) image=texture7b.getScaledInstance(a, b, c); //Sieben
-				else if(f.value==6 && f.color==2) image=texture7c.getScaledInstance(a, b, c); //Sieben
-				else if(f.value==6 && f.color==3) image=texture7d.getScaledInstance(a, b, c); //Sieben
-				else if(f.value==7 && f.color==0) image=texture8a.getScaledInstance(a, b, c); //Acht
-				else if(f.value==7 && f.color==1) image=texture8b.getScaledInstance(a, b, c); //Acht
-				else if(f.value==7 && f.color==2) image=texture8c.getScaledInstance(a, b, c); //Acht
-				else if(f.value==7 && f.color==3) image=texture8d.getScaledInstance(a, b, c); //Acht
-				else if(f.value==8 && f.color==0) image=texture9a.getScaledInstance(a, b, c); //Neun
-				else if(f.value==8 && f.color==1) image=texture9b.getScaledInstance(a, b, c); //Neun
-				else if(f.value==8 && f.color==2) image=texture9c.getScaledInstance(a, b, c); //Neun
-				else if(f.value==8 && f.color==3) image=texture9d.getScaledInstance(a, b, c); //Neun
-				else if(f.value==9 && f.color==0) image=texture10a.getScaledInstance(a, b,c); //Zehn
-				else if(f.value==9 && f.color==1) image=texture10b.getScaledInstance(a, b, c); //Zehn
-				else if(f.value==9 && f.color==2) image=texture10c.getScaledInstance(a, b, c); //Zehn
-				else if(f.value==9 && f.color==3) image=texture10d.getScaledInstance(a, b, c); //Zehn
-				else if(f.value==10 && f.color==0) image=texture11a.getScaledInstance(a, b,c); //Bube
-				else if(f.value==10 && f.color==1) image=texture11b.getScaledInstance(a, b, c); //Bube
-				else if(f.value==10 && f.color==2) image=texture11c.getScaledInstance(a, b, c); //Bube
-				else if(f.value==10 && f.color==3) image=texture11d.getScaledInstance(a, b, c); //Bube
-				else if(f.value==11 && f.color==0) image=texture12a.getScaledInstance(a, b, c); //Dame
-				else if(f.value==11 && f.color==1) image=texture12b.getScaledInstance(a, b, c); //Dame
-				else if(f.value==11 && f.color==2) image=texture12c.getScaledInstance(a, b, c); //Dame
-				else if(f.value==11 && f.color==3) image=texture12d.getScaledInstance(a, b, c); //Dame
-				else if(f.value==12 && f.color==0) image=texture13a.getScaledInstance(a, b, c); //Koenig
-				else if(f.value==12 && f.color==1) image=texture13b.getScaledInstance(a, b, c); //Koenig
-				else if(f.value==12 && f.color==2) image=texture13c.getScaledInstance(a, b, c); //Koenig
-				else if(f.value==12 && f.color==3) image=texture13d.getScaledInstance(a, b, c); //Koenig
-		}
+			this.graphicObjects =graphicObjects;
+					}
 
 		protected void paintComponent(Graphics g) {
-			g.drawImage(image, f.x, f.y, this);
+			for(Figure f: graphicObjects){
+			if(f.type==2){
+			if(f.value==0 && f.color==0) g.drawImage(texture1a.getScaledInstance(a, b, c),f.x,f.y,this); //Ass
+			else if(f.value==0 && f.color==1) g.drawImage(texture1b.getScaledInstance(a, b, c),f.x,f.y,this); //Ass
+			else if(f.value==0 && f.color==2) g.drawImage(texture1c.getScaledInstance(a, b, c),f.x,f.y,this); //Ass
+			else if(f.value==0 && f.color==3) g.drawImage(texture1d.getScaledInstance(a, b, c),f.x,f.y,this); //Ass
+			else if(f.value==1 && f.color==0) g.drawImage(texture2a.getScaledInstance(a, b, c),f.x,f.y,this);//Zwei
+			else if(f.value==1 && f.color==1) g.drawImage(texture2b.getScaledInstance(a, b, c),f.x,f.y,this); //Zwei
+			else if(f.value==1 && f.color==2) g.drawImage(texture2c.getScaledInstance(a, b, c),f.x,f.y,this); //Zwei
+			else if(f.value==1 && f.color==3) g.drawImage(texture2d.getScaledInstance(a, b, c),f.x,f.y,this); //Zwei
+			else if(f.value==1 && f.color==0) g.drawImage(texture3a.getScaledInstance(a, b, c),f.x,f.y,this); //Drei
+			else if(f.value==2 && f.color==1) g.drawImage(texture3b.getScaledInstance(a, b, c),f.x,f.y,this); //Drei
+			else if(f.value==2 && f.color==2) g.drawImage(texture3c.getScaledInstance(a, b, c),f.x,f.y,this); //Drei
+			else if(f.value==2 && f.color==3) g.drawImage(texture3d.getScaledInstance(a, b, c),f.x,f.y,this); //Drei
+			else if(f.value==3 && f.color==0) g.drawImage(texture4a.getScaledInstance(a, b, c),f.x,f.y,this); //Vier
+			else if(f.value==3 && f.color==1) g.drawImage(texture4b.getScaledInstance(a, b, c),f.x,f.y,this); //Vier
+			else if(f.value==3 && f.color==2) g.drawImage(texture4c.getScaledInstance(a, b, c),f.x,f.y,this); //Vier
+			else if(f.value==3 && f.color==3) g.drawImage(texture4d.getScaledInstance(a, b, c),f.x,f.y,this); //Vier
+			else if(f.value==4 && f.color==0) g.drawImage(texture5a.getScaledInstance(a, b, c),f.x,f.y,this); //Fuenf
+			else if(f.value==4 && f.color==1) g.drawImage(texture5b.getScaledInstance(a, b, c),f.x,f.y,this); //Fuenf
+			else if(f.value==4 && f.color==2) g.drawImage(texture5c.getScaledInstance(a, b, c),f.x,f.y,this); //Fuenf
+			else if(f.value==4 && f.color==3) g.drawImage(texture5d.getScaledInstance(a, b, c),f.x,f.y,this); //Fuenf
+			else if(f.value==5 && f.color==0) g.drawImage(texture6a.getScaledInstance(a, b, c),f.x,f.y,this); //Sechs
+			else if(f.value==5 && f.color==1) g.drawImage(texture6b.getScaledInstance(a, b, c),f.x,f.y,this); //Sechs
+			else if(f.value==5 && f.color==2) g.drawImage(texture6c.getScaledInstance(a, b, c),f.x,f.y,this); //Sechs
+			else if(f.value==5 && f.color==3) g.drawImage(texture6d.getScaledInstance(a, b, c),f.x,f.y,this); //Sechs
+			else if(f.value==6 && f.color==0) g.drawImage(texture7a.getScaledInstance(a, b, c),f.x,f.y,this); //Sieben
+			else if(f.value==6 && f.color==1) g.drawImage(texture7b.getScaledInstance(a, b, c),f.x,f.y,this); //Sieben
+			else if(f.value==6 && f.color==2) g.drawImage(texture7c.getScaledInstance(a, b, c),f.x,f.y,this); //Sieben
+			else if(f.value==6 && f.color==3) g.drawImage(texture7d.getScaledInstance(a, b, c),f.x,f.y,this); //Sieben
+			else if(f.value==7 && f.color==0) g.drawImage(texture8a.getScaledInstance(a, b, c),f.x,f.y,this); //Acht
+			else if(f.value==7 && f.color==1) g.drawImage(texture8b.getScaledInstance(a, b, c),f.x,f.y,this); //Acht
+			else if(f.value==7 && f.color==2) g.drawImage(texture8c.getScaledInstance(a, b, c),f.x,f.y,this); //Acht
+			else if(f.value==7 && f.color==3) g.drawImage(texture8d.getScaledInstance(a, b, c),f.x,f.y,this); //Acht
+			else if(f.value==8 && f.color==0) g.drawImage(texture9a.getScaledInstance(a, b, c),f.x,f.y,this); //Neun
+			else if(f.value==8 && f.color==1) g.drawImage(texture9b.getScaledInstance(a, b, c),f.x,f.y,this); //Neun
+			else if(f.value==8 && f.color==2) g.drawImage(texture9c.getScaledInstance(a, b, c),f.x,f.y,this); //Neun
+			else if(f.value==8 && f.color==3) g.drawImage(texture9d.getScaledInstance(a, b, c),f.x,f.y,this); //Neun
+			else if(f.value==9 && f.color==0) g.drawImage(texture10a.getScaledInstance(a, b, c),f.x,f.y,this); //Zehn
+			else if(f.value==9 && f.color==1) g.drawImage(texture10b.getScaledInstance(a, b, c),f.x,f.y,this); //Zehn
+			else if(f.value==9 && f.color==2) g.drawImage(texture10c.getScaledInstance(a, b, c),f.x,f.y,this); //Zehn
+			else if(f.value==9 && f.color==3) g.drawImage(texture10d.getScaledInstance(a, b, c),f.x,f.y,this); //Zehn
+			else if(f.value==10 && f.color==0) g.drawImage(texture11a.getScaledInstance(a, b, c),f.x,f.y,this); //Bube
+			else if(f.value==10 && f.color==1) g.drawImage(texture11b.getScaledInstance(a, b, c),f.x,f.y,this); //Bube
+			else if(f.value==10 && f.color==2) g.drawImage(texture11c.getScaledInstance(a, b, c),f.x,f.y,this); //Bube
+			else if(f.value==10 && f.color==3) g.drawImage(texture11d.getScaledInstance(a, b, c),f.x,f.y,this); //Bube
+			else if(f.value==11 && f.color==0) g.drawImage(texture12a.getScaledInstance(a, b, c),f.x,f.y,this); //Dame
+			else if(f.value==11 && f.color==1) g.drawImage(texture12b.getScaledInstance(a, b, c),f.x,f.y,this); //Dame
+			else if(f.value==11 && f.color==2) g.drawImage(texture12c.getScaledInstance(a, b, c),f.x,f.y,this); //Dame
+			else if(f.value==11 && f.color==3) g.drawImage(texture12d.getScaledInstance(a, b, c),f.x,f.y,this); //Dame
+			else if(f.value==12 && f.color==0) g.drawImage(texture13a.getScaledInstance(a, b, c),f.x,f.y,this); //Koenig
+			else if(f.value==12 && f.color==1) g.drawImage(texture13b.getScaledInstance(a, b, c),f.x,f.y,this); //Koenig
+			else if(f.value==12 && f.color==2) g.drawImage(texture13c.getScaledInstance(a, b, c),f.x,f.y,this); //Koenig
+			else if(f.value==12 && f.color==3) g.drawImage(texture13d.getScaledInstance(a, b, c),f.x,f.y,this); //Koenig
 		}
+		}
+	 }
 	
 	}
 	
