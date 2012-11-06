@@ -9,7 +9,7 @@ package KnowledgeSystem;
 public class Player extends Participant{
 	
 	protected int credit;
-	private double Bet;
+	private int Bet;
 	public int gamesPlayed;
 	protected int countCards;
 	public int gamesWon;
@@ -48,7 +48,7 @@ public class Player extends Participant{
 		return credit;
 	}
 	
-	public double getBet() {
+	public int getBet() {
 		return Bet;
 	}
 	
@@ -58,6 +58,10 @@ public class Player extends Participant{
 		if (inGame = false) {
 			inGame = true;
 		}
+	}
+	
+	public int getBetResult() {
+		return Bet;
 	}
 	
 	public void newGame() {
