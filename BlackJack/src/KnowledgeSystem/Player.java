@@ -61,10 +61,14 @@ public class Player extends Participant{
 	}
 	
 	public void newGame() {
+		System.out.println("new Game");
 		Bet = 0;
 		cardScore[0] = 0;
 		cardScore[1] = 0;
 		inGame = false;
 		resetCountCards();
+//		for (int i=0; i<2;i++) {
+//			card[i]=0;
+//		}
 	}
 }
