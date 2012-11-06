@@ -52,6 +52,7 @@ public class Bank extends Participant{
 	public void newGame() {
 		cardScore[0] = 0;
 		cardScore[1] = 0;
+		resetCountCards();
 	}
 	
 }

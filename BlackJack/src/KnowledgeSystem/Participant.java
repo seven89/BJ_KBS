@@ -23,13 +23,14 @@ public class Participant {
 	public Participant ()
 	{
 		cardScore = new int[2];
+		card= new int[3];
+		card[1]=12;
 		cardScore[0] = 0;	//Low Stack (Ass=1)
 		cardScore[1] = 0;	//High Stack (Ass=11)
 		countCards=0;
 		inGame=true;
 		helpAss=0;
 		secondCardScore=false;
-		
 	}
 	
 	
@@ -90,11 +91,15 @@ public class Participant {
 	
 	// return one high score (higher)
 	public int getHighCardScore() {
-		if (cardScore[0]>cardScore[1]) {
+		if (cardScore[0]>=cardScore[1]) {
 			if (cardScore[0]<=21) { 
 				return cardScore[0]; }
 			else return cardScore[1];
-		} else return cardScore[1];
+		}		
+		else 
+			if (cardScore[1]>21)
+				return cardScore[0];
+			else return cardScore[1];
 	}
 	// TODO Weitermachen
 	
@@ -115,7 +120,7 @@ public class Participant {
 //	}
 	
 	public int getCurrentCard() {
-		return card[2];
+		return card[1];
 	}
 	
 	//getters & setters
@@ -125,6 +130,10 @@ public class Participant {
 
 	public void setInGame(boolean inGame) {
 		this.inGame = inGame;
+	}
+	
+	public void resetCountCards() {
+		countCards=0;
 	}
 	
 
