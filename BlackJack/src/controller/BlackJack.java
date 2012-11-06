@@ -23,7 +23,7 @@ public class BlackJack {
 		debug =1; // 1 bedeutet, dass alle syso ausgegeben werden
 		//startMoney=100;
 		gc = new GraphicsController(); //create gui
-		gc.setVisible(false);
+		gc.setVisible(true);
 		agentHelp=true;
 		agentSplitHelp=false;
 		agentSplitCardHelp=true;
@@ -155,7 +155,7 @@ public class BlackJack {
 //							System.out.println("Card Step A           "+card[1]+" "+agent.getCurrentCard());
 
 							
-							gc.newPlayerCard(card[0], card[1]);
+							gc.newPlayerCard(card[0], card[1], agent.probability);
 							agent.updateProbability(card);
 //							System.out.println("Farbe " + (card[0]+1) + "Typ " + (card[1]+1) + "Score " + card[2]);
 						} 
@@ -167,7 +167,7 @@ public class BlackJack {
 							if(agentSplit.pullCard(bank.getCardScore())) {  
 								int[] card = CardDeck.getRandCard();
 								// TODO Marvin AgentSplitt zeichnen
-								gc.newPlayerCard(card[0], card[1]);
+								gc.newPlayerCard(card[0], card[1], agent.probability);
 								agentSplit.updateProbability(card);
 								
 								if (!(agentSplit.getHighCardScore()<21)) {

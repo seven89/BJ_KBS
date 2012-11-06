@@ -122,7 +122,7 @@ public class GraphicsController extends JFrame {
 	   
 public GraphicsController(){
 	 
-	 labels=new JLabel[13];
+	 labels=new JLabel[10];
 	 for(int i=0;i<labels.length;i++){
 		 labels[i]=null;
 	 }
@@ -375,11 +375,11 @@ public GraphicsController(){
 			int positionx = 0;
 			int positiony = 60;
 			
-			JLabel label = new JLabel("Wahrscheinlichkeiten:");
+			JLabel label = new JLabel("Wahrscheinlichkeiten (in Punkten):");
 			label.setFont(new Font("Serif", Font.PLAIN, 20));
 		    label.setForeground(Color.WHITE);
 		    this.add(label);
-		    this.setSize(230, positiony);
+		    this.setSize(300, positiony);
 		    this.setVisible(true);
 			
 			
@@ -393,27 +393,27 @@ public GraphicsController(){
 		    labels[7] = new JLabel("8 ist : ");
 		    labels[8] = new JLabel("9 ist : ");
 		    labels[9] = new JLabel("10 ist : ");
-		    labels[10] = new JLabel("Bube ist : ");
-		    labels[11] = new JLabel("Dame ist : ");
-		    labels[12] = new JLabel("König ist : ");
+
 		    
 		    for(JLabel l : labels){
 		    	l.setFont(new Font("Serif", Font.PLAIN, 20));
 			    l.setForeground(Color.WHITE);
 			    this.add(l);
-			    this.setSize(230, positiony);
 			    positiony+=30;
+			    this.setSize(230, positiony);
 			    this.setVisible(true);
 		    }
 		    
 		}
 	
-		private void changepercentage(){
+		private void changepercentage(float[] probabilities){
 			float w = 1.5f;
-			labels[0].setText("1 ist: "+ w + "%");
+			for(int i=0; i<labels.length; i++){
+				labels[i].setText((i+1) +" ist: "+ probabilities[i] + "%");
+			}
 		}
 	
-	public void newPlayerCard(int color, int value){
+	public void newPlayerCard(int color, int value, float[] probability){
 		 graphicObjects[cards].type=2;
 		 graphicObjects[cards].color=color;
 		 graphicObjects[cards].value=value;
@@ -421,7 +421,7 @@ public GraphicsController(){
 		 graphicObjects[cards].y=490;
 		 playercards++;
 		 cards++;
-		 changepercentage();
+		 changepercentage(probability);
 	}
 	
 	public void newBankCard(int color, int value){

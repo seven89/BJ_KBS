@@ -11,7 +11,7 @@ import data.Rules;
 
 public class Agent extends Player{
 
-	private float [] probability;
+	public float [] probability;
 	private int [] probCounter;
 	
 	float[] tempProb;
