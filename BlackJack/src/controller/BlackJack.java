@@ -126,8 +126,7 @@ public class BlackJack {
 							//p.setCard(card);
 
 							// splitting (teilen, spielmodus)
-							System.out.println("Card2 "+card[1]);
-							System.out.println("Card1 "+agent.getCurrentCard());
+							System.out.println("Card Step B           "+card[1]+" "+agent.getCurrentCard());
 //							if (agent.getCards()==1 && agent.getCurrentCard()==card[1] && agentSplit==null && modus==false) {
 //								System.out.println("Teilen? (spielmodus)");
 //								agentSplit = agent;
@@ -139,6 +138,7 @@ public class BlackJack {
 //								agent.setCard(card);
 //							}
 							agent.setCard(card);
+							System.out.println("Card Step A           "+card[1]+" "+agent.getCurrentCard());
 						
 //							// doubling down (doppeln, spielmodus)
 //							if (agent.getCards()==2 && (agent.getCardScore()[0]>=9 && agent.getCardScore()[0]<=11) || (agent.getCardScore()[1]>=9 && agent.getCardScore()[1]<=11) && modus==false) {
@@ -158,22 +158,22 @@ public class BlackJack {
 							agentHelp=false;
 						}
 						// for AgentSplit
-						if (agentSplit!=null) {
-							if(agentSplit.pullCard(bank.getCardScore())) {  
-								int[] card = CardDeck.getRandCard();
-								// TODO Marvin AgentSplitt zeichnen
-								gc.newPlayerCard(card[0], card[1]);
-								agentSplit.updateProbability(card);
-								
-								if (!(agentSplit.getHighCardScore()<21)) {
-									agentSplitCardHelp=false;
-								}
-								agentSplitHelp=true;
-							}
-							else {
-								agentSplitHelp=false;
-							}
-						}
+//						if (agentSplit!=null) {
+//							if(agentSplit.pullCard(bank.getCardScore())) {  
+//								int[] card = CardDeck.getRandCard();
+//								// TODO Marvin AgentSplitt zeichnen
+//								gc.newPlayerCard(card[0], card[1]);
+//								agentSplit.updateProbability(card);
+//								
+//								if (!(agentSplit.getHighCardScore()<21)) {
+//									agentSplitCardHelp=false;
+//								}
+//								agentSplitHelp=true;
+//							}
+//							else {
+//								agentSplitHelp=false;
+//							}
+//						}
 					}
 					//now banks turn
 					else {
