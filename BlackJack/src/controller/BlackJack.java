@@ -211,7 +211,6 @@ public class BlackJack {
 			System.exit(0);
 	  }
 	  
-	  
 	  private static void printResult(){
 		  
 		  if (debug==1) {
@@ -284,7 +283,6 @@ public class BlackJack {
 			Players = p;
 		}
 		/**
-		 * only for test
+		 * only for test test
 		 */
-		
 }
