@@ -12,7 +12,7 @@ package KnowledgeSystem;
 public class Participant {
 	
 	//private CardSet [] cards;
-	protected int[] card;
+	protected int cardtmp;
 	protected int countCards;
 	protected int[] cardScore;
 	protected boolean inGame;
@@ -23,7 +23,6 @@ public class Participant {
 	public Participant ()
 	{
 		cardScore = new int[2];
-		card= new int[3];
 		cardScore[0] = 0;	//Low Stack (Ass=1)
 		cardScore[1] = 0;	//High Stack (Ass=11)
 		countCards=0;
@@ -40,38 +39,33 @@ public class Participant {
 		 */
 	}
 	
-	public void setCard(int[] pC) {
-		System.out.println("oooooooooooooo");
+	public void setCard(int c0, int c1, int c2) {
 		/**
 		 * Participant pulls another card
 		 */
 		
-//		if (pC[2] == card[2]) {
-//			sameCard();
-//		}
-		
 		// if Ass (eleven or one score)
-		if (pC[2]==11 && helpAss==0) {
+		if (c2==11 && helpAss==0) {
 			cardScore[0] += 1;
 			cardScore[1] += 11;
 			helpAss++;
 			secondCardScore=true;
 		}
-		else if (pC[2]==11 && helpAss==1) {
+		else if (c2==11 && helpAss==1) {
 			cardScore[0] += 11;
 			cardScore[1] += 1;
 			helpAss++;
 		}
-		else if (pC[2]==11 && helpAss>1) {
+		else if (c2==11 && helpAss>1) {
 			cardScore[0] += 1;
 			cardScore[1] += 1;
 			helpAss++;
 		}
 		else {
-			cardScore[0] += pC[2];
-			cardScore[1] += pC[2];
+			cardScore[0] += c2;
+			cardScore[1] += c2;
 		}
-		card = pC;
+		cardtmp = c1;
 		countCards++;
 
 		
@@ -102,9 +96,8 @@ public class Participant {
 				return cardScore[0];
 			else return cardScore[1];
 	}
-	// TODO Weitermachen
 	
-	public int getCards() {
+	public int getCountCards() {
 		return countCards;
 	}
 	
@@ -115,13 +108,9 @@ public class Participant {
 	public boolean getSecondCardScore() {
 		return secondCardScore;
 	}
-	
-//	public boolean sameCard() {
-//		return true;
-//	}
-	
+
 	public int getCurrentCard() {
-		return card[1];
+		return cardtmp;
 	}
 	
 	//getters & setters
@@ -135,7 +124,6 @@ public class Participant {
 	
 	public void resetCountCards() {
 		countCards=0;
+		cardtmp=0;	
 	}
-	
-
 }
