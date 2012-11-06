@@ -191,6 +191,23 @@ public class BlackJack {
 						//new game
 						else{
 							printResult();
+							
+							String sGame = ("Aktuelles Spiel: "+Game);
+							String sKonto = ("Kontostand: "+agent.getCredit());
+							String sBet = ("Einsatz: "+agent.getBet());
+							String sBetResult = ("Bet Result: "+agent.getBetResult());
+							String sWon = ("You won "+ agent.gamesWon +"/"+ agent.gamesPlayed + " " + (((float)agent.gamesWon/(float)agent.gamesPlayed)*100.0) + "% of games!");
+							String sLost = ("You lost "+ agent.gamesLost +"/"+ agent.gamesPlayed + " " + (((float)agent.gamesLost/(float)agent.gamesPlayed)*100.0) + "% of games!");
+							String sDrawn = ("You had a draw in "+ agent.gamesDraw +"/"+ agent.gamesPlayed + " " + (((float)agent.gamesDraw/(float)agent.gamesPlayed)*100.0) + "% of games!");
+							
+							//gc.printStatistic(sGame, sKonto, sBet, sBetResult, sWon, sLost, sDrawn);
+							
+							
+//							printStatDecision(); // erstmal weglasen
+//							printDecision();
+							
+							// 0 =Links, 1= rechts
+							
 							newGame();
 							newgame=true;
 							agent.gamesPlayed++;
