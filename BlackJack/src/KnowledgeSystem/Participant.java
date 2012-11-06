@@ -41,6 +41,7 @@ public class Participant {
 	}
 	
 	public void setCard(int[] pC) {
+		System.out.println("oooooooooooooo");
 		/**
 		 * Participant pulls another card
 		 */
