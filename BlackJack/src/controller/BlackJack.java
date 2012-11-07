@@ -183,7 +183,7 @@ public class BlackJack {
 					}
 					//now banks turn
 					else {
-						if(bank.getCardScore()[0]<17 || bank.getCardScore()[1]<17 && (agent.getHighCardScore()<21) && agentSplitCardHelp){
+						if(bank.getHighCardScore()<17 && (agent.getHighCardScore()<21) && agentSplitCardHelp){
 							int[] card = CardDeck.getRandCard();
 							bank.setCard(card[0], card[1], card[2]);
 							gc.newBankCard(card[0], card[1]);
@@ -217,8 +217,9 @@ public class BlackJack {
 							
 						}
 					}
-					gc.repaint();
+					
 					}
+				gc.repaint();
 				step++;
 				}
 			}
@@ -261,6 +262,7 @@ public class BlackJack {
 		  else if (agent.getHighCardScore()==21 && agent.getCountCards()==2) {
 				System.out.println("> > > > > > > > > > BlackJack! < < < < < < < < < <");
 				agent.setCredit(bet+bet*1.5);
+				agent.gamesWon++;
 				gc.printDecision("BlackJack!");
 			}
 			else if(agent.getHighCardScore()>21){

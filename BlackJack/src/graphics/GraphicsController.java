@@ -44,59 +44,59 @@ public class GraphicsController extends JFrame {
 	/**
 	 * @param args
 	 */
-	private static BufferedImage texture1a;
-	private static BufferedImage texture1b;
-	private static BufferedImage texture1c;
-	private static BufferedImage texture1d;
-	private static BufferedImage texture2a;
-	private static BufferedImage texture2b;
-	private static BufferedImage texture2c;
-	private static BufferedImage texture2d;
-	private static BufferedImage texture3a;
-	private static BufferedImage texture3b;
-	private static BufferedImage texture3c;
-	private static BufferedImage texture3d;
-	private static BufferedImage texture4a;
-	private static BufferedImage texture4b;
-	private static BufferedImage texture4c;
-	private static BufferedImage texture4d;
-	private static BufferedImage texture5a;
-	private static BufferedImage texture5b;
-	private static BufferedImage texture5c;
-	private static BufferedImage texture5d;
-	private static BufferedImage texture6a;
-	private static BufferedImage texture6b;
-	private static BufferedImage texture6c;
-	private static BufferedImage texture6d;
-	private static BufferedImage texture7a;
-	private static BufferedImage texture7b;
-	private static BufferedImage texture7c;
-	private static BufferedImage texture7d;
-	private static BufferedImage texture8a;
-	private static BufferedImage texture8b;
-	private static BufferedImage texture8c;
-	private static BufferedImage texture8d;
-	private static BufferedImage texture9a;
-	private static BufferedImage texture9b;
-	private static BufferedImage texture9c;
-	private static BufferedImage texture9d;
-	private static BufferedImage texture10a;
-	private static BufferedImage texture10b;
-	private static BufferedImage texture10c;
-	private static BufferedImage texture10d;
-	private static BufferedImage texture11a;
-	private static BufferedImage texture11b;
-	private static BufferedImage texture11c;
-	private static BufferedImage texture11d;
-	private static BufferedImage texture12a;
-	private static BufferedImage texture12b;
-	private static BufferedImage texture12c;
-	private static BufferedImage texture12d;
-	private static BufferedImage texture13a;
-	private static BufferedImage texture13b;
-	private static BufferedImage texture13c;
-	private static BufferedImage texture13d;
-	private static BufferedImage textureb;
+	private static Image texture1a;
+	private static Image texture1b;
+	private static Image texture1c;
+	private static Image texture1d;
+	private static Image texture2a;
+	private static Image texture2b;
+	private static Image texture2c;
+	private static Image texture2d;
+	private static Image texture3a;
+	private static Image texture3b;
+	private static Image texture3c;
+	private static Image texture3d;
+	private static Image texture4a;
+	private static Image texture4b;
+	private static Image texture4c;
+	private static Image texture4d;
+	private static Image texture5a;
+	private static Image texture5b;
+	private static Image texture5c;
+	private static Image texture5d;
+	private static Image texture6a;
+	private static Image texture6b;
+	private static Image texture6c;
+	private static Image texture6d;
+	private static Image texture7a;
+	private static Image texture7b;
+	private static Image texture7c;
+	private static Image texture7d;
+	private static Image texture8a;
+	private static Image texture8b;
+	private static Image texture8c;
+	private static Image texture8d;
+	private static Image texture9a;
+	private static Image texture9b;
+	private static Image texture9c;
+	private static Image texture9d;
+	private static Image texture10a;
+	private static Image texture10b;
+	private static Image texture10c;
+	private static Image texture10d;
+	private static Image texture11a;
+	private static Image texture11b;
+	private static Image texture11c;
+	private static Image texture11d;
+	private static Image texture12a;
+	private static Image texture12b;
+	private static Image texture12c;
+	private static Image texture12d;
+	private static Image texture13a;
+	private static Image texture13b;
+	private static Image texture13c;
+	private static Image texture13d;
+	private static Image textureb;
 
 	
 	class Figure {
@@ -188,11 +188,13 @@ public GraphicsController(){
 	backgroundPanel.add(closeButton);
 	backgroundPanel.add(pauseButton);
 	getContentPane().add(backgroundPanel);
+	
 	}
 	   
-	
+	boolean firstrun=true;
 	public void paint(Graphics g) {
 		super.paint(g);
+			
 				cardPanel=new CardPanel(this, graphicObjects);
 				getContentPane().add(cardPanel);
 
