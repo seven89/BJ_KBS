@@ -575,6 +575,37 @@ public class Agent extends Player{
 		return true;
 	}
 	
+	public boolean insureBoolean(int agentScore) {
+		boolean back=false;
+		return back;
+	}
+	
+	public boolean doublingBoolean(int aScore, int bScore) {
+			
+        switch (bScore) {
+        	case 2: {
+        		if (aScore==9) return false;
+        		else return true;
+        	}	
+            case 3:  return true;
+            case 4:  return true;
+            case 5:  return true;
+            case 6:  return true;
+            case 7: {
+        		if (aScore==9) return false;
+        		else return true;
+        	}	
+            default: return false;
+        }
+	}
+		
+	
+	public boolean splittingBoolean(int aCard, int bCard) {
+		return true;
+	}
+	
+	
+	
 	//getters & setters
 	public float[] getProbability() {
 		return probability;

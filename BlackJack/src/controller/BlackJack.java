@@ -26,7 +26,7 @@ public class BlackJack {
 		gc.setVisible(true);
 		agentHelp=true;
 		agentSplitHelp=false;
-		agentSplitCardHelp=true;
+		agentSplitCardHelp=true;   
 		Game=1;
 		
 		//bet=10;
@@ -110,12 +110,6 @@ public class BlackJack {
 					gc.newBankCard(initialcard[0], initialcard[1]);
 					newgame=false;
 					
-					// Insurance (versichern, spielmodus)
-					if (bank.getCountCards()==1 && bank.getCardScore()[1]==11) {
-						System.out.println("oooooooooooooooooooooooooooooooooooo Versichern? (Spielmodus)");
-						agent.insure();
-						insurance=true;
-					}
 				}
 				
 				//reset turn + player handling
@@ -126,23 +120,21 @@ public class BlackJack {
 						if(agent.pullCard(bank.getCardScore())){
 							int[] card = CardDeck.getRandCard();
 							//p.setCard(card);
-
-//							// doubling down (doppeln, spielmodus)
-							if (agent.getCountCards()==2 && (agent.getHighCardScore()>8 && agent.getHighCardScore()<11) && modus==false) {
-								System.out.println("oooooooooooooooooooooooooooooooooooo Doppeln? (Spielmodus)");
-								//agent.doubling();
-								agent.doubling();
-								card = CardDeck.getRandCard();
-								agent.setCard(card[0], card[1], card[2]);
-								//agent.setDoubled(true);
-								modus=true;
+							
+							// Insurance (versichern, spielmodus)
+							if (bank.getCountCards()==1 && bank.getCardScore()[1]==11) {
+								System.out.println("oooooooooooooooooooooooooooooooooooo Versichern? (Spielmodus)");
+								
+								if (agent.insureBoolean(card[2])) {
+									agent.insure();
+									insurance=true;
+								}
 							}
 							
 							// splitting (teilen, spielmodus)
 //							System.out.println("Card Step B           "+card[1]+" "+agent.getCurrentCard());
 							if (agent.getCountCards()==1 && agent.getCurrentCard()==card[1] && agentSplit==null && modus==false) {
 //								System.out.println("Teilen? (spielmodus)");
-								//agentSplit = agent;
 								agentSplit=agent;
 								agentSplit.setCard(card[0], card[1], card[2]);
 								agentSplitHelp=true;
@@ -150,6 +142,18 @@ public class BlackJack {
 							}
 							else {
 								agent.setCard(card[0], card[1], card[2]);
+							}
+							
+							// doubling down (doppeln, spielmodus)
+							if (agent.getCountCards()==2 && (agent.getHighCardScore()>8 && agent.getHighCardScore()<11) && modus==false) {
+								System.out.println("oooooooooooooooooooooooooooooooooooo Doppeln? (Spielmodus)");		
+								
+								if (agent.doublingBoolean(agent.getHighCardScore(),bank.getHighCardScore())) {
+									agent.doubling();
+									card = CardDeck.getRandCard();
+									agent.setCard(card[0], card[1], card[2]);
+									modus=true;
+								}
 							}
 							
 //							System.out.println("Card Step A           "+card[1]+" "+agent.getCurrentCard());
