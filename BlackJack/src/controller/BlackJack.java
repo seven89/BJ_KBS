@@ -158,6 +158,7 @@ public class BlackJack {
 							gc.newPlayerCard(card[0], card[1], agent.probability);
 							agent.updateProbability(card);
 //							System.out.println("Farbe " + (card[0]+1) + "Typ " + (card[1]+1) + "Score " + card[2]);
+							gc.printDecision("Bank->" + bank.getHighCardScore() + "|"+ agent.getHighCardScore() + "<-You" );
 						} 
 						else {
 							agentHelp=false;
@@ -187,22 +188,12 @@ public class BlackJack {
 							bank.setCard(card[0], card[1], card[2]);
 							gc.newBankCard(card[0], card[1]);
 							agent.updateProbability(card);
+							gc.printDecision("W: Bank->" + bank.getHighCardScore() + "|"+ agent.getHighCardScore() + "<-You" );
+							
 						}
 						//new game
 						else{
 							printResult();
-							
-							String sGame = ("Aktuelles Spiel: "+Game);
-							String sKonto = ("Kontostand: "+agent.getCredit());
-							String sBet = ("Einsatz: "+agent.getBet());
-							String sBetResult = ("Bet Result: "+agent.getBetResult());
-							String sWon = ("You won "+ agent.gamesWon +"/"+ agent.gamesPlayed + " " + (((float)agent.gamesWon/(float)agent.gamesPlayed)*100.0) + "% of games!");
-							String sLost = ("You lost "+ agent.gamesLost +"/"+ agent.gamesPlayed + " " + (((float)agent.gamesLost/(float)agent.gamesPlayed)*100.0) + "% of games!");
-							String sDrawn = ("You had a draw in "+ agent.gamesDraw +"/"+ agent.gamesPlayed + " " + (((float)agent.gamesDraw/(float)agent.gamesPlayed)*100.0) + "% of games!");
-							
-							gc.printStatistic(sGame, sKonto, sBet, sBetResult, sWon, sLost, sDrawn);
-							
-							
 //							printStatDecision(); // erstmal weglasen
 //							printDecision();
 							
@@ -213,7 +204,18 @@ public class BlackJack {
 							agent.gamesPlayed++;
 							Game++;
 							//System.out.println("GAME " + Game);
-						}	
+							
+							String sGame = ("Aktuelles Spiel: "+Game);
+							String sKonto = ("Kontostand: "+agent.getCredit());
+							String sBet = ("Einsatz: "+agent.getBet());
+							String sBetResult = ("Bet Result: "+agent.getBetResult());
+							String sWon = ("Wins: "+ agent.gamesWon +"/"+ agent.gamesPlayed + " " + Math.round( (((float)agent.gamesWon/(float)agent.gamesPlayed)*100.0)) + "%");
+							String sLost = ("Lost: "+ agent.gamesLost +"/"+ agent.gamesPlayed + " " + Math.round( (((float)agent.gamesLost/(float)agent.gamesPlayed)*100.0)) + "%");
+							String sDrawn = ("You had a draw in "+ agent.gamesDraw +"/"+ agent.gamesPlayed + " " + Math.round((((float)agent.gamesDraw/(float)agent.gamesPlayed)*100.0)) + "%");
+							
+							gc.printStatistic(sGame, sKonto, sBet, sBetResult, sWon, sLost, sDrawn);
+							
+						}
 					}
 					gc.repaint();
 					}
@@ -253,36 +255,43 @@ public class BlackJack {
 			  if (bank.getCountCards()==2 && bank.getHighCardScore()==21) {
 				  agent.setCredit(agent.getBet());
 				  agent.gamesWon++;
+				  gc.printDecision("Gewonnen, versichert!");
 			  }
 		  }
 		  else if (agent.getHighCardScore()==21 && agent.getCountCards()==2) {
 				System.out.println("> > > > > > > > > > BlackJack! < < < < < < < < < <");
 				agent.setCredit(bet+bet*1.5);
+				gc.printDecision("BlackJack!");
 			}
 			else if(agent.getHighCardScore()>21){
 				agent.setInGame(false);
 				agent.setCredit(-bet);
 				agent.gamesLost++;
+				gc.printDecision("Verloren >21");
 			}
 			else if (bank.getHighCardScore()>21) {
 					//System.out.println("Player win!");
 					agent.setCredit(bet*2);
 					agent.gamesWon++;
+					gc.printDecision("Sieg bank>21");
 			}
 			else if (bank.getHighCardScore()>agent.getHighCardScore()) {
 						//System.out.println("Bank win!");
 						agent.setCredit(-bet);
 						agent.gamesLost++;
+						gc.printDecision("L: Bank->" + bank.getHighCardScore() + "|"+ agent.getHighCardScore() + "<-You" );
 			}
 			else if (bank.getHighCardScore() == agent.getHighCardScore()) {
 						System.out.println("drawn");
 						//agent.setCredit(0);
 						agent.gamesDraw++;
+						gc.printDecision("Draw!");
 			}
 			// else: bank < player < 21
 			else{
 				agent.setCredit(bet);
 				agent.gamesWon++;
+				gc.printDecision("W: Bank->" + bank.getHighCardScore() + "|"+ agent.getHighCardScore() + "<-You" );
 			}
 			
 			if (debug==1) {

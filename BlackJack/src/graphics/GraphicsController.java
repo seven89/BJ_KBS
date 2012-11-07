@@ -146,7 +146,6 @@ public GraphicsController(){
 		 panels[i]=null;
 	 }
 	 
-	createAndShowWindow(); 
 	showpercentage();
 	
 	
@@ -175,8 +174,14 @@ public GraphicsController(){
 	
 	pauseButton.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			if(GraphicsController.this.pause)GraphicsController.this.pause=false;
-			else{GraphicsController.this.pause=true;}
+			if(GraphicsController.this.pause){
+				GraphicsController.this.pause=false;
+				printDecision("Unpaused");
+			}
+			else{
+				GraphicsController.this.pause=true;
+				printDecision("paused");
+				}
 		}
 	});
 	
@@ -191,8 +196,7 @@ public GraphicsController(){
 				cardPanel=new CardPanel(this, graphicObjects);
 				getContentPane().add(cardPanel);
 
-		this.setVisible(true);
-		decision.setLocation(460, 80);
+		decision.setLocation(460, 300);
 		//labels
 		 for(JLabel l : stats){
 			    positiony+=30;
@@ -206,7 +210,7 @@ public GraphicsController(){
 		    }
 		    positiony=0;
 		    positionx=0;
-	
+			this.setVisible(true);
 	}
 	
 	public static void initGraphics(){
@@ -377,22 +381,6 @@ public GraphicsController(){
 	
 	}
 	
-		private JFrame frame;
-	   
-	    private void createAndShowWindow() {
-	        float w1=(float) 1.02;
-	    	JTextField text = new JTextField("Whatever");
-	        text.setText("Wahrscheinlichkeit für 1: "+ w1);
-	        JWindow win = new JWindow(frame);
-	        win.setLayout(new GridLayout(0, 1));
-	        getContentPane().add(text);
-	        text.setLocation(100, 100);
-	        text.setVisible(true);
-	        win.pack();
-	        win.setLocation(0, 0);
-	        win.setVisible(true);
-	    }
-	    
 	    JLabel label1;
 
 		private void showpercentage(){
@@ -408,7 +396,7 @@ public GraphicsController(){
 		    decision.setFont(new Font("Serif", Font.PLAIN, 20));
 		    decision.setForeground(Color.WHITE);
 		    this.add(decision);
-		    this.setSize(300, 600);
+		    this.setSize(230, 230);
 		    this.setVisible(true);
 
 			stats[0] = new JLabel("Aktuelles Spiel: ");
@@ -479,6 +467,7 @@ public GraphicsController(){
 		 playercards++;
 		 cards++;
 		 changepercentage(probability);
+		 //printDecision("Neue Karte: " + playercards);
 	}
 	
 	public void newBankCard(int color, int value){
