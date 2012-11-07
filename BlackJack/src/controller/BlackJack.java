@@ -159,7 +159,7 @@ public class BlackJack {
 //							System.out.println("Card Step A           "+card[1]+" "+agent.getCurrentCard());
 
 							
-							gc.newPlayerCard(card[0], card[1], agent.probability);
+							gc.newPlayerCard(card[0], card[1], agent.probability, 0);
 							agent.updateProbability(card);
 //							System.out.println("Farbe " + (card[0]+1) + "Typ " + (card[1]+1) + "Score " + card[2]);
 							gc.printDecision("Bank-> " + bank.getHighCardScore() + " | "+ agent.getHighCardScore() + " <-You" );
@@ -172,7 +172,7 @@ public class BlackJack {
 							if(agentSplit.pullCard(bank.getCardScore())) {  
 								int[] card = CardDeck.getRandCard();
 								// TODO Marvin AgentSplitt zeichnen
-								gc.newPlayerCard(card[0], card[1], agent.probability);
+								gc.newPlayerCard(card[0], card[1], agent.probability, 1);
 								agentSplit.updateProbability(card);
 								
 								if (!(agentSplit.getHighCardScore()<21)) {
