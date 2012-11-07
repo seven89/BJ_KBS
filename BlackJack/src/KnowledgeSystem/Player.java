@@ -24,7 +24,6 @@ public class Player extends Participant{
 		gamesLost=0;
 		gamesDraw=0;
 		credit+=c;
-		
 	}
 	
 	public void splitt() {

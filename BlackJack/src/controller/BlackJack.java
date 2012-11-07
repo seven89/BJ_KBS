@@ -9,7 +9,7 @@ import KnowledgeSystem.Player;
 
 public class BlackJack {
 
-	static int Players, Game, bet, debug;
+	static int Players, Game, bet, debug, creditTmp, betResult;
 	int startMoney;
 	protected static GraphicsController gc;
 	protected static CardSet CardDeck;
@@ -100,7 +100,7 @@ public class BlackJack {
 			while(agent.getCredit()>0 && Game<=100){
 			
 				//refresh time
-				wait(1000);	// waits for 1000 ms
+				wait(10);	// waits for 1000 ms
 				if(!gc.pause){
 					
 				if(newgame){
@@ -122,7 +122,7 @@ public class BlackJack {
 				if(step==2) {
 					step=0;
 					//players turn?
-					if (agentHelp || agentSplitHelp) {
+					if ((agentHelp && agent.getHighCardScore()<22) || (!(agentSplitCardHelp) && agentSplit.getHighCardScore()<22)) {
 						if(agent.pullCard(bank.getCardScore())){
 							int[] card = CardDeck.getRandCard();
 							//p.setCard(card);
@@ -158,7 +158,7 @@ public class BlackJack {
 							gc.newPlayerCard(card[0], card[1], agent.probability);
 							agent.updateProbability(card);
 //							System.out.println("Farbe " + (card[0]+1) + "Typ " + (card[1]+1) + "Score " + card[2]);
-							gc.printDecision("Bank->" + bank.getHighCardScore() + "|"+ agent.getHighCardScore() + "<-You" );
+							gc.printDecision("Bank-> " + bank.getHighCardScore() + " | "+ agent.getHighCardScore() + " <-You" );
 						} 
 						else {
 							agentHelp=false;
@@ -193,7 +193,9 @@ public class BlackJack {
 						}
 						//new game
 						else{
+							creditTmp=agent.getCredit();
 							printResult();
+							betResult=agent.getCredit()-creditTmp;
 //							printStatDecision(); // erstmal weglasen
 //							printDecision();
 							
@@ -208,10 +210,10 @@ public class BlackJack {
 							String sGame = ("Aktuelles Spiel: "+Game);
 							String sKonto = ("Kontostand: "+agent.getCredit());
 							String sBet = ("Einsatz: "+agent.getBet());
-							String sBetResult = ("Bet Result: "+agent.getBetResult());
+							String sBetResult = ("Bet Result: "+betResult);
 							String sWon = ("Wins: "+ agent.gamesWon +"/"+ agent.gamesPlayed + " " + Math.round( (((float)agent.gamesWon/(float)agent.gamesPlayed)*100.0)) + "%");
 							String sLost = ("Lost: "+ agent.gamesLost +"/"+ agent.gamesPlayed + " " + Math.round( (((float)agent.gamesLost/(float)agent.gamesPlayed)*100.0)) + "%");
-							String sDrawn = ("You had a draw in "+ agent.gamesDraw +"/"+ agent.gamesPlayed + " " + Math.round((((float)agent.gamesDraw/(float)agent.gamesPlayed)*100.0)) + "%");
+							String sDrawn = ("Draw: "+ agent.gamesDraw +"/"+ agent.gamesPlayed + " " + Math.round((((float)agent.gamesDraw/(float)agent.gamesPlayed)*100.0)) + "%");
 							
 							gc.printStatistic(sGame, sKonto, sBet, sBetResult, sWon, sLost, sDrawn);
 							
@@ -252,12 +254,10 @@ public class BlackJack {
 		// TODO agentsplitt bei der auszahlung einbinden (zunaechst aber darf agentSplit nicht gleich agent sein)
 			
 			
-		  if (insurance==true) {
-			  if (bank.getCountCards()==2 && bank.getHighCardScore()==21) {
-				  agent.setCredit(agent.getBet());
-				  agent.gamesWon++;
-				  gc.printDecision("Gewonnen, versichert!");
-			  }
+		  if (insurance==true && bank.getCountCards()==2 && bank.getHighCardScore()==21) {
+			  agent.setCredit(agent.getBet());
+			  agent.gamesWon++;
+			  gc.printDecision("Gewonnen, versichert!");
 		  }
 		  else if (agent.getHighCardScore()==21 && agent.getCountCards()==2) {
 				System.out.println("> > > > > > > > > > BlackJack! < < < < < < < < < <");
