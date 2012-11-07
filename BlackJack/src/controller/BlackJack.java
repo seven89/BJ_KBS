@@ -97,7 +97,7 @@ public class BlackJack {
 		  boolean newgame=true;
 		  //Render loop
 			//System.out.println("GAME " + Game);
-			while(agent.getCredit()>0 && Game<=100){
+			while(agent.getCredit()>0 && Game<=1000){
 			
 				//refresh time
 				wait(10);	// waits for 1000 ms
