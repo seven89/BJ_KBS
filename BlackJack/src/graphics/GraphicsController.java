@@ -44,61 +44,61 @@ public class GraphicsController extends JFrame {
 	/**
 	 * @param args
 	 */
-	private static Image texture1a;
-	private static Image texture1b;
-	private static Image texture1c;
-	private static Image texture1d;
-	private static Image texture2a;
-	private static Image texture2b;
-	private static Image texture2c;
-	private static Image texture2d;
-	private static Image texture3a;
-	private static Image texture3b;
-	private static Image texture3c;
-	private static Image texture3d;
-	private static Image texture4a;
-	private static Image texture4b;
-	private static Image texture4c;
-	private static Image texture4d;
-	private static Image texture5a;
-	private static Image texture5b;
-	private static Image texture5c;
-	private static Image texture5d;
-	private static Image texture6a;
-	private static Image texture6b;
-	private static Image texture6c;
-	private static Image texture6d;
-	private static Image texture7a;
-	private static Image texture7b;
-	private static Image texture7c;
-	private static Image texture7d;
-	private static Image texture8a;
-	private static Image texture8b;
-	private static Image texture8c;
-	private static Image texture8d;
-	private static Image texture9a;
-	private static Image texture9b;
-	private static Image texture9c;
-	private static Image texture9d;
-	private static Image texture10a;
-	private static Image texture10b;
-	private static Image texture10c;
-	private static Image texture10d;
-	private static Image texture11a;
-	private static Image texture11b;
-	private static Image texture11c;
-	private static Image texture11d;
-	private static Image texture12a;
-	private static Image texture12b;
-	private static Image texture12c;
-	private static Image texture12d;
-	private static Image texture13a;
-	private static Image texture13b;
-	private static Image texture13c;
-	private static Image texture13d;
-	private static Image textureb;
-
-	
+//	private static Image texture1a;
+//	private static Image texture1b;
+//	private static Image texture1c;
+//	private static Image texture1d;
+//	private static Image texture2a;
+//	private static Image texture2b;
+//	private static Image texture2c;
+//	private static Image texture2d;
+//	private static Image texture3a;
+//	private static Image texture3b;
+//	private static Image texture3c;
+//	private static Image texture3d;
+//	private static Image texture4a;
+//	private static Image texture4b;
+//	private static Image texture4c;
+//	private static Image texture4d;
+//	private static Image texture5a;
+//	private static Image texture5b;
+//	private static Image texture5c;
+//	private static Image texture5d;
+//	private static Image texture6a;
+//	private static Image texture6b;
+//	private static Image texture6c;
+//	private static Image texture6d;
+//	private static Image texture7a;
+//	private static Image texture7b;
+//	private static Image texture7c;
+//	private static Image texture7d;
+//	private static Image texture8a;
+//	private static Image texture8b;
+//	private static Image texture8c;
+//	private static Image texture8d;
+//	private static Image texture9a;
+//	private static Image texture9b;
+//	private static Image texture9c;
+//	private static Image texture9d;
+//	private static Image texture10a;
+//	private static Image texture10b;
+//	private static Image texture10c;
+//	private static Image texture10d;
+//	private static Image texture11a;
+//	private static Image texture11b;
+//	private static Image texture11c;
+//	private static Image texture11d;
+//	private static Image texture12a;
+//	private static Image texture12b;
+//	private static Image texture12c;
+//	private static Image texture12d;
+//	private static Image texture13a;
+//	private static Image texture13b;
+//	private static Image texture13c;
+//	private static Image texture13d;
+//	private static Image textureb;
+//
+//	
 	class Figure {
 		int type=0;
 		int value=0;
@@ -152,7 +152,7 @@ public GraphicsController(){
 	 
 
 	setSize(1024,768);
-	initGraphics();
+//	initGraphics();
 	centerOnScreen(this);
 	
 	float w1=(float) 1.02;
@@ -215,67 +215,67 @@ public GraphicsController(){
 			this.setVisible(true);
 	}
 	
-	public static void initGraphics(){
-		try {
-			texture1a = ImageIO.read( new File( "images/texture1a.png" ) );
-			texture2a = ImageIO.read( new File( "images/texture2a.png" ) );
-			texture3a = ImageIO.read( new File( "images/texture3a.png" ) );
-			texture4a = ImageIO.read( new File( "images/texture4a.png" ) );
-			texture5a = ImageIO.read( new File( "images/texture5a.png" ) );
-			texture6a = ImageIO.read( new File( "images/texture6a.png" ) );
-			texture7a = ImageIO.read( new File( "images/texture7a.png" ) );
-			texture8a = ImageIO.read( new File( "images/texture8a.png" ) );
-			texture9a = ImageIO.read( new File( "images/texture9a.png" ) );
-			texture10a = ImageIO.read( new File( "images/texture10a.png" ) );
-			texture11a = ImageIO.read( new File( "images/texture11a.png" ) );
-			texture12a = ImageIO.read( new File( "images/texture12a.png" ) );
-			texture13a = ImageIO.read( new File( "images/texture13a.png" ) );
-			texture1b = ImageIO.read( new File( "images/texture1b.png" ) );
-			texture2b = ImageIO.read( new File( "images/texture2b.png" ) );
-			texture3b = ImageIO.read( new File( "images/texture3b.png" ) );
-			texture4b = ImageIO.read( new File( "images/texture4b.png" ) );
-			texture5b = ImageIO.read( new File( "images/texture5b.png" ) );
-			texture6b = ImageIO.read( new File( "images/texture6b.png" ) );
-			texture7b = ImageIO.read( new File( "images/texture7b.png" ) );
-			texture8b = ImageIO.read( new File( "images/texture8b.png" ) );
-			texture9b = ImageIO.read( new File( "images/texture9b.png" ) );
-			texture10b = ImageIO.read( new File( "images/texture10b.png" ) );
-			texture11b = ImageIO.read( new File( "images/texture11b.png" ) );
-			texture12b = ImageIO.read( new File( "images/texture12b.png" ) );
-			texture13b = ImageIO.read( new File( "images/texture13b.png" ) );
-			texture1c = ImageIO.read( new File( "images/texture1c.png" ) );
-			texture2c = ImageIO.read( new File( "images/texture2c.png" ) );
-			texture3c = ImageIO.read( new File( "images/texture3c.png" ) );
-			texture4c = ImageIO.read( new File( "images/texture4c.png" ) );
-			texture5c = ImageIO.read( new File( "images/texture5c.png" ) );
-			texture6c = ImageIO.read( new File( "images/texture6c.png" ) );
-			texture7c = ImageIO.read( new File( "images/texture7c.png" ) );
-			texture8c = ImageIO.read( new File( "images/texture8c.png" ) );
-			texture9c = ImageIO.read( new File( "images/texture9c.png" ) );
-			texture10c = ImageIO.read( new File( "images/texture10c.png" ) );
-			texture11c = ImageIO.read( new File( "images/texture11c.png" ) );
-			texture12c = ImageIO.read( new File( "images/texture12c.png" ) );
-			texture13c = ImageIO.read( new File( "images/texture13c.png" ) );
-			texture1d = ImageIO.read( new File( "images/texture1d.png" ) );
-			texture2d = ImageIO.read( new File( "images/texture2d.png" ) );
-			texture3d = ImageIO.read( new File( "images/texture3d.png" ) );
-			texture4d = ImageIO.read( new File( "images/texture4d.png" ) );
-			texture5d = ImageIO.read( new File( "images/texture5d.png" ) );
-			texture6d = ImageIO.read( new File( "images/texture6d.png" ) );
-			texture7d = ImageIO.read( new File( "images/texture7d.png" ) );
-			texture8d = ImageIO.read( new File( "images/texture8d.png" ) );
-			texture9d = ImageIO.read( new File( "images/texture9d.png" ) );
-			texture10d = ImageIO.read( new File( "images/texture10d.png" ) );
-			texture11d = ImageIO.read( new File( "images/texture11d.png" ) );
-			texture12d = ImageIO.read( new File( "images/texture12d.png" ) );
-			texture13d = ImageIO.read( new File( "images/texture13d.png" ) );
-			textureb = ImageIO.read( new File( "images/textureb.png" ) );
-			
-		} catch (IOException e1) {
-			e1.printStackTrace();
-			System.out.println("FUCKING SHIT IT DOESNT WORK!(Picture missing)");
-		}
-	}
+//	public static void initGraphics(){
+//		try {
+//			texture1a = ImageIO.read( new File( "images/texture1a.png" ) );
+//			texture2a = ImageIO.read( new File( "images/texture2a.png" ) );
+//			texture3a = ImageIO.read( new File( "images/texture3a.png" ) );
+//			texture4a = ImageIO.read( new File( "images/texture4a.png" ) );
+//			texture5a = ImageIO.read( new File( "images/texture5a.png" ) );
+//			texture6a = ImageIO.read( new File( "images/texture6a.png" ) );
+//			texture7a = ImageIO.read( new File( "images/texture7a.png" ) );
+//			texture8a = ImageIO.read( new File( "images/texture8a.png" ) );
+//			texture9a = ImageIO.read( new File( "images/texture9a.png" ) );
+//			texture10a = ImageIO.read( new File( "images/texture10a.png" ) );
+//			texture11a = ImageIO.read( new File( "images/texture11a.png" ) );
+//			texture12a = ImageIO.read( new File( "images/texture12a.png" ) );
+//			texture13a = ImageIO.read( new File( "images/texture13a.png" ) );
+//			texture1b = ImageIO.read( new File( "images/texture1b.png" ) );
+//			texture2b = ImageIO.read( new File( "images/texture2b.png" ) );
+//			texture3b = ImageIO.read( new File( "images/texture3b.png" ) );
+//			texture4b = ImageIO.read( new File( "images/texture4b.png" ) );
+//			texture5b = ImageIO.read( new File( "images/texture5b.png" ) );
+//			texture6b = ImageIO.read( new File( "images/texture6b.png" ) );
+//			texture7b = ImageIO.read( new File( "images/texture7b.png" ) );
+//			texture8b = ImageIO.read( new File( "images/texture8b.png" ) );
+//			texture9b = ImageIO.read( new File( "images/texture9b.png" ) );
+//			texture10b = ImageIO.read( new File( "images/texture10b.png" ) );
+//			texture11b = ImageIO.read( new File( "images/texture11b.png" ) );
+//			texture12b = ImageIO.read( new File( "images/texture12b.png" ) );
+//			texture13b = ImageIO.read( new File( "images/texture13b.png" ) );
+//			texture1c = ImageIO.read( new File( "images/texture1c.png" ) );
+//			texture2c = ImageIO.read( new File( "images/texture2c.png" ) );
+//			texture3c = ImageIO.read( new File( "images/texture3c.png" ) );
+//			texture4c = ImageIO.read( new File( "images/texture4c.png" ) );
+//			texture5c = ImageIO.read( new File( "images/texture5c.png" ) );
+//			texture6c = ImageIO.read( new File( "images/texture6c.png" ) );
+//			texture7c = ImageIO.read( new File( "images/texture7c.png" ) );
+//			texture8c = ImageIO.read( new File( "images/texture8c.png" ) );
+//			texture9c = ImageIO.read( new File( "images/texture9c.png" ) );
+//			texture10c = ImageIO.read( new File( "images/texture10c.png" ) );
+//			texture11c = ImageIO.read( new File( "images/texture11c.png" ) );
+//			texture12c = ImageIO.read( new File( "images/texture12c.png" ) );
+//			texture13c = ImageIO.read( new File( "images/texture13c.png" ) );
+//			texture1d = ImageIO.read( new File( "images/texture1d.png" ) );
+//			texture2d = ImageIO.read( new File( "images/texture2d.png" ) );
+//			texture3d = ImageIO.read( new File( "images/texture3d.png" ) );
+//			texture4d = ImageIO.read( new File( "images/texture4d.png" ) );
+//			texture5d = ImageIO.read( new File( "images/texture5d.png" ) );
+//			texture6d = ImageIO.read( new File( "images/texture6d.png" ) );
+//			texture7d = ImageIO.read( new File( "images/texture7d.png" ) );
+//			texture8d = ImageIO.read( new File( "images/texture8d.png" ) );
+//			texture9d = ImageIO.read( new File( "images/texture9d.png" ) );
+//			texture10d = ImageIO.read( new File( "images/texture10d.png" ) );
+//			texture11d = ImageIO.read( new File( "images/texture11d.png" ) );
+//			texture12d = ImageIO.read( new File( "images/texture12d.png" ) );
+//			texture13d = ImageIO.read( new File( "images/texture13d.png" ) );
+//			textureb = ImageIO.read( new File( "images/textureb.png" ) );
+//			
+//		} catch (IOException e1) {
+//			e1.printStackTrace();
+//			System.out.println("FUCKING SHIT IT DOESNT WORK!(Picture missing)");
+//		}
+//	}
 
 	private void centerOnScreen(Container c) {
 		Dimension paneSize = c.getSize();
@@ -295,7 +295,12 @@ public GraphicsController(){
 		
 		BackgroundPanel(GraphicsController graphicsController) {	
 			//image = ImageIO.read( new File( "images/textureb.png" ) );
-			image=textureb;
+			try {
+				image=ImageIO.read( new File( "images/textureb.png" ) );
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 		protected void paintComponent(Graphics g) {
@@ -325,58 +330,372 @@ public GraphicsController(){
 		protected void paintComponent(Graphics g) {
 			for(Figure f: graphicObjects){
 			if(f.type==2){
-			if(f.value==0 && f.color==0) g.drawImage(texture1a.getScaledInstance(a, b, c),f.x,f.y,this); //Ass
-			else if(f.value==0 && f.color==1) g.drawImage(texture1b.getScaledInstance(a, b, c),f.x,f.y,this); //Ass
-			else if(f.value==0 && f.color==2) g.drawImage(texture1c.getScaledInstance(a, b, c),f.x,f.y,this); //Ass
-			else if(f.value==0 && f.color==3) g.drawImage(texture1d.getScaledInstance(a, b, c),f.x,f.y,this); //Ass
-			else if(f.value==1 && f.color==0) g.drawImage(texture2a.getScaledInstance(a, b, c),f.x,f.y,this);//Zwei
-			else if(f.value==1 && f.color==1) g.drawImage(texture2b.getScaledInstance(a, b, c),f.x,f.y,this); //Zwei
-			else if(f.value==1 && f.color==2) g.drawImage(texture2c.getScaledInstance(a, b, c),f.x,f.y,this); //Zwei
-			else if(f.value==1 && f.color==3) g.drawImage(texture2d.getScaledInstance(a, b, c),f.x,f.y,this); //Zwei
-			else if(f.value==1 && f.color==0) g.drawImage(texture3a.getScaledInstance(a, b, c),f.x,f.y,this); //Drei
-			else if(f.value==2 && f.color==1) g.drawImage(texture3b.getScaledInstance(a, b, c),f.x,f.y,this); //Drei
-			else if(f.value==2 && f.color==2) g.drawImage(texture3c.getScaledInstance(a, b, c),f.x,f.y,this); //Drei
-			else if(f.value==2 && f.color==3) g.drawImage(texture3d.getScaledInstance(a, b, c),f.x,f.y,this); //Drei
-			else if(f.value==3 && f.color==0) g.drawImage(texture4a.getScaledInstance(a, b, c),f.x,f.y,this); //Vier
-			else if(f.value==3 && f.color==1) g.drawImage(texture4b.getScaledInstance(a, b, c),f.x,f.y,this); //Vier
-			else if(f.value==3 && f.color==2) g.drawImage(texture4c.getScaledInstance(a, b, c),f.x,f.y,this); //Vier
-			else if(f.value==3 && f.color==3) g.drawImage(texture4d.getScaledInstance(a, b, c),f.x,f.y,this); //Vier
-			else if(f.value==4 && f.color==0) g.drawImage(texture5a.getScaledInstance(a, b, c),f.x,f.y,this); //Fuenf
-			else if(f.value==4 && f.color==1) g.drawImage(texture5b.getScaledInstance(a, b, c),f.x,f.y,this); //Fuenf
-			else if(f.value==4 && f.color==2) g.drawImage(texture5c.getScaledInstance(a, b, c),f.x,f.y,this); //Fuenf
-			else if(f.value==4 && f.color==3) g.drawImage(texture5d.getScaledInstance(a, b, c),f.x,f.y,this); //Fuenf
-			else if(f.value==5 && f.color==0) g.drawImage(texture6a.getScaledInstance(a, b, c),f.x,f.y,this); //Sechs
-			else if(f.value==5 && f.color==1) g.drawImage(texture6b.getScaledInstance(a, b, c),f.x,f.y,this); //Sechs
-			else if(f.value==5 && f.color==2) g.drawImage(texture6c.getScaledInstance(a, b, c),f.x,f.y,this); //Sechs
-			else if(f.value==5 && f.color==3) g.drawImage(texture6d.getScaledInstance(a, b, c),f.x,f.y,this); //Sechs
-			else if(f.value==6 && f.color==0) g.drawImage(texture7a.getScaledInstance(a, b, c),f.x,f.y,this); //Sieben
-			else if(f.value==6 && f.color==1) g.drawImage(texture7b.getScaledInstance(a, b, c),f.x,f.y,this); //Sieben
-			else if(f.value==6 && f.color==2) g.drawImage(texture7c.getScaledInstance(a, b, c),f.x,f.y,this); //Sieben
-			else if(f.value==6 && f.color==3) g.drawImage(texture7d.getScaledInstance(a, b, c),f.x,f.y,this); //Sieben
-			else if(f.value==7 && f.color==0) g.drawImage(texture8a.getScaledInstance(a, b, c),f.x,f.y,this); //Acht
-			else if(f.value==7 && f.color==1) g.drawImage(texture8b.getScaledInstance(a, b, c),f.x,f.y,this); //Acht
-			else if(f.value==7 && f.color==2) g.drawImage(texture8c.getScaledInstance(a, b, c),f.x,f.y,this); //Acht
-			else if(f.value==7 && f.color==3) g.drawImage(texture8d.getScaledInstance(a, b, c),f.x,f.y,this); //Acht
-			else if(f.value==8 && f.color==0) g.drawImage(texture9a.getScaledInstance(a, b, c),f.x,f.y,this); //Neun
-			else if(f.value==8 && f.color==1) g.drawImage(texture9b.getScaledInstance(a, b, c),f.x,f.y,this); //Neun
-			else if(f.value==8 && f.color==2) g.drawImage(texture9c.getScaledInstance(a, b, c),f.x,f.y,this); //Neun
-			else if(f.value==8 && f.color==3) g.drawImage(texture9d.getScaledInstance(a, b, c),f.x,f.y,this); //Neun
-			else if(f.value==9 && f.color==0) g.drawImage(texture10a.getScaledInstance(a, b, c),f.x,f.y,this); //Zehn
-			else if(f.value==9 && f.color==1) g.drawImage(texture10b.getScaledInstance(a, b, c),f.x,f.y,this); //Zehn
-			else if(f.value==9 && f.color==2) g.drawImage(texture10c.getScaledInstance(a, b, c),f.x,f.y,this); //Zehn
-			else if(f.value==9 && f.color==3) g.drawImage(texture10d.getScaledInstance(a, b, c),f.x,f.y,this); //Zehn
-			else if(f.value==10 && f.color==0) g.drawImage(texture11a.getScaledInstance(a, b, c),f.x,f.y,this); //Bube
-			else if(f.value==10 && f.color==1) g.drawImage(texture11b.getScaledInstance(a, b, c),f.x,f.y,this); //Bube
-			else if(f.value==10 && f.color==2) g.drawImage(texture11c.getScaledInstance(a, b, c),f.x,f.y,this); //Bube
-			else if(f.value==10 && f.color==3) g.drawImage(texture11d.getScaledInstance(a, b, c),f.x,f.y,this); //Bube
-			else if(f.value==11 && f.color==0) g.drawImage(texture12a.getScaledInstance(a, b, c),f.x,f.y,this); //Dame
-			else if(f.value==11 && f.color==1) g.drawImage(texture12b.getScaledInstance(a, b, c),f.x,f.y,this); //Dame
-			else if(f.value==11 && f.color==2) g.drawImage(texture12c.getScaledInstance(a, b, c),f.x,f.y,this); //Dame
-			else if(f.value==11 && f.color==3) g.drawImage(texture12d.getScaledInstance(a, b, c),f.x,f.y,this); //Dame
-			else if(f.value==12 && f.color==0) g.drawImage(texture13a.getScaledInstance(a, b, c),f.x,f.y,this); //Koenig
-			else if(f.value==12 && f.color==1) g.drawImage(texture13b.getScaledInstance(a, b, c),f.x,f.y,this); //Koenig
-			else if(f.value==12 && f.color==2) g.drawImage(texture13c.getScaledInstance(a, b, c),f.x,f.y,this); //Koenig
-			else if(f.value==12 && f.color==3) g.drawImage(texture13d.getScaledInstance(a, b, c),f.x,f.y,this); //Koenig
+			if(f.value==0 && f.color==0){ 
+				try {
+					g.drawImage(ImageIO.read(new File( "images/texture1a.png" )).getScaledInstance(a, b, c),f.x,f.y,this);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} //Ass
+			}
+			else if(f.value==0 && f.color==1){
+				try {
+					g.drawImage(ImageIO.read(new File( "images/texture1b.png" )).getScaledInstance(a, b, c),f.x,f.y,this);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} //Ass
+			}
+			else if(f.value==0 && f.color==2)
+				try {
+					g.drawImage(ImageIO.read(new File( "images/texture1c.png" )).getScaledInstance(a, b, c),f.x,f.y,this);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			else if(f.value==0 && f.color==3)
+				try {
+					g.drawImage(ImageIO.read(new File( "images/texture1d.png" )).getScaledInstance(a, b, c),f.x,f.y,this);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			else if(f.value==1 && f.color==0)
+				try {
+					g.drawImage(ImageIO.read(new File( "images/texture2a.png" )).getScaledInstance(a, b, c),f.x,f.y,this);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			else if(f.value==1 && f.color==1)
+				try {
+					g.drawImage(ImageIO.read(new File( "images/texture2b.png" )).getScaledInstance(a, b, c),f.x,f.y,this);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			else if(f.value==1 && f.color==2)
+				try {
+					g.drawImage(ImageIO.read(new File( "images/texture2c.png" )).getScaledInstance(a, b, c),f.x,f.y,this);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			else if(f.value==1 && f.color==3)
+				try {
+					g.drawImage(ImageIO.read(new File( "images/texture2d.png" )).getScaledInstance(a, b, c),f.x,f.y,this);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			else if(f.value==1 && f.color==0)
+				try {
+					g.drawImage(ImageIO.read(new File( "images/texture3a.png" )).getScaledInstance(a, b, c),f.x,f.y,this);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			else if(f.value==2 && f.color==1)
+				try {
+					g.drawImage(ImageIO.read(new File( "images/texture3b.png" )).getScaledInstance(a, b, c),f.x,f.y,this);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			else if(f.value==2 && f.color==2)
+				try {
+					g.drawImage(ImageIO.read(new File( "images/texture3c.png" )).getScaledInstance(a, b, c),f.x,f.y,this);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			else if(f.value==2 && f.color==3)
+				try {
+					g.drawImage(ImageIO.read(new File( "images/texture3d.png" )).getScaledInstance(a, b, c),f.x,f.y,this);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			else if(f.value==3 && f.color==0)
+				try {
+					g.drawImage(ImageIO.read(new File( "images/texture4a.png" )).getScaledInstance(a, b, c),f.x,f.y,this);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			else if(f.value==3 && f.color==1)
+				try {
+					g.drawImage(ImageIO.read(new File( "images/texture4b.png" )).getScaledInstance(a, b, c),f.x,f.y,this);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			else if(f.value==3 && f.color==2)
+				try {
+					g.drawImage(ImageIO.read(new File( "images/texture4c.png" )).getScaledInstance(a, b, c),f.x,f.y,this);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			else if(f.value==3 && f.color==3)
+				try {
+					g.drawImage(ImageIO.read(new File( "images/texture4d.png" )).getScaledInstance(a, b, c),f.x,f.y,this);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			else if(f.value==4 && f.color==0)
+				try {
+					g.drawImage(ImageIO.read(new File( "images/texture5a.png" )).getScaledInstance(a, b, c),f.x,f.y,this);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			else if(f.value==4 && f.color==1)
+				try {
+					g.drawImage(ImageIO.read(new File( "images/texture5b.png" )).getScaledInstance(a, b, c),f.x,f.y,this);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			else if(f.value==4 && f.color==2)
+				try {
+					g.drawImage(ImageIO.read(new File( "images/texture5c.png" )).getScaledInstance(a, b, c),f.x,f.y,this);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			else if(f.value==4 && f.color==3)
+				try {
+					g.drawImage(ImageIO.read(new File( "images/texture5d.png" )).getScaledInstance(a, b, c),f.x,f.y,this);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			else if(f.value==5 && f.color==0)
+				try {
+					g.drawImage(ImageIO.read(new File( "images/texture6a.png" )).getScaledInstance(a, b, c),f.x,f.y,this);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			else if(f.value==5 && f.color==1)
+				try {
+					g.drawImage(ImageIO.read(new File( "images/texture6b.png" )).getScaledInstance(a, b, c),f.x,f.y,this);
+				} catch (IOException e6) {
+					// TODO Auto-generated catch block
+					e6.printStackTrace();
+				}
+			else if(f.value==5 && f.color==2)
+				try {
+					g.drawImage(ImageIO.read(new File( "images/texture6c.png" )).getScaledInstance(a, b, c),f.x,f.y,this);
+				} catch (IOException e6) {
+					// TODO Auto-generated catch block
+					e6.printStackTrace();
+				}
+			else if(f.value==5 && f.color==3)
+				try {
+					g.drawImage(ImageIO.read(new File( "images/texture6d.png" )).getScaledInstance(a, b, c),f.x,f.y,this);
+				} catch (IOException e6) {
+					// TODO Auto-generated catch block
+					e6.printStackTrace();
+				}
+			else if(f.value==6 && f.color==0)
+				try {
+					g.drawImage(ImageIO.read(new File( "images/texture7a.png" )).getScaledInstance(a, b, c),f.x,f.y,this);
+				} catch (IOException e6) {
+					// TODO Auto-generated catch block
+					e6.printStackTrace();
+				}
+			else if(f.value==6 && f.color==1)
+				try {
+					g.drawImage(ImageIO.read(new File( "images/texture7b.png" )).getScaledInstance(a, b, c),f.x,f.y,this);
+				} catch (IOException e6) {
+					// TODO Auto-generated catch block
+					e6.printStackTrace();
+				}
+			else if(f.value==6 && f.color==2)
+				try {
+					g.drawImage(ImageIO.read(new File( "images/texture7c.png" )).getScaledInstance(a, b, c),f.x,f.y,this);
+				} catch (IOException e7) {
+					// TODO Auto-generated catch block
+					e7.printStackTrace();
+				}
+			else if(f.value==6 && f.color==3)
+				try {
+					g.drawImage(ImageIO.read(new File( "images/texture7d.png" )).getScaledInstance(a, b, c),f.x,f.y,this);
+				} catch (IOException e6) {
+					// TODO Auto-generated catch block
+					e6.printStackTrace();
+				}
+			else if(f.value==7 && f.color==0)
+				try {
+					g.drawImage(ImageIO.read(new File( "images/texture8a.png" )).getScaledInstance(a, b, c),f.x,f.y,this);
+				} catch (IOException e6) {
+					// TODO Auto-generated catch block
+					e6.printStackTrace();
+				}
+			else if(f.value==7 && f.color==1)
+				try {
+					g.drawImage(ImageIO.read(new File( "images/texture8b.png" )).getScaledInstance(a, b, c),f.x,f.y,this);
+				} catch (IOException e6) {
+					// TODO Auto-generated catch block
+					e6.printStackTrace();
+				}
+			else if(f.value==7 && f.color==2)
+				try {
+					g.drawImage(ImageIO.read(new File( "images/texture8c.png" )).getScaledInstance(a, b, c),f.x,f.y,this);
+				} catch (IOException e6) {
+					// TODO Auto-generated catch block
+					e6.printStackTrace();
+				}
+			else if(f.value==7 && f.color==3)
+				try {
+					g.drawImage(ImageIO.read(new File( "images/texture8d.png" )).getScaledInstance(a, b, c),f.x,f.y,this);
+				} catch (IOException e6) {
+					// TODO Auto-generated catch block
+					e6.printStackTrace();
+				}
+			else if(f.value==8 && f.color==0)
+				try {
+					g.drawImage(ImageIO.read(new File( "images/texture9a.png" )).getScaledInstance(a, b, c),f.x,f.y,this);
+				} catch (IOException e6) {
+					// TODO Auto-generated catch block
+					e6.printStackTrace();
+				}
+			else if(f.value==8 && f.color==1)
+				try {
+					g.drawImage(ImageIO.read(new File( "images/texture9b.png" )).getScaledInstance(a, b, c),f.x,f.y,this);
+				} catch (IOException e6) {
+					// TODO Auto-generated catch block
+					e6.printStackTrace();
+				}
+			else if(f.value==8 && f.color==2)
+				try {
+					g.drawImage(ImageIO.read(new File( "images/texture9c.png" )).getScaledInstance(a, b, c),f.x,f.y,this);
+				} catch (IOException e6) {
+					// TODO Auto-generated catch block
+					e6.printStackTrace();
+				}
+			else if(f.value==8 && f.color==3)
+				try {
+					g.drawImage(ImageIO.read(new File( "images/texture9d.png" )).getScaledInstance(a, b, c),f.x,f.y,this);
+				} catch (IOException e6) {
+					// TODO Auto-generated catch block
+					e6.printStackTrace();
+				}
+			else if(f.value==9 && f.color==0)
+				try {
+					g.drawImage(ImageIO.read(new File( "images/texture10a.png" )).getScaledInstance(a, b, c),f.x,f.y,this);
+				} catch (IOException e6) {
+					// TODO Auto-generated catch block
+					e6.printStackTrace();
+				}
+			else if(f.value==9 && f.color==1)
+				try {
+					g.drawImage(ImageIO.read(new File( "images/texture10b.png" )).getScaledInstance(a, b, c),f.x,f.y,this);
+				} catch (IOException e6) {
+					// TODO Auto-generated catch block
+					e6.printStackTrace();
+				}
+			else if(f.value==9 && f.color==2)
+				try {
+					g.drawImage(ImageIO.read(new File( "images/texture10c.png" )).getScaledInstance(a, b, c),f.x,f.y,this);
+				} catch (IOException e6) {
+					// TODO Auto-generated catch block
+					e6.printStackTrace();
+				}
+			else if(f.value==9 && f.color==3)
+				try {
+					g.drawImage(ImageIO.read(new File( "images/texture10d.png" )).getScaledInstance(a, b, c),f.x,f.y,this);
+				} catch (IOException e6) {
+					// TODO Auto-generated catch block
+					e6.printStackTrace();
+				}
+			else if(f.value==10 && f.color==0)
+				try {
+					g.drawImage(ImageIO.read(new File( "images/texture11a.png" )).getScaledInstance(a, b, c),f.x,f.y,this);
+				} catch (IOException e6) {
+					// TODO Auto-generated catch block
+					e6.printStackTrace();
+				}
+			else if(f.value==10 && f.color==1)
+				try {
+					g.drawImage(ImageIO.read(new File( "images/texture11b.png" )).getScaledInstance(a, b, c),f.x,f.y,this);
+				} catch (IOException e6) {
+					// TODO Auto-generated catch block
+					e6.printStackTrace();
+				}
+			else if(f.value==10 && f.color==2)
+				try {
+					g.drawImage(ImageIO.read(new File( "images/texture11c.png" )).getScaledInstance(a, b, c),f.x,f.y,this);
+				} catch (IOException e6) {
+					// TODO Auto-generated catch block
+					e6.printStackTrace();
+				}
+			else if(f.value==10 && f.color==3)
+				try {
+					g.drawImage(ImageIO.read(new File( "images/texture11d.png" )).getScaledInstance(a, b, c),f.x,f.y,this);
+				} catch (IOException e6) {
+					// TODO Auto-generated catch block
+					e6.printStackTrace();
+				}
+			else if(f.value==11 && f.color==0)
+				try {
+					g.drawImage(ImageIO.read(new File( "images/texture12a.png" )).getScaledInstance(a, b, c),f.x,f.y,this);
+				} catch (IOException e6) {
+					// TODO Auto-generated catch block
+					e6.printStackTrace();
+				}
+			else if(f.value==11 && f.color==1)
+				try {
+					g.drawImage(ImageIO.read(new File( "images/texture12b.png" )).getScaledInstance(a, b, c),f.x,f.y,this);
+				} catch (IOException e5) {
+					// TODO Auto-generated catch block
+					e5.printStackTrace();
+				}
+			else if(f.value==11 && f.color==2)
+				try {
+					g.drawImage(ImageIO.read(new File( "images/texture12c.png" )).getScaledInstance(a, b, c),f.x,f.y,this);
+				} catch (IOException e4) {
+					// TODO Auto-generated catch block
+					e4.printStackTrace();
+				}
+			else if(f.value==11 && f.color==3)
+				try {
+					g.drawImage(ImageIO.read(new File( "images/texture12d.png" )).getScaledInstance(a, b, c),f.x,f.y,this);
+				} catch (IOException e3) {
+					// TODO Auto-generated catch block
+					e3.printStackTrace();
+				}
+			else if(f.value==12 && f.color==0)
+				try {
+					g.drawImage(ImageIO.read(new File( "images/texture13a.png" )).getScaledInstance(a, b, c),f.x,f.y,this);
+				} catch (IOException e3) {
+					// TODO Auto-generated catch block
+					e3.printStackTrace();
+				}
+			else if(f.value==12 && f.color==1)
+				try {
+					g.drawImage(ImageIO.read(new File( "images/texture13b.png" )).getScaledInstance(a, b, c),f.x,f.y,this);
+				} catch (IOException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
+			else if(f.value==12 && f.color==2)
+				try {
+					g.drawImage(ImageIO.read(new File( "images/texture13c.png" )).getScaledInstance(a, b, c),f.x,f.y,this);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			else if(f.value==12 && f.color==3)
+				try {
+					g.drawImage(ImageIO.read(new File( "images/texture13d.png" )).getScaledInstance(a, b, c),f.x,f.y,this);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} //Koenig
 		}
 		}
 	 }
