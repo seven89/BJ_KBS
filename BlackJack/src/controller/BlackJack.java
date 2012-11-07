@@ -100,7 +100,7 @@ public class BlackJack {
 			while(agent.getCredit()>0 && Game<=100){
 			
 				//refresh time
-				wait(1);	// waits for 1000 ms
+				wait(1000);	// waits for 1000 ms
 				if(!gc.pause){
 					
 				if(newgame){
@@ -200,7 +200,7 @@ public class BlackJack {
 							String sLost = ("You lost "+ agent.gamesLost +"/"+ agent.gamesPlayed + " " + (((float)agent.gamesLost/(float)agent.gamesPlayed)*100.0) + "% of games!");
 							String sDrawn = ("You had a draw in "+ agent.gamesDraw +"/"+ agent.gamesPlayed + " " + (((float)agent.gamesDraw/(float)agent.gamesPlayed)*100.0) + "% of games!");
 							
-							//gc.printStatistic(sGame, sKonto, sBet, sBetResult, sWon, sLost, sDrawn);
+							gc.printStatistic(sGame, sKonto, sBet, sBetResult, sWon, sLost, sDrawn);
 							
 							
 //							printStatDecision(); // erstmal weglasen

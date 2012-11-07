@@ -121,6 +121,8 @@ public class GraphicsController extends JFrame {
 	//rdy grphc
 	private BackgroundPanel backgroundPanel;
 	private CardPanel cardPanel;
+	private int positionx = 0;
+	private int positiony = 0;
 	   
 public GraphicsController(){
 	 
@@ -190,6 +192,21 @@ public GraphicsController(){
 				getContentPane().add(cardPanel);
 
 		this.setVisible(true);
+		decision.setLocation(460, 80);
+		//labels
+		 for(JLabel l : stats){
+			    positiony+=30;
+			    l.setLocation(positionx, positiony);
+		    }
+		 
+		    positiony=0;
+		    for(JLabel l : labels){
+		    	positiony+=30;
+			    l.setLocation(positionx+800, positiony);
+		    }
+		    positiony=0;
+		    positionx=0;
+	
 	}
 	
 	public static void initGraphics(){
@@ -379,8 +396,6 @@ public GraphicsController(){
 	    JLabel label1;
 
 		private void showpercentage(){
-			int positiony = 60;
-			int positiony2 = 60;
 			
 			JLabel label = new JLabel("Wahrscheinlichkeiten (in Punkten):");
 			label.setFont(new Font("Serif", Font.PLAIN, 20));
@@ -389,10 +404,9 @@ public GraphicsController(){
 		    this.setSize(300, positiony);
 		    this.setVisible(true);
 		    
-		    decision = new JLabel("Wahrscheinlichkeiten (in Punkten):");
+		    decision = new JLabel("Entscheidung");
 		    decision.setFont(new Font("Serif", Font.PLAIN, 20));
 		    decision.setForeground(Color.WHITE);
-		    decision.locate(200, 0);
 		    this.add(decision);
 		    this.setSize(300, 600);
 		    this.setVisible(true);
@@ -405,16 +419,6 @@ public GraphicsController(){
 			stats[5] = new JLabel("Spiele verloren: ");
 			stats[6] = new JLabel("Unentschieden: ");
 			
-		    for(JLabel l : stats){
-		    	l.setFont(new Font("Serif", Font.PLAIN, 20));
-			    l.setForeground(Color.WHITE);
-			    this.add(l);
-			    positiony2+=30;
-			    this.setSize(230, positiony2);
-			    this.setVisible(true);
-		    }
-		    
-			
 		    labels[0] = new JLabel("1 ist : ");
 		    labels[1] = new JLabel("2 ist : ");
 		    labels[2] = new JLabel("3 ist : ");
@@ -425,18 +429,24 @@ public GraphicsController(){
 		    labels[7] = new JLabel("8 ist : ");
 		    labels[8] = new JLabel("9 ist : ");
 		    labels[9] = new JLabel("10 ist : ");
+		    
+			//labels
+			 for(JLabel l : stats){
+			    	l.setFont(new Font("Serif", Font.PLAIN, 20));
+				    l.setForeground(Color.WHITE);
+				    this.add(l);
+				    this.setSize(400, 230);
+				    this.setVisible(true);
+			    }
+			 
 
-		    
-		    for(JLabel l : labels){
-		    	l.setFont(new Font("Serif", Font.PLAIN, 20));
-			    l.setForeground(Color.WHITE);
-			    l.locate(200, 0);
-			    this.add(l);
-			    positiony+=30;
-			    this.setSize(230, positiony);
-			    this.setVisible(true);
-		    }
-		    
+			    for(JLabel l : labels){
+			    	l.setFont(new Font("Serif", Font.PLAIN, 20));
+				    l.setForeground(Color.WHITE);
+				    this.add(l);
+				    this.setSize(230, 230);
+				    this.setVisible(true);
+			    }
 		}
 	
 		private void changepercentage(float[] probabilities){
@@ -447,13 +457,13 @@ public GraphicsController(){
 		
 		
 		public void  printStatistic(String sGame,String sKonto,String sBet,String sBetResult,String sWon,String sLost,String sDraw){
-			 labels[0].setText(sGame);
-			 labels[1].setText(sKonto);
-			 labels[2].setText(sBet);
-			 labels[3].setText(sBetResult);
-			 labels[4].setText(sWon);
-			 labels[5].setText(sLost);
-			 labels[6].setText(sDraw);
+			 stats[0].setText(sGame);
+			 stats[1].setText(sKonto);
+			 stats[2].setText(sBet);
+			 stats[3].setText(sBetResult);
+			 stats[4].setText(sWon);
+			 stats[5].setText(sLost);
+			 stats[6].setText(sDraw);
 		}
 		
 		public void printDecision(String text){
