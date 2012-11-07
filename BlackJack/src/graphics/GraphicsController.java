@@ -45,6 +45,7 @@ public class GraphicsController extends JFrame {
 	public JLabel[] stats;
 	public JLabel decision;
 	private int playercards=0;
+	private int playercardsright=0;
 	private int bankcards=0;
 	private int cards=0;
 	public boolean pause=false;
@@ -633,13 +634,19 @@ public GraphicsController(){
 			decision.setText(text);
 		}
 	
-	public void newPlayerCard(int color, int value, float[] probability){
+	public void newPlayerCard(int color, int value, float[] probability, int side){
 		 graphicObjects[cards].type=2;
 		 graphicObjects[cards].color=color;
 		 graphicObjects[cards].value=value;
-		 graphicObjects[cards].x=300+playercards*40;
+		 if(side==0){
+			 graphicObjects[cards].x=300+playercards*40;
+			 playercards++;
+		 }
+		 else{
+			 graphicObjects[cards].x=600+playercardsright*40;
+			 playercardsright++;
+		 }
 		 graphicObjects[cards].y=490;
-		 playercards++;
 		 cards++;
 		 changepercentage(probability);
 		 //printDecision("Neue Karte: " + playercards);
@@ -661,6 +668,7 @@ public GraphicsController(){
 			 graphicObjects[i].drawn=0;
 		 }
 		playercards=0;
+		playercardsright=0;
 		bankcards=0;
 		cards=0;
 	}
