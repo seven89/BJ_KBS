@@ -7,7 +7,7 @@
  */
 package KnowledgeSystem;
 
-import data.Rules;
+
 
 public class Agent extends Player{
 
@@ -33,17 +33,15 @@ public class Agent extends Player{
 		setDoubled(false);
 		initializeProbability();
 	}
-
-	//TODO: Strategie --> Entscheidung anhand von Kriterien treffen
 	
-	public double calcBetValue(Rules rules)
+	public double calcBetValue(int boxLimit)
 	{
 		/**
 		 * This method calculates the bet-value of an agent
 		 */
 		double betValue = 0;
-		if(credit/10 < rules.getBoxLimit()) betValue =credit/10;
-		else betValue = rules.getBoxLimit();
+		if(credit/10 <boxLimit) betValue =credit/10;
+		else betValue = boxLimit;
 		
 		return betValue;
 	}
@@ -130,6 +128,11 @@ public class Agent extends Player{
 	
 	public void calcProb(int card)
 	{
+		/**
+		 * @brief This method is for temporary probability calculations
+		 * @param checkState indicates, whether the real probabilities should 
+		 * 		  be initialized again (true) or whether not (false)
+		 */
 		if(checkState)
 		for(int i = 0; i < probability.length; i++){
 			tempProb[i]=probability[i];
@@ -174,110 +177,12 @@ public class Agent extends Player{
 		}		
 	}
 	
-//	public float calcBankWinProb (int curVal, float curProb, boolean ace)
-//	{
-//		int aceCount = 0;
-//		if(ace)
-//		{
-//			aceCount++;
-//		}
-//		resultProb = new float [16];
-//		float tmpProb = 0;
-//		int tempVal = 0;
-//		int diffVal = 21-curVal;
-//		resultProb[0] = curProb;
-//		if(diffVal > 4)//unter 17
-//		{
-//			switch(diffVal)
-//			{
-//				/**
-//				 * Minimum was die Bank haben kann ist ein Ass (als erste karte), deshalb fangen wir hier mit 2 an,
-//				 * da die Wahrscheinlichkeiten für folgende karten berechnet wird
-//				 */						
-//				case 5: 
-//					int z = 0;
-//					for(int y= 1; y <= 5; y++)
-//					{
-//						tempVal = diffVal;
-//						if(y == 1) aceCount++;
-//						if(tempVal > 5)
-//						{
-//							//Wenn 21 überschritten wird
-//							y++;
-//						}
-//						calcProb(y);
-//						tmpProb+=tempProb[y];
-//						tempVal+=y;
-//						for(int i = 1; i <= 5-y; i++)
-//						{
-//							i = z;
-//							while(true)
-//							{
-//								if(z == 1) aceCount++;
-//								if(tempVal > 5 || aceCount == 4)
-//								{
-//									i++;
-//									break;
-//								}
-//								calcProb(i);
-//								tmpProb+=tempProb[i];
-//								tempVal+=i;
-//							}
-//						}
-//						
-//						//reset + Transition
-//						resultProb[y]= tmpProb;
-//						tempVal = diffVal;
-//						tmpProb = 0;
-//						
-//					}
-//					/**
-//					 * 5
-//					 * 4,1
-//					 * 3,2
-//					 * 3,1,1
-//					 * 2,3
-//					 * 2,2,1
-//					 * 2,1,2
-//					 * 2,1,1,1
-//					 * 1,2,2
-//					 * 1,3,1
-//					 * 1,4
-//					 * 1,1,1,2
-//					 * 1,2,1,1
-//					 * 1,1,2,1
-//					 */
-//						
-//				case 6: calcProb(6);
-//						calcBankWinProb(curVal+6,tempProb[5], false);
-//				case 7: calcProb(7);
-//						calcBankWinProb(curVal+7,tempProb[6], false);
-//				case 8: calcProb(8);
-//						calcBankWinProb(curVal+8,tempProb[7], false);
-//				case 9: calcProb(9);
-//						calcBankWinProb(curVal+9,tempProb[8], false);
-//				case 10: calcProb(10);
-//						calcBankWinProb(curVal+10,tempProb[9], false);
-//				case 11:
-//				case 12:
-//				case 13:
-//				case 14:
-//				case 15:
-//				case 16:
-//				case 17:
-//				case 18:
-//				case 19:
-//				case 20:
-//					
-//			}
-//		}
-//		return curProb;
-//	}
 	
-	private float calcBankOff (int border)
+	private float calcOverrun (int border)
 	{
 		/**
-		 * Calculates all combination which overrun the border
+		 * @brief Calculates all combination which overrun the border and
+		 * 		  returns its probability
 		 */
 		int y,y1,x,x1;
 		float tmpProb = 0;
@@ -287,7 +192,7 @@ public class Agent extends Player{
     	{
     		if((y-i)+(x+i+1) > border)
     		{
-    			//vorwärts
+    			//forwards
     			tmpProb = tempProb[y-1-i];
     			calcProb(y-i);
     			tmpProb += tempProb[x+i];
@@ -296,7 +201,7 @@ public class Agent extends Player{
     		
     		if((y1+i+1)+(x1-i) > border)
     		{
-    			//rückwärts
+    			//backwards
     			if(!(y-i == x+i))
     			{
     				tmpProb = tempProb[y1+i];
@@ -311,6 +216,9 @@ public class Agent extends Player{
 	
 	public boolean pullCard(int [] bankScore)
 	{
+		/**
+		 * @brief This method decides when the agent should pull a new Card or not
+		 */
 		//-->used in funtion calcProb
 		checkState = true;
 		@SuppressWarnings("unused")
@@ -326,13 +234,24 @@ public class Agent extends Player{
 		int diffLoStack = 21 - super.cardScore[0];
 		int diffHiStack = 21 - super.cardScore[1];
 		/**
-		 * bank muss bis einschließlich 16 immer ziehen
-		 * --> ab 17 ist ende
+		 * bank have to pull until a score of 16 
+		 * --> at score of 17 pulling is over
 		 */
-		if(diffHiStack >= 9)
+		/*
+		 * The probability of pulling a 10 is the highest in game, therefore the agent
+		 * should always pull until a difference of 10 until the score reaches 21.
+		 */
+		if(diffHiStack >= 10)
 			return true;
-		else if(diffLoStack <= 21-pullBorder)//AgentScore >= 16
+		/*
+		 * This else-path is used to prevent that the agent sells itself
+		 * -->diffLoStack considers Ace with score of 1
+		 */
+		else if(diffLoStack <= 21-pullBorder)
 			return false;
+		/*
+		 * This else-path decides on basis of bank probabilities
+		 */
 		else {
 			boolean check = calcPullBorder (diffLoStack, diffHiStack);
 			if(!check)
@@ -453,8 +372,7 @@ public class Agent extends Player{
 					}
 					else
 					{
-						//TODO: Entscheidung anhand von Wahrscheinlichkeit ermitteln
-						//bankScore = 17 - 21 --> Wahrscheinlichkeit
+						//bankScore = 17 - 21 --> Probability
 						bankHiScore = tempProb1 + probability[5] + probability[6]
 								+ probability[7] + probability[8] + probability[9];
 					}
@@ -494,7 +412,7 @@ public class Agent extends Player{
 				//4
 			    case 17:
 			    {//4+10+8| 4+8+10 | 4+9+9
-			    	tmpProb = calcBankOff (17);
+			    	tmpProb = calcOverrun (17);
 					bankOverTop = tmpProb;
 					bankHiScore = 100-tmpProb;
 					tmpProb = 0;
@@ -503,7 +421,7 @@ public class Agent extends Player{
 				//5
 			    case 16:
 			    {//8+9|9+8|10+7|7+10
-			    	tmpProb = calcBankOff (16);
+			    	tmpProb = calcOverrun (16);
 					bankOverTop = tmpProb;
 					bankHiScore = 100-tmpProb;
 					tmpProb = 0;				
@@ -511,7 +429,7 @@ public class Agent extends Player{
 				//6
 			    case 15:
 			    {//8+8|9+7|7+9|10+6|6+10
-			    	tmpProb = calcBankOff (15);
+			    	tmpProb = calcOverrun (15);
 					bankOverTop = tmpProb;
 					bankHiScore = 100-tmpProb;
 					tmpProb = 0;
@@ -519,33 +437,31 @@ public class Agent extends Player{
 				//7
 			    case 14:
 			    {//5+10|10+5|7+8|8+7|6+9|9+6
-			    	tmpProb = calcBankOff (14);
+			    	tmpProb = calcOverrun (14);
 					bankOverTop = tmpProb;
 					bankHiScore = 100-tmpProb;
 					tmpProb = 0;
 				}	 	
 				//8
 			    case 13:
-			    	tmpProb = calcBankOff (13);
+			    	tmpProb = calcOverrun (13);
 					bankOverTop = tmpProb;
 					bankHiScore = 100-tmpProb;
 					tmpProb = 0;
 				//9
 			    case 12:
-			    	tmpProb = calcBankOff (12);
+			    	tmpProb = calcOverrun (12);
 					bankOverTop = tmpProb;
 					bankHiScore = 100-tmpProb;
 					tmpProb = 0;
 				//10
 			    case 11:
-			    	tmpProb = calcBankOff (11);
+			    	tmpProb = calcOverrun (11);
 					bankOverTop = tmpProb;
 					bankHiScore = 100-tmpProb;
 					tmpProb = 0;
 					bankBj = probability[9];
 			}
-			//TODO:Spielerwahrscheinlichkeit
-			//TODO:Spieler wahrscheinlichkeit für über 21
 			if(bankHiScore > 50 && bankOverTop <= 50 && bankHiScore >= bankOverTop)
 			{
 				return false;
@@ -560,8 +476,8 @@ public class Agent extends Player{
 	
 	private boolean calcPullBorder (int lo, int hi)
 	{
-		float probHi = calcBankOff (hi);
-		float probLo = calcBankOff (lo);
+		float probHi = calcOverrun (hi);
+		float probLo = calcOverrun (lo);
 		float tmpProb;
 		//Probability that agent overruns 21
 		tmpProb = (probLo + probHi)/2;

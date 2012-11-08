@@ -2,7 +2,6 @@ package controller;
 
 import graphics.GraphicsController;
 import data.CardSet;
-import data.Rules;
 import KnowledgeSystem.Agent;
 import KnowledgeSystem.Bank;
 import KnowledgeSystem.Player;
@@ -15,7 +14,6 @@ public class BlackJack {
 	protected static CardSet CardDeck;
 	protected static Agent agent, agentSplit;
 	protected static Player p;
-	protected static Rules rules;
 	protected static Bank bank;
 	static boolean agentHelp, agentSplitHelp, agentSplitCardHelp, modus, insurance;
 	
@@ -33,10 +31,9 @@ public class BlackJack {
 		modus = false;
 		insurance=false;
 		
-		CardDeck = new CardSet(false);	// create card deck
-		rules = new Rules(7, 5);	
+		CardDeck = new CardSet(false);	// create card deck	
 		agent = new Agent (100);
-		bet = (int) agent.calcBetValue(rules);
+		bet = (int) agent.calcBetValue(50);
 		
 		//p = new Player(50);		// create player(s)
 		//setPlayers(1);			// count player
@@ -50,6 +47,7 @@ public class BlackJack {
 
 	public static void main(String [ ] args)
 	{
+		@SuppressWarnings("unused")
 		BlackJack table = new BlackJack();		//create table
 		nextStep();		
 	}
@@ -85,7 +83,7 @@ public class BlackJack {
 			//p.newGame();
 			agent.newGame();
 			bank.newGame();
-			bet = (int) agent.calcBetValue(rules);
+			bet = (int) agent.calcBetValue(50);
 			agent.setBet(bet);
 			agent.initializeProbability();
 //			System.out.println("------------New Game-----------");
