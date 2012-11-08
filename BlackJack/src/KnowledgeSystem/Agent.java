@@ -16,6 +16,7 @@ public class Agent extends Player{
 	
 	float[] tempProb;
 	int[] tempProbCounter;
+	int twoPartyCombis;
 	float[] resultProb;
 	
 	private int pullBorder;
@@ -25,6 +26,9 @@ public class Agent extends Player{
 	public Agent (int credit)
 	{
 		super(credit);
+		//130 = Count of possible two-party combinations [1,1][1,2][2,1][2,2]...
+		twoPartyCombis = 130;
+		
 		probability = new float [11];
 		probCounter = new int [11];
 		tempProb = new float [11];
@@ -184,33 +188,23 @@ public class Agent extends Player{
 		 * @brief Calculates all combination which overrun the border and
 		 * 		  returns its probability
 		 */
-		int y,y1,x,x1;
+		int y,x;
 		float tmpProb = 0;
 		x = 0; y = 10;
-    	x1 = 10; y1 = 0;
     	for(int i = 0; i < probability.length-1; i++)
     	{
-    		if((y-i)+(x+i+1) > border)
+    		for(int z = 0; z < probability.length-1; z++)
     		{
-    			//forwards
-    			tmpProb = tempProb[y-1-i];
-    			calcProb(y-i);
-    			tmpProb += tempProb[x+i];
-    			checkState = true;
-    		}
-    		
-    		if((y1+i+1)+(x1-i) > border)
-    		{
-    			//backwards
-    			if(!(y-i == x+i))
+    			if((y-i)+(x+z+1) > border)
     			{
-    				tmpProb = tempProb[y1+i];
-    				calcProb(y1+i+1);
-    				tmpProb += tempProb[x1-1-i];
+    				tmpProb += tempProb[y-1-i];
+    				calcProb(y-i);
+    				tmpProb += tempProb[x+z];
     				checkState = true;
     			}
     		}
     	}	
+    	tmpProb = tmpProb/130;
     	return tmpProb;
 	}
 	
@@ -221,9 +215,6 @@ public class Agent extends Player{
 		 */
 		//-->used in funtion calcProb
 		checkState = true;
-		@SuppressWarnings("unused")
-		float bankBj = 0;
-		
 		
 		//bank score is between 17 and 21
 		float bankHiScore = 0;
@@ -274,13 +265,13 @@ public class Agent extends Player{
 					//case Ace = 1 --> nur wenn 21 überschritten wird
 					for(int i = 0; i < 6;i++){
 						/**
-						 * Wie hoch ist die Wahrscheinlichkeit, dass die Bank eine dritte Karte zieht (nach einem Ass)
+						 * Probability, that bank pulls a third card (after ace)
 						 */
 						tmpProb += probability[i];
 					}
 					for(int i = 0; i <= 9; i++){
 						/**
-						 * Wie hoch ist die Wahrscheinlichkeit, dass die Bank keine dritte Karte zieht
+						 * Probability, that bank pulls no third card
 						 */
 						if(i == 0 || i > 5){
 							tempProb1 += probability[i];
@@ -288,126 +279,38 @@ public class Agent extends Player{
 					}
 					if(tmpProb > tempProb1)
 					{
-						//bankscore >= 2 && <= 16
-						//TODO: Entscheidung anhand von Wahrscheinlichkeiten ermitteln
-						/**
-						 * eigene Wahrscheinlichkeit gegen Bank
-						 * Spieler Score >= 11
-						 */
-						//wie hoch die Wahrscheinlichkeit, dass Bank über 21
-						//wie hoch, dass Wahrscheinlichkeit unter 21 
-						//TODO: bankOverTop ermitteln --> man 12 erreicht --> danach erste wahrscheinlichkeit drüber
+						//case: bank pulls three cards, first ace score = 11
+						//-->Question: When overrun Bank score the value 21
 						bankOverTop = tmpProb;
-						{//Ass+10
-							tmpProb = tempProb[0];
-							calcProb(1); 
-							tmpProb += tempProb[10];
-							calcProb(10);
-							checkState = true;
-						}
-						{//2+9
-							tmpProb = tempProb[1];
-							calcProb(2); 
-							tmpProb += tempProb[8];
-							calcProb(9);
-							checkState = true;
-						}
-						{//3+8
-							tmpProb = tempProb[2];
-							calcProb(3); 
-							tmpProb += tempProb[7];
-							calcProb(8);
-							checkState = true;
-						}
-						{//4+7
-							tmpProb = tempProb[3];
-							calcProb(4); 
-							tmpProb += tempProb[6];
-							calcProb(7);
-							checkState = true;
-						}
-						{//5+6
-							tmpProb = tempProb[4];
-							calcProb(5); 
-							tmpProb += tempProb[5];
-							calcProb(6);
-							checkState = true;
-						}
-						{//6+5
-							tmpProb = tempProb[5];
-							calcProb(6); 
-							tmpProb += tempProb[4];
-							calcProb(5);
-							checkState = true;
-						}
-						{//7+4
-							tmpProb = tempProb[6];
-							calcProb(7); 
-							tmpProb += tempProb[3];
-							calcProb(4);
-							checkState = true;
-						}
-						{//8+3
-							tmpProb = tempProb[7];
-							calcProb(8); 
-							tmpProb += tempProb[2];
-							calcProb(3);
-							checkState = true;
-						}
-						{//9+2
-							tmpProb = tempProb[8];
-							calcProb(9); 
-							tmpProb += tempProb[1];
-							calcProb(2);
-							checkState = true;
-						}
-						{//10+1
-							tmpProb = tempProb[9];
-							calcProb(10); 
-							tmpProb += tempProb[0];
-							calcProb(1);
-							checkState = true;
-						}
-						bankOverTop += tmpProb;
+						tmpProb = calcOverrun (10);
+						bankOverTop += tmpProb/2;
 					}
 					else
 					{
 						//bankScore = 17 - 21 --> Probability
-						bankHiScore = tempProb1 + probability[5] + probability[6]
-								+ probability[7] + probability[8] + probability[9];
+						bankHiScore = (tempProb1 + probability[5] + probability[6]
+								+ probability[7] + probability[8] + probability[9])/2;
 					}
 					tempProb1 = 0;
 					tmpProb = 0;
+					break;
 				//2
 				case 19:
 				{//2+10+10
-						tmpProb = tempProb[9];
-						calcProb(10);
-						tmpProb += tempProb[9];
-						checkState = true;
-						bankOverTop = tmpProb;
-						bankHiScore = 100-tmpProb;
-						tmpProb = 0;
-						
+					tmpProb = calcOverrun (19);
+					bankOverTop = tmpProb;
+					bankHiScore = 100-tmpProb;
+					tmpProb = 0;
+					break;
 				}
 				//3
 				case 18:
 				{//3+9+10| 3+10+9
-					tmpProb = tempProb[9];
-					calcProb(10);
-					tmpProb += tempProb[9];
-					checkState = true;
-					tmpProb = tempProb[9];
-					calcProb(10);
-					tmpProb += tempProb[8];
-					checkState = true;
-					tmpProb += tempProb[8];
-					calcProb(10);
-					tmpProb += tempProb[9];
+					tmpProb = calcOverrun (18);
 					bankOverTop = tmpProb;
 					bankHiScore = 100-tmpProb;
 					tmpProb = 0;
-					checkState = true;
+					break;
 				}
 				//4
 			    case 17:
@@ -416,7 +319,7 @@ public class Agent extends Player{
 					bankOverTop = tmpProb;
 					bankHiScore = 100-tmpProb;
 					tmpProb = 0;
-					
+					break;
 				}
 				//5
 			    case 16:
@@ -424,7 +327,8 @@ public class Agent extends Player{
 			    	tmpProb = calcOverrun (16);
 					bankOverTop = tmpProb;
 					bankHiScore = 100-tmpProb;
-					tmpProb = 0;				
+					tmpProb = 0;			
+					break;
 				}
 				//6
 			    case 15:
@@ -433,6 +337,7 @@ public class Agent extends Player{
 					bankOverTop = tmpProb;
 					bankHiScore = 100-tmpProb;
 					tmpProb = 0;
+					break;
 				}
 				//7
 			    case 14:
@@ -441,6 +346,7 @@ public class Agent extends Player{
 					bankOverTop = tmpProb;
 					bankHiScore = 100-tmpProb;
 					tmpProb = 0;
+					break;
 				}	 	
 				//8
 			    case 13:
@@ -448,30 +354,32 @@ public class Agent extends Player{
 					bankOverTop = tmpProb;
 					bankHiScore = 100-tmpProb;
 					tmpProb = 0;
+					break;
 				//9
 			    case 12:
 			    	tmpProb = calcOverrun (12);
 					bankOverTop = tmpProb;
 					bankHiScore = 100-tmpProb;
 					tmpProb = 0;
+					break;
 				//10
 			    case 11:
 			    	tmpProb = calcOverrun (11);
 					bankOverTop = tmpProb;
 					bankHiScore = 100-tmpProb;
 					tmpProb = 0;
-					bankBj = probability[9];
+					break;
 			}
-			if(bankHiScore > 50 && bankOverTop <= 50 && bankHiScore >= bankOverTop)
+			//spot check result = 92% Bank HighScore (17-21); Agent Score <= 13
+			if(bankHiScore > 92 && bankOverTop <8 && bankHiScore >= bankOverTop)
 			{
 				return false;
 			}
-			else if(bankOverTop > 50 && bankOverTop > bankHiScore)
+			else 
 			{
 				return true;
 			}
 		}
-		return false;
 	}
 	
 	private boolean calcPullBorder (int lo, int hi)
