@@ -329,9 +329,7 @@ public class Agent extends Player{
 		 * bank muss bis einschließlich 16 immer ziehen
 		 * --> ab 17 ist ende
 		 */
-		if(isDoubled)
-			return false;
-		else if(diffHiStack >= 11)
+		if(diffHiStack >= 9)
 			return true;
 		else if(diffLoStack <= 21-pullBorder)//AgentScore >= 16
 			return false;
