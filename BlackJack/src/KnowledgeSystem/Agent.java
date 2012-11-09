@@ -266,12 +266,14 @@ public class Agent extends Player{
 					for(int i = 0; i < 6;i++){
 						/**
 						 * Probability, that bank pulls a third card (after ace)
+						 * because of a score of <= 16
 						 */
 						tmpProb += probability[i];
 					}
 					for(int i = 0; i <= 9; i++){
 						/**
 						 * Probability, that bank pulls no third card
+						 * because of a score of > 16
 						 */
 						if(i == 0 || i > 5){
 							tempProb1 += probability[i];
