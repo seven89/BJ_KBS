@@ -143,7 +143,6 @@ public class Agent extends Player{
 			tempProbCounter[i]=probCounter[i];
 		}
 		checkState = false;
-		//TODO: Calc future Probability
 		
 		switch(card)
 		{
@@ -391,7 +390,7 @@ public class Agent extends Player{
 		float tmpProb;
 		//Probability that agent overruns 21
 		tmpProb = (probLo + probHi)/2;
-		if(tmpProb > 40)
+		if(tmpProb > 13.5)//13.5 score >= 17 through spot test
 		{
 			pullBorder = lo;
 			return false;
