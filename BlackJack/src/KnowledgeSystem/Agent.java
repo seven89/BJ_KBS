@@ -143,7 +143,6 @@ public class Agent extends Player{
 			tempProbCounter[i]=probCounter[i];
 		}
 		checkState = false;
-		//TODO: Calc future Probability
 		
 		switch(card)
 		{
@@ -266,12 +265,14 @@ public class Agent extends Player{
 					for(int i = 0; i < 6;i++){
 						/**
 						 * Probability, that bank pulls a third card (after ace)
+						 * because of a score of <= 16
 						 */
 						tmpProb += probability[i];
 					}
 					for(int i = 0; i <= 9; i++){
 						/**
 						 * Probability, that bank pulls no third card
+						 * because of a score of > 16
 						 */
 						if(i == 0 || i > 5){
 							tempProb1 += probability[i];
@@ -389,7 +390,7 @@ public class Agent extends Player{
 		float tmpProb;
 		//Probability that agent overruns 21
 		tmpProb = (probLo + probHi)/2;
-		if(tmpProb > 40)
+		if(tmpProb > 13.5)//13.5 score >= 17 through spot test
 		{
 			pullBorder = lo;
 			return false;
