@@ -52,7 +52,7 @@ public class GraphicsController extends JFrame {
 	//rdy grphc
 	private BackgroundPanel backgroundPanel;
 	private CardPanel cardPanel;
-	private int positionx = 0;
+	private int positionx = 50;
 	private int positiony = 0;
 	   
 public GraphicsController(){
@@ -74,7 +74,7 @@ public GraphicsController(){
 	 
 	 
 	showpercentage();
-	setSize(1024,768);
+	setSize(1500,768);
 //	initGraphics();
 	centerOnScreen(this);
 	
@@ -115,8 +115,8 @@ public GraphicsController(){
 				cardPanel=new CardPanel(this, graphicObjects);
 				getContentPane().add(cardPanel);
 
-		if(first){
-		decision.setLocation(460, 300);
+		//if(first){
+		decision.setLocation(760, 300);
 		//labels
 		 for(JLabel l : stats){
 			    positiony+=30;
@@ -126,12 +126,12 @@ public GraphicsController(){
 		    positiony=0;
 		    for(JLabel l : labels){
 		    	positiony+=30;
-			    l.setLocation(positionx+800, positiony);
+			    l.setLocation(positionx+1210, positiony);
 		    }
 		    positiony=0;
-		    positionx=0;
-			first=false;
-			}
+		    positionx=50;
+			//first=false;
+			//}
 			this.setVisible(true);
 	}
 	
@@ -154,7 +154,7 @@ public GraphicsController(){
 		BackgroundPanel(GraphicsController graphicsController) {	
 			//image = ImageIO.read( new File( "images/textureb.png" ) );
 			try {
-				image=ImageIO.read( new File( "images/textureb.png" ) );
+				image=ImageIO.read( new File( "images/textureb2.png" ) );
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -639,11 +639,11 @@ public GraphicsController(){
 		 graphicObjects[cards].color=color;
 		 graphicObjects[cards].value=value;
 		 if(side==0){
-			 graphicObjects[cards].x=300+playercards*40;
+			 graphicObjects[cards].x=600+playercards*40;
 			 playercards++;
 		 }
 		 else{
-			 graphicObjects[cards].x=600+playercardsright*40;
+			 graphicObjects[cards].x=900+playercardsright*40;
 			 playercardsright++;
 		 }
 		 graphicObjects[cards].y=490;
@@ -656,7 +656,7 @@ public GraphicsController(){
 		 graphicObjects[cards].type=2;
 		 graphicObjects[cards].color=color;
 		 graphicObjects[cards].value=value;
-		 graphicObjects[cards].x=600-bankcards*40;
+		 graphicObjects[cards].x=900-bankcards*40;
 		 graphicObjects[cards].y=140;
 		 bankcards++;
 		 cards++;
