@@ -385,12 +385,15 @@ public class Agent extends Player{
 	
 	private boolean calcPullBorder (int lo, int hi)
 	{
+		/**
+		 * Calculates the chance to overrun 21
+		 */
 		float probHi = calcOverrun (hi);
 		float probLo = calcOverrun (lo);
 		float tmpProb;
 		//Probability that agent overruns 21
 		tmpProb = (probLo + probHi)/2;
-		if(tmpProb > 13.5)//13.5 score >= 17 through spot test
+		if(tmpProb > 13.5)//13.5, cause current score >= 17 through spot test determined
 		{
 			pullBorder = lo;
 			return false;
