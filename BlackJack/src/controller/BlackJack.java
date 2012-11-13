@@ -97,10 +97,10 @@ public class BlackJack {
 		  boolean newgame=true;
 		  //Render loop
 			//System.out.println("GAME " + Game);
-			while(agent.getCredit()>0 && Game<=1000){
+			while(agent.getCredit()>0 && Game<=1000 && agent.getCredit()>10){
 			
 				//refresh time
-				wait(10);	// waits for 1000 ms
+				wait(100);	// waits for 1000 ms
 				if(!gc.pause){
 					
 				if(newgame){
@@ -286,14 +286,14 @@ public class BlackJack {
 			}
 			else if (bank.getHighCardScore() == agent.getHighCardScore()) {
 						System.out.println("drawn");
-						//agent.setCredit(0);
+						agent.setCredit(bet);
 						agent.gamesDraw++;
 						gc.printDecision("Draw!");
 			}
 			// else: bank < player < 21
 			else{
-				agent.setCredit(bet);
 				agent.gamesWon++;
+				agent.setCredit(bet);
 				gc.printDecision("W: Bank->" + bank.getHighCardScore() + "|"+ agent.getHighCardScore() + "<-You" );
 			}
 			
