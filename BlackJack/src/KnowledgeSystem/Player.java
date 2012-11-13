@@ -26,21 +26,22 @@ public class Player extends Participant{
 		credit+=c;
 	}
 	
+	// TODO Bug money
+	
 	public void splitt() {
-		Bet = Bet*2;
+		//Bet = Bet*2;
 	}
 	
 	public void insure () {
-		Bet = Bet + Bet/2;
+//		Bet = Bet + Bet/2;
 	}
 	
 	public void doubling() {
 		Bet = Bet*2;
 	}
 	
-	
 	public void setCredit(double d) {
-		credit += d;
+		credit =(int) (credit+d);
 	}
 	
 	public int getCredit() {
@@ -51,8 +52,10 @@ public class Player extends Participant{
 		return Bet;
 	}
 	
-	public void setBet(double d) {
-		Bet += d;
+	public void setBet(int d) {
+		Bet = d;
+		credit = credit - d;
+		System.out.println("Bet " +Bet);
 		
 		if (inGame = false) {
 			inGame = true;

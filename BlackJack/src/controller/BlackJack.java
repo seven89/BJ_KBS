@@ -25,15 +25,15 @@ public class BlackJack {
 		agentHelp=true;
 		agentSplitHelp=false;
 		agentSplitCardHelp=true;   
-		Game=1;
+		Game=0;
 		
 		//bet=10;
 		modus = false;
 		insurance=false;
 		
 		CardDeck = new CardSet(false);	// create card deck	
-		agent = new Agent (100);
-		bet = (int) agent.calcBetValue(50);
+		agent = new Agent (500);
+//		bet = (int) agent.calcBetValue(50);
 		
 		//p = new Player(50);		// create player(s)
 		//setPlayers(1);			// count player
@@ -44,7 +44,6 @@ public class BlackJack {
 		bank = new Bank();					
 	}
 	
-
 	public static void main(String [ ] args)
 	{
 		@SuppressWarnings("unused")
@@ -80,12 +79,15 @@ public class BlackJack {
 			if (agentSplit!=null) {
 				agentSplit.resetHelpAss();
 			}
+			
 			//p.newGame();
 			agent.newGame();
 			bank.newGame();
 			bet = (int) agent.calcBetValue(50);
 			agent.setBet(bet);
 			agent.initializeProbability();
+			Game++;
+			agent.gamesPlayed++;
 //			System.out.println("------------New Game-----------");
 	  }
 	  
@@ -95,10 +97,10 @@ public class BlackJack {
 		  boolean newgame=true;
 		  //Render loop
 			//System.out.println("GAME " + Game);
-			while(agent.getCredit()>0 && Game<=1000){
+			while(agent.getCredit()>0 && Game<=1000 && agent.getCredit()>10){
 			
 				//refresh time
-				wait(10);	// waits for 1000 ms
+				wait(100);	// waits for 1000 ms
 				if(!gc.pause){
 					
 				if(newgame){
@@ -107,7 +109,6 @@ public class BlackJack {
 					bank.setCard(initialcard[0], initialcard[1], initialcard[2]);
 					gc.newBankCard(initialcard[0], initialcard[1]);
 					newgame=false;
-					
 				}
 				
 				//reset turn + player handling
@@ -203,11 +204,6 @@ public class BlackJack {
 							
 							// 0 =Links, 1= rechts
 							
-							newGame();
-							newgame=true;
-							agent.gamesPlayed++;
-							Game++;
-							//System.out.println("GAME " + Game);
 							
 							String sGame = ("Aktuelles Spiel: "+Game);
 							String sKonto = ("Kontostand: "+agent.getCredit());
@@ -219,6 +215,9 @@ public class BlackJack {
 							
 							gc.printStatistic(sGame, sKonto, sBet, sBetResult, sWon, sLost, sDrawn);
 							
+							newGame();
+							newgame=true;
+							//System.out.println("GAME " + Game);
 						}
 					}
 					
@@ -269,7 +268,7 @@ public class BlackJack {
 			}
 			else if(agent.getHighCardScore()>21){
 				agent.setInGame(false);
-				agent.setCredit(-bet);
+//				agent.setCredit(-bet);
 				agent.gamesLost++;
 				gc.printDecision("Verloren >21");
 			}
@@ -281,20 +280,20 @@ public class BlackJack {
 			}
 			else if (bank.getHighCardScore()>agent.getHighCardScore()) {
 						//System.out.println("Bank win!");
-						agent.setCredit(-bet);
+//						agent.setCredit(-bet);
 						agent.gamesLost++;
 						gc.printDecision("L: Bank->" + bank.getHighCardScore() + "|"+ agent.getHighCardScore() + "<-You" );
 			}
 			else if (bank.getHighCardScore() == agent.getHighCardScore()) {
 						System.out.println("drawn");
-						//agent.setCredit(0);
+						agent.setCredit(bet);
 						agent.gamesDraw++;
 						gc.printDecision("Draw!");
 			}
 			// else: bank < player < 21
 			else{
-				agent.setCredit(bet);
 				agent.gamesWon++;
+				agent.setCredit(bet);
 				gc.printDecision("W: Bank->" + bank.getHighCardScore() + "|"+ agent.getHighCardScore() + "<-You" );
 			}
 			
