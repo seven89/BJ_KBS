@@ -108,6 +108,7 @@ public class BlackJack {
 					agent.updateProbability(initialcard);
 					bank.setCard(initialcard[0], initialcard[1], initialcard[2]);
 					gc.newBankCard(initialcard[0], initialcard[1]);
+					gc.printBank("Bank: "+bank.getHighCardScore());
 					newgame=false;
 				}
 				
@@ -161,7 +162,8 @@ public class BlackJack {
 							gc.newPlayerCard(card[0], card[1], agent.probability, 0);
 							agent.updateProbability(card);
 //							System.out.println("Farbe " + (card[0]+1) + "Typ " + (card[1]+1) + "Score " + card[2]);
-							gc.printDecision("Bank-> " + bank.getHighCardScore() + " | "+ agent.getHighCardScore() + " <-You" );
+							gc.printDecision("Draw card!" );
+							gc.printPlayer("Score: " +agent.getHighCardScore());
 						} 
 						else {
 							agentHelp=false;
@@ -191,8 +193,8 @@ public class BlackJack {
 							bank.setCard(card[0], card[1], card[2]);
 							gc.newBankCard(card[0], card[1]);
 							agent.updateProbability(card);
-							gc.printDecision("W: Bank->" + bank.getHighCardScore() + "|"+ agent.getHighCardScore() + "<-You" );
-							
+							gc.printDecision("Bank draws card!" );
+							gc.printBank("Bank: "+bank.getHighCardScore());
 						}
 						//new game
 						else{
