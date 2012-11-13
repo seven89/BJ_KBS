@@ -44,6 +44,8 @@ public class GraphicsController extends JFrame {
 	public JLabel[] labels;
 	public JLabel[] stats;
 	public JLabel decision;
+	public JLabel player;
+	public JLabel bank;
 	private int playercards=0;
 	private int playercardsright=0;
 	private int bankcards=0;
@@ -52,7 +54,7 @@ public class GraphicsController extends JFrame {
 	//rdy grphc
 	private BackgroundPanel backgroundPanel;
 	private CardPanel cardPanel;
-	private int positionx = 50;
+	private int positionx = 20;
 	private int positiony = 0;
 	   
 public GraphicsController(){
@@ -116,7 +118,9 @@ public GraphicsController(){
 				getContentPane().add(cardPanel);
 
 		//if(first){
-		decision.setLocation(760, 300);
+		decision.setLocation(650, 330);
+		player.setLocation(1000, 630);
+		bank.setLocation(350, 180);
 		//labels
 		 for(JLabel l : stats){
 			    positiony+=30;
@@ -126,10 +130,10 @@ public GraphicsController(){
 		    positiony=0;
 		    for(JLabel l : labels){
 		    	positiony+=30;
-			    l.setLocation(positionx+1210, positiony);
+			    l.setLocation(positionx+1230, positiony);
 		    }
 		    positiony=0;
-		    positionx=50;
+		    positionx=20;
 			//first=false;
 			//}
 			this.setVisible(true);
@@ -154,7 +158,7 @@ public GraphicsController(){
 		BackgroundPanel(GraphicsController graphicsController) {	
 			//image = ImageIO.read( new File( "images/textureb.png" ) );
 			try {
-				image=ImageIO.read( new File( "images/textureb2.png" ) );
+				image=ImageIO.read( new File( "images/textureb3.png" ) );
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -572,9 +576,23 @@ public GraphicsController(){
 		    decision.setFont(new Font("Serif", Font.PLAIN, 20));
 		    decision.setForeground(Color.WHITE);
 		    this.add(decision);
-		    this.setSize(230, 230);
+		    this.setSize(230, 80);
 		    this.setVisible(true);
 
+		    player = new JLabel("Spielerscore");
+		    player.setFont(new Font("Serif", Font.PLAIN, 20));
+		    player.setForeground(Color.WHITE);
+		    this.add(player);
+		    this.setSize(230, 80);
+		    this.setVisible(true);
+		    
+		    bank = new JLabel("Bankscore");
+		    bank.setFont(new Font("Serif", Font.PLAIN, 20));
+		    bank.setForeground(Color.WHITE);
+		    this.add(bank);
+		    this.setSize(230, 80);
+		    this.setVisible(true);
+		    
 			stats[0] = new JLabel("Aktuelles Spiel: ");
 			stats[1] = new JLabel("Guthaben: ");
 			stats[2] = new JLabel("Einsatz: ");
@@ -599,7 +617,7 @@ public GraphicsController(){
 			    	l.setFont(new Font("Serif", Font.PLAIN, 20));
 				    l.setForeground(Color.WHITE);
 				    this.add(l);
-				    this.setSize(400, 230);
+				    this.setSize(400, 80);
 				    this.setVisible(true);
 			    }
 			 
@@ -608,7 +626,7 @@ public GraphicsController(){
 			    	l.setFont(new Font("Serif", Font.PLAIN, 20));
 				    l.setForeground(Color.WHITE);
 				    this.add(l);
-				    this.setSize(230, 230);
+				    this.setSize(230, 80);
 				    this.setVisible(true);
 			    }
 		}
@@ -633,17 +651,25 @@ public GraphicsController(){
 		public void printDecision(String text){
 			decision.setText(text);
 		}
+		
+		public void printPlayer(String text){
+			player.setText(text);
+		}
+		
+		public void printBank(String text){
+			bank.setText(text);
+		}
 	
 	public void newPlayerCard(int color, int value, float[] probability, int side){
 		 graphicObjects[cards].type=2;
 		 graphicObjects[cards].color=color;
 		 graphicObjects[cards].value=value;
 		 if(side==0){
-			 graphicObjects[cards].x=600+playercards*40;
+			 graphicObjects[cards].x=500+playercards*40;
 			 playercards++;
 		 }
 		 else{
-			 graphicObjects[cards].x=900+playercardsright*40;
+			 graphicObjects[cards].x=800+playercardsright*40;
 			 playercardsright++;
 		 }
 		 graphicObjects[cards].y=490;
@@ -656,7 +682,7 @@ public GraphicsController(){
 		 graphicObjects[cards].type=2;
 		 graphicObjects[cards].color=color;
 		 graphicObjects[cards].value=value;
-		 graphicObjects[cards].x=900-bankcards*40;
+		 graphicObjects[cards].x=800-bankcards*40;
 		 graphicObjects[cards].y=140;
 		 bankcards++;
 		 cards++;
