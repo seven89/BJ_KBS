@@ -47,8 +47,8 @@ public class BlackJack {
 		
 		// Bank (first card)
 		bank = new Bank();
-		this.speed=speed;
-		this.games=games;
+		BlackJack.speed=speed;
+		BlackJack.games=games;
 	}
 	
 	
@@ -244,8 +244,7 @@ public class BlackJack {
 
 			        if(n==0){
 			        	gc.setVisible(false);
-			            Dialog dia = new Dialog();
-			            dia.main(null);
+			            Dialog.main(null);
 			            System.exit(0);
 			           
 			        }
