@@ -71,7 +71,7 @@ public class Participant {
 		
 		// only for test
 		if (helpAss>3) {
-			System.out.println("ERROR: IM DECK SIND MEHR ALS 4 ASSE");
+			//System.out.println("ERROR: IM DECK SIND MEHR ALS 4 ASSE");
 		}
 	}
 	

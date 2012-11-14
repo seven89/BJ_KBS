@@ -11,6 +11,37 @@ import KnowledgeSystem.Player;
 
 public class BlackJack {
 
+	//auswertung
+	private static int insured=0;
+	private static int insuredwin=0;
+	private static int insuredlost=0;
+	private static int insureddraw=0;
+	private static int doubled=0;
+	private static int doubledwin=0;
+	private static int doubledlost=0;
+	private static int doubleddraw=0;
+	private static int averagewin=0;
+	private static int averagelost=0;
+	private static int averageinsured=0;
+	private static int averagedoubled=0;
+	private static int lostover=0;
+	private static int wonover=0;
+	private static int lostunder=0;
+	private static int wonunder=0;
+	private static int blackjack=0;
+	private static int lostblackjack=0;
+	
+	private static double money=0;
+	private static boolean splitted=false;
+	private static boolean won=false;
+	private static int wincounter=0;
+	private static int lostcounter=0;
+	private static int doubledcounter=0;
+	private static int insuredcounter=0;
+
+	
+	
+	
 	static int Players, Game, bet, debug, creditTmp, betResult;
 	int startMoney;
 	protected static GraphicsController gc;
@@ -21,9 +52,11 @@ public class BlackJack {
 	static boolean agentHelp, agentSplitHelp, agentSplitCardHelp, modus, insurance;
 	private static int games=100;
 	private static int speed=100;
+	private static Dialog d;
 	
-	public BlackJack(int games, int speed) {
-		debug =1; // 1 bedeutet, dass alle syso ausgegeben werden
+	public BlackJack(int games, int speed, Dialog d) {
+	 this.d=d;
+		debug =2; // 1 bedeutet, dass alle syso ausgegeben werden
 		//startMoney=100;
 		gc = new GraphicsController(); //create gui
 		gc.setVisible(true);
@@ -124,11 +157,11 @@ public class BlackJack {
 							
 							// Insurance (versichern, spielmodus)
 							if (bank.getCountCards()==1 && bank.getCardScore()[1]==11) {
-								System.out.println("oooooooooooooooooooooooooooooooooooo Versichern? (Spielmodus)");
+								//System.out.println("oooooooooooooooooooooooooooooooooooo Versichern? (Spielmodus)");
 								
 								if (agent.insureBoolean(card[2])) {
 									agent.insure();
-									insurance=true;
+									insurance=false;
 								}
 							}
 							
@@ -136,6 +169,8 @@ public class BlackJack {
 //							System.out.println("Card Step B           "+card[1]+" "+agent.getCurrentCard());
 							if (agent.getCountCards()==1 && agent.getCurrentCard()==card[1] && agentSplit==null && modus==false) {
 //								System.out.println("Teilen? (spielmodus)");
+								doubled++;
+								splitted=true;
 								agentSplit=agent;
 								agentSplit.setCard(card[0], card[1], card[2]);
 								agentSplitHelp=true;
@@ -147,7 +182,7 @@ public class BlackJack {
 							
 							// doubling down (doppeln, spielmodus)
 							if (agent.getCountCards()==2 && (agent.getHighCardScore()>8 && agent.getHighCardScore()<11) && modus==false) {
-								System.out.println("oooooooooooooooooooooooooooooooooooo Doppeln? (Spielmodus)");		
+								//System.out.println("oooooooooooooooooooooooooooooooooooo Doppeln? (Spielmodus)");		
 								
 								if (agent.doublingBoolean(agent.getHighCardScore(),bank.getHighCardScore())) {
 									agent.doubling();
@@ -232,6 +267,60 @@ public class BlackJack {
 			System.out.println("You won "+ agent.gamesWon +"/"+ agent.gamesPlayed + " " + (((float)agent.gamesWon/(float)agent.gamesPlayed)*100.0) + "% of games!");
 			System.out.println("You lost "+ agent.gamesLost +"/"+ agent.gamesPlayed + " " + (((float)agent.gamesLost/(float)agent.gamesPlayed)*100.0) + "% of games!");
 			System.out.println("You had a draw in "+ agent.gamesDraw +"/"+ agent.gamesPlayed + " " + (((float)agent.gamesDraw/(float)agent.gamesPlayed)*100.0) + "% of games!");
+			
+			if(debug==2){
+				
+				int wert1=0;
+				int wert2=0;
+				int wert3=0;
+				int wert4=0;
+				if(insuredcounter!=0) wert1= (averageinsured/insuredcounter);
+				if(doubledcounter!=0)wert2=(averagedoubled/doubledcounter);
+				if(wincounter!=0) wert3=(averagewin/wincounter);
+				if(lostcounter!=0) wert4=(averagelost/lostcounter);
+				System.out.println("You used insurance " + insured + " times");
+				System.out.println("You won " + insuredwin + " insured games");
+				System.out.println("You lost " + insuredlost + " insured games");
+				System.out.println("You gained " + wert1 + " in average when insured");
+				System.out.println("You used double " + doubled + " times");
+				System.out.println("You won " + doubledwin + " doubled games");
+				System.out.println("You lost " + doubledlost + " doubled games");
+				System.out.println("You gained " + wert2 + " in average when doubled");
+				System.out.println("You won " + wert3 + " in average");
+				System.out.println("You lost " + wert4 + " in average");
+				System.out.println("You have lost because you had >21 points " + lostover);
+				System.out.println("You have won because bank had >21 points " + wonover);
+				System.out.println("You have lost because you had less points " + lostunder);
+				System.out.println("You have won because bank had less points " + wonunder);
+				System.out.println("You had " + blackjack + " Blackjacks");
+				System.out.println("Bank had " + lostblackjack + " Blackjacks");
+				System.out.println("Verbleibendes Guthaben "+ agent.getCredit());
+				
+				float[] values =new float[21];
+				values[0]=(float) (((float)agent.gamesWon/(float)agent.gamesPlayed)*100.0);
+				values[1]=(float) (((float)agent.gamesLost/(float)agent.gamesPlayed)*100.0);
+				values[2]=(float) (((float)agent.gamesDraw/(float)agent.gamesPlayed)*100.0);
+				values[3]=insured;
+				values[4]=insuredwin;
+				values[5]=insuredlost;
+				values[6]=wert1;
+				values[7]=doubled;
+				values[8]=doubledwin;
+				values[9]=doubledlost;
+				values[10]=wert2;
+				values[11]=wert3;
+				values[12]=wert4;
+				values[13]= lostover;
+				values[14]=wonover;
+				values[15]=lostunder;
+				values[16]=wonunder;
+				values[17]=blackjack;
+				values[18]=lostblackjack;
+				values[19]=agent.getCredit();
+				values[20]=agent.gamesPlayed;
+				d.addnewone(values);
+			}
+			
 			//gc.setVisible(false);
 			//gc.dispose();
 			//System.exit(0);
@@ -244,7 +333,8 @@ public class BlackJack {
 
 			        if(n==0){
 			        	gc.setVisible(false);
-			            Dialog.main(null);
+			        	gc=null;
+			            d.dialog();
 			            System.exit(0);
 			           
 			        }
@@ -276,49 +366,112 @@ public class BlackJack {
 
 		// TODO agentsplitt bei der auszahlung einbinden (zunaechst aber darf agentSplit nicht gleich agent sein)
 			
-			
-		  if (insurance==true && bank.getCountCards()==2 && bank.getHighCardScore()==21) {
+		  if (bank.getCountCards()==2 && bank.getHighCardScore()==21) {
+			  if(insurance==true){
+			  money=agent.getBet();
 			  agent.setCredit(agent.getBet());
 			  agent.gamesWon++;
 			  gc.printDecision("Gewonnen, versichert!");
+			  lostblackjack++;
+			  insuredwin++;
+			  insured++;
+			  won=true;
+			  }
+			  else{
+				  lostblackjack++;
+				  money=agent.getBet();
+				  insuredlost++;
+				  insured++;
+				  won=false;
+			  }
+		  }
+		  else if(insurance==true){
+			  insuredlost++;
+			  insured++;
+			  money=bet;
+			  won=false;
 		  }
 		  else if (agent.getHighCardScore()==21 && agent.getCountCards()==2) {
-				System.out.println("> > > > > > > > > > BlackJack! < < < < < < < < < <");
-				agent.setCredit(bet+bet*1.5);
+				//System.out.println("> > > > > > > > > > BlackJack! < < < < < < < < < <");
+				money=bet+bet*1.5;
+			  	agent.setCredit(((bet+bet)*1.5));
 				agent.gamesWon++;
 				gc.printDecision("BlackJack!");
+				blackjack++;
+				won=true;
 			}
 			else if(agent.getHighCardScore()>21){
+				money=agent.getBet();
 				agent.setInGame(false);
 //				agent.setCredit(-bet);
 				agent.gamesLost++;
 				gc.printDecision("Verloren >21");
+				lostover++;
+				won=false;
 			}
 			else if (bank.getHighCardScore()>21) {
 					//System.out.println("Player win!");
-					agent.setCredit(bet*2);
+				money=bet*2;	
+				agent.setCredit((bet*2));
 					agent.gamesWon++;
 					gc.printDecision("Sieg bank>21");
+					wonover++;
+					won=true;
 			}
 			else if (bank.getHighCardScore()>agent.getHighCardScore()) {
 						//System.out.println("Bank win!");
 //						agent.setCredit(-bet);
+						money=agent.getBet();
 						agent.gamesLost++;
 						gc.printDecision("L: Bank->" + bank.getHighCardScore() + "|"+ agent.getHighCardScore() + "<-You" );
+						lostunder++;
+						won=false;
 			}
 			else if (bank.getHighCardScore() == agent.getHighCardScore()) {
-						System.out.println("drawn");
-						agent.setCredit(bet);
+						
+						money=agent.getBet();
+						//System.out.println("drawn");
+						agent.setCredit(bet*1.2);
 						agent.gamesDraw++;
 						gc.printDecision("Draw!");
 			}
 			// else: bank < player < 21
 			else{
+				money=bet;
 				agent.gamesWon++;
-				agent.setCredit(bet);
+				agent.setCredit(bet*2);
 				gc.printDecision("W: Bank->" + bank.getHighCardScore() + "|"+ agent.getHighCardScore() + "<-You" );
+				wonunder++;
+				won=true;
 			}
 			
+		  //averagemoney
+		  	if(insurance==true){
+		  		if(won){
+		  			averageinsured +=money;
+		  		}
+		  		else{
+		  			averageinsured -=money;
+		  		}
+		  		insuredcounter++;
+		  	}
+		  	else if(splitted){
+		  		if(won){doubledwin++;averagedoubled+=money;}
+		  		else{
+		  			doubledlost++;
+		  			averagedoubled-=money;
+		  		}
+		  		doubledcounter++;
+		  		splitted=false;
+		  	}
+		  	else {
+		  			if(won){averagewin+=money;wincounter++;}
+		  			else{
+		  				averagelost-=money;
+		  				lostcounter++;
+		  			}
+		  	}
+		  
 			if (debug==1) {
 				System.out.println("Money  After  : "+agent.getCredit());
 				System.out.println("---------------------------------");

@@ -55,7 +55,7 @@ public class Player extends Participant{
 	public void setBet(int d) {
 		Bet = d;
 		credit = credit - d;
-		System.out.println("Bet " +Bet);
+		//System.out.println("Bet " +Bet);
 		
 		if (inGame = false) {
 			inGame = true;

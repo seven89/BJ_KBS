@@ -127,19 +127,26 @@ public GraphicsController(){
 				getContentPane().add(cardPanel);
 
 		//if(first){
+		if(decision!=null)
 		decision.setLocation(650, 330);
+		if(player!=null)
 		player.setLocation(1000, 630);
+		if(bank!=null)
 		bank.setLocation(350, 180);
 		//labels
 		 for(JLabel l : stats){
 			    positiony+=30;
+			    if(l!=null){
 			    l.setLocation(positionx, positiony);
-		    }
+			    }
+		}
 		 
 		    positiony=0;
 		    for(JLabel l : labels){
 		    	positiony+=30;
+		    	if(l!=null){
 			    l.setLocation(positionx+1230, positiony);
+		    	}
 		    }
 		    positiony=0;
 		    positionx=20;
