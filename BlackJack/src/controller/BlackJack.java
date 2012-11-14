@@ -16,8 +16,10 @@ public class BlackJack {
 	protected static Player p;
 	protected static Bank bank;
 	static boolean agentHelp, agentSplitHelp, agentSplitCardHelp, modus, insurance;
+	private static int games=100;
+	private static int speed=100;
 	
-	public BlackJack() {
+	public BlackJack(int games, int speed) {
 		debug =1; // 1 bedeutet, dass alle syso ausgegeben werden
 		//startMoney=100;
 		gc = new GraphicsController(); //create gui
@@ -41,15 +43,11 @@ public class BlackJack {
 		//p.setBet(bet);					// player set 10 money
 		
 		// Bank (first card)
-		bank = new Bank();					
+		bank = new Bank();
+		this.speed=speed;
+		this.games=games;
 	}
 	
-	public static void main(String [ ] args)
-	{
-		@SuppressWarnings("unused")
-		BlackJack table = new BlackJack();		//create table
-		nextStep();		
-	}
 	
 	  public static void wait (int timeToWait){
 	        long t0,t1;
@@ -91,16 +89,16 @@ public class BlackJack {
 //			System.out.println("------------New Game-----------");
 	  }
 	  
-	  private static void nextStep(){
+	  public static void nextStep(){
 		  //int Game=0;
 		  int step=1;
 		  boolean newgame=true;
 		  //Render loop
 			//System.out.println("GAME " + Game);
-			while(agent.getCredit()>0 && Game<=1000 && agent.getCredit()>10){
+			while(agent.getCredit()>0 && Game<=games && agent.getCredit()>10){
 			
 				//refresh time
-				wait(100);	// waits for 1000 ms
+				wait(speed);	// waits for 1000 ms
 				if(!gc.pause){
 					
 				if(newgame){
@@ -231,9 +229,9 @@ public class BlackJack {
 			System.out.println("You won "+ agent.gamesWon +"/"+ agent.gamesPlayed + " " + (((float)agent.gamesWon/(float)agent.gamesPlayed)*100.0) + "% of games!");
 			System.out.println("You lost "+ agent.gamesLost +"/"+ agent.gamesPlayed + " " + (((float)agent.gamesLost/(float)agent.gamesPlayed)*100.0) + "% of games!");
 			System.out.println("You had a draw in "+ agent.gamesDraw +"/"+ agent.gamesPlayed + " " + (((float)agent.gamesDraw/(float)agent.gamesPlayed)*100.0) + "% of games!");
-			gc.setVisible(false);
-			gc.dispose();
-			System.exit(0);
+			//gc.setVisible(false);
+			//gc.dispose();
+			//System.exit(0);
 	  }
 	  
 	  private static void printResult(){
