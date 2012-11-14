@@ -1,5 +1,8 @@
 package controller;
 
+import javax.swing.JOptionPane;
+
+import graphics.Dialog;
 import graphics.GraphicsController;
 import data.CardSet;
 import KnowledgeSystem.Agent;
@@ -232,7 +235,27 @@ public class BlackJack {
 			//gc.setVisible(false);
 			//gc.dispose();
 			//System.exit(0);
-	  }
+			
+			  int n = JOptionPane.showConfirmDialog(
+			            null,
+			            "Would you like to play again?",
+			            "-",
+			            JOptionPane.YES_NO_OPTION);
+
+			        if(n==0){
+			        	gc.setVisible(false);
+			            Dialog dia = new Dialog();
+			            dia.main(null);
+			            System.exit(0);
+			           
+			        }
+			        else {
+			            JOptionPane.showMessageDialog(null, "Thanks for playing!");
+			            System.exit(0);
+			        }
+
+			        
+			    }
 	  
 	  private static void printResult(){
 		  
