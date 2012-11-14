@@ -9,6 +9,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 
@@ -84,6 +85,15 @@ public GraphicsController(){
 	JButton closeButton = new JButton("Close");
 	JButton pauseButton = new JButton("Pause");
 	
+	this.addWindowListener(new java.awt.event.WindowAdapter() {
+	    public void windowClosing(WindowEvent winEvt) {
+	        // Perhaps ask user if they want to save any unsaved files first.
+	    	setVisible(false);
+			dispose();
+			System.exit(0);
+	    }
+	});
+	
 	closeButton.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			GraphicsController.this.setVisible(false);
@@ -105,7 +115,7 @@ public GraphicsController(){
 		}
 	});
 	
-	backgroundPanel.add(closeButton);
+	//backgroundPanel.add(closeButton);
 	backgroundPanel.add(pauseButton);
 	getContentPane().add(backgroundPanel);
 	

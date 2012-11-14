@@ -27,7 +27,7 @@ public class BlackJack {
 		agentHelp=true;
 		agentSplitHelp=false;
 		agentSplitCardHelp=true;   
-		Game=0;
+		Game=1;
 		
 		//bet=10;
 		modus = false;
@@ -209,9 +209,9 @@ public class BlackJack {
 							String sKonto = ("Kontostand: "+agent.getCredit());
 							String sBet = ("Einsatz: "+agent.getBet());
 							String sBetResult = ("Bet Result: "+betResult);
-							String sWon = ("Wins: "+ agent.gamesWon +"/"+ agent.gamesPlayed + " " + Math.round( (((float)agent.gamesWon/(float)agent.gamesPlayed)*100.0)) + "%");
-							String sLost = ("Lost: "+ agent.gamesLost +"/"+ agent.gamesPlayed + " " + Math.round( (((float)agent.gamesLost/(float)agent.gamesPlayed)*100.0)) + "%");
-							String sDrawn = ("Draw: "+ agent.gamesDraw +"/"+ agent.gamesPlayed + " " + Math.round((((float)agent.gamesDraw/(float)agent.gamesPlayed)*100.0)) + "%");
+							String sWon = ("Wins: "+ agent.gamesWon +"/"+ (agent.gamesPlayed+1) + " " + Math.round( (((float)agent.gamesWon/(float)(agent.gamesPlayed+1))*100.0)) + "%");
+							String sLost = ("Lost: "+ agent.gamesLost +"/"+ (agent.gamesPlayed+1) + " " + Math.round( (((float)agent.gamesLost/(float)(agent.gamesPlayed+1))*100.0)) + "%");
+							String sDrawn = ("Draw: "+ agent.gamesDraw +"/"+ (agent.gamesPlayed+1) + " " + Math.round((((float)agent.gamesDraw/(float)(agent.gamesPlayed+1))*100.0)) + "%");
 							
 							gc.printStatistic(sGame, sKonto, sBet, sBetResult, sWon, sLost, sDrawn);
 							
